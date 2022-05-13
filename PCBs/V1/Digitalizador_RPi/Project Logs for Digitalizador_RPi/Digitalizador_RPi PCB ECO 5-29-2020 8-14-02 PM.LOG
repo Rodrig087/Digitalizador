@@ -1,0 +1,65 @@
+Change Component DesignItemId : Designator=R1 Old DesignItemId= New DesignItemId=Res1
+Change Component DesignItemId : Designator=R2 Old DesignItemId= New DesignItemId=Res1
+Change Component DesignItemId : Designator=R6 Old DesignItemId= New DesignItemId=Res1
+Change Component DesignItemId : Designator=R7 Old DesignItemId= New DesignItemId=Res1
+Change Component DesignItemId : Designator=R8 Old DesignItemId= New DesignItemId=Res1
+Change Component DesignItemId : Designator=R9 Old DesignItemId= New DesignItemId=Res1
+Change Component DesignItemId : Designator=R10 Old DesignItemId= New DesignItemId=Res1
+Change Component DesignItemId : Designator=R11 Old DesignItemId= New DesignItemId=Res1
+Change Component DesignItemId : Designator=R12 Old DesignItemId= New DesignItemId=Res1
+Change Component DesignItemId : Designator=R13 Old DesignItemId= New DesignItemId=Res1
+Change Component DesignItemId : Designator=R14 Old DesignItemId= New DesignItemId=Res1
+Change Component DesignItemId : Designator=R15 Old DesignItemId= New DesignItemId=Res1
+Change Component DesignItemId : Designator=R16 Old DesignItemId= New DesignItemId=Res1
+Change Component DesignItemId : Designator=R17 Old DesignItemId= New DesignItemId=Res1
+Change Component DesignItemId : Designator=R18 Old DesignItemId= New DesignItemId=Res1
+Change Component DesignItemId : Designator=R19 Old DesignItemId= New DesignItemId=Res1
+Change Component DesignItemId : Designator=R20 Old DesignItemId= New DesignItemId=Res1
+Change Component DesignItemId : Designator=R21 Old DesignItemId= New DesignItemId=Res1
+Change Component DesignItemId : Designator=R22 Old DesignItemId= New DesignItemId=Res1
+Change Component DesignItemId : Designator=R23 Old DesignItemId= New DesignItemId=Res1
+Change Component DesignItemId : Designator=R24 Old DesignItemId= New DesignItemId=Res1
+Change Component DesignItemId : Designator=R25 Old DesignItemId= New DesignItemId=Res1
+Change Component DesignItemId : Designator=R26 Old DesignItemId= New DesignItemId=Res1
+Change Component DesignItemId : Designator=R27 Old DesignItemId= New DesignItemId=Res1
+Change Component DesignItemId : Designator=R28 Old DesignItemId= New DesignItemId=Res1
+Change Component DesignItemId : Designator=R29 Old DesignItemId= New DesignItemId=Res1
+Change Component DesignItemId : Designator=R30 Old DesignItemId= New DesignItemId=Res1
+Change Component DesignItemId : Designator=R31 Old DesignItemId= New DesignItemId=Res1
+Change Component DesignItemId : Designator=R32 Old DesignItemId= New DesignItemId=Res1
+Change Component DesignItemId : Designator=R33 Old DesignItemId= New DesignItemId=Res1
+Change Component DesignItemId : Designator=R34 Old DesignItemId= New DesignItemId=Res1
+Change Component DesignItemId : Designator=R35 Old DesignItemId= New DesignItemId=Res1
+Change Component DesignItemId : Designator=R36 Old DesignItemId= New DesignItemId=Res1
+Change Component DesignItemId : Designator=R37 Old DesignItemId= New DesignItemId=Res1
+Change Component DesignItemId : Designator=R38 Old DesignItemId= New DesignItemId=Res1
+Change Component DesignItemId : Designator=R39 Old DesignItemId= New DesignItemId=Res1
+Change Component DesignItemId : Designator=R40 Old DesignItemId= New DesignItemId=Res1
+Change Component DesignItemId : Designator=R41 Old DesignItemId= New DesignItemId=Res1
+Added Component: Designator=C48(CAP_8.5mm)
+Add component. Clean all parameters for all variants
+Add component (AddParameter): Name = "LatestRevisionDate"; Value = "17-Jul-2002"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "LatestRevisionNote"; Value = "Re-released for DXP Platform."; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "PackageDescription"; Value = "Polarized Capacitor (Radial); 2 Leads"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "PackageReference"; Value = "RB7.6-15"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Published"; Value = "8-Jun-2000"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Publisher"; Value = "Altium Limited"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Value"; Value = "470uF"; VariantName = "[No Variations]"
+Added Component: Designator=C49(lenteja)
+Add component. Clean all parameters for all variants
+Add component (AddParameter): Name = "LatestRevisionDate"; Value = "17-Jul-2002"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "LatestRevisionNote"; Value = "Re-released for DXP Platform."; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "PackageDescription"; Value = "Radial Cap, Thru-Hole; 2 Leads; 0.3 in Pin Spacing"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "PackageReference"; Value = "RAD-0.3"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Published"; Value = "8-Jun-2000"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Publisher"; Value = "Altium Limited"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Value"; Value = "100nF"; VariantName = "[No Variations]"
+Added Pin To Net: NetName=+12V Pin=C48-1
+Added Pin To Net: NetName=GND Pin=C48-2
+Added Pin To Net: NetName=GND Pin=C49-1
+Added Pin To Net: NetName=+12V Pin=C49-2
+Added Member To Class: ClassName=Digitalizador_RPi Member=Component C48 Cap Pol1
+Added Member To Class: ClassName=Digitalizador_RPi Member=Component C49 Cap
+Added Member To Class: ClassName=Digitalizador_RPi Member=Component R6 Res1
+Added Member To Class: ClassName=Digitalizador_RPi Member=Component R9 Res1
+Added Room: Name=Digitalizador_RPi

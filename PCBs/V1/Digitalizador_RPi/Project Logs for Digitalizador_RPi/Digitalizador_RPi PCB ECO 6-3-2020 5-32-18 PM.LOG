@@ -1,0 +1,11 @@
+Change Component Footprint: Designator=R1 Old Footprint=AXIAL-0.3 New Footprint=0805
+Change Component Footprint: Designator=R2 Old Footprint=AXIAL-0.3 New Footprint=0805
+Change Component Footprint: Designator=R43 Old Footprint=AXIAL-0.3 New Footprint=0805
+Change Component Footprint: Designator=R44 Old Footprint=AXIAL-0.3 New Footprint=0805
+Change Component Footprint: Designator=R45 Old Footprint=AXIAL-0.3 New Footprint=0805
+Change Component Footprint: Designator=R46 Old Footprint=AXIAL-0.3 New Footprint=0805
+Change Component Footprint: Designator=R48 Old Footprint=AXIAL-0.3 New Footprint=0805
+Change Component Footprint: Designator=R49 Old Footprint=AXIAL-0.3 New Footprint=0805
+Change Component Footprint: Designator=R50 Old Footprint=AXIAL-0.3 New Footprint=0805
+Change Component Footprint: Designator=R51 Old Footprint=AXIAL-0.3 New Footprint=0805
+Added Room: Name=Digitalizador_RPi

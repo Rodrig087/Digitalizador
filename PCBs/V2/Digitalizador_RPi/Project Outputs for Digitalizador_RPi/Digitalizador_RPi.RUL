@@ -1,0 +1,19 @@
+DRC Rules Export File for PCB: G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc
+RuleKind=MinimumAnnularRing|RuleName=MinimumAnnularRing|Scope=Board|Minimum=3.00
+RuleKind=ShortCircuit|RuleName=ShortCircuit|Scope=Board|Allowed=0
+RuleKind=SolderMaskExpansion|RuleName=SolderMaskExpansion|Scope=Board|Minimum=1.97
+RuleKind=SolderMaskExpansion|RuleName=SolderMaskExpansion_NPTH|Scope=Board|Minimum=5.00
+RuleKind=Width|RuleName=Width|Scope=Board|Minimum=4.92
+RuleKind=Width|RuleName=Width_POWER|Scope=Board|Minimum=7.87
+RuleKind=Width|RuleName=Width_SILK|Scope=Board|Minimum=5.91
+RuleKind=Clearance|RuleName=Clearance|Scope=Board|Minimum=5.00
+RuleKind=Clearance|RuleName=Clearance_TL|Scope=Board|Minimum=10.00
+RuleKind=Clearance|RuleName=Clearance_BL|Scope=Board|Minimum=10.00
+RuleKind=Clearance|RuleName=Clearance_GENERAL_GROUND|Scope=Board|Minimum=7.87
+RuleKind=Clearance|RuleName=Clearance_NPTH|Scope=Board|Minimum=7.87
+RuleKind=Clearance|RuleName=Clearance_PTH|Scope=Board|Minimum=7.87
+RuleKind=Clearance|RuleName=Clearance_VIA|Scope=Board|Minimum=7.87
+RuleKind=Clearance|RuleName=Clearance_FIX|Scope=Board|Minimum=15.00
+RuleKind=Clearance|RuleName=Clearance_THPAD|Scope=Board|Minimum=10.00
+RuleKind=Clearance|RuleName=Clearance_KO|Scope=Board|Minimum=11.81
+RuleKind=Clearance|RuleName=Clearance_MOUSE_BITES|Scope=Board|Minimum=10.00

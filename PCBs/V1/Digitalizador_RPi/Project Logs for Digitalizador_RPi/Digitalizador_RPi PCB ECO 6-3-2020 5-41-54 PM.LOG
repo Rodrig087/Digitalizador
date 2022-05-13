@@ -1,0 +1,3 @@
+Change Component Footprint: Designator=U12 Old Footprint=DIP-14 New Footprint=SOIC-14
+Change Component Comment : Designator=Y1 Old Comment=XTAL-12MHz New Comment=XTAL-15MHz
+Added Room: Name=Digitalizador_RPi

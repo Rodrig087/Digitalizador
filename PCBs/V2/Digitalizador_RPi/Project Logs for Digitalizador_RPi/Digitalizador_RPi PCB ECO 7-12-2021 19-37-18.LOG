@@ -1,0 +1,10 @@
+Added Component: Designator=GPS1(GPS-BREAKOUT-V3)
+Add component. Clean all parameters for all variants
+Added Pin To Net: NetName=PPS_GPS_3.3V Pin=GPS1-0
+Added Pin To Net: NetName=+5V Pin=GPS1-1
+Added Pin To Net: NetName=GND Pin=GPS1-2
+Added Pin To Net: NetName=RX_GPS Pin=GPS1-3
+Added Pin To Net: NetName=TX_GPS_3.3V Pin=GPS1-4
+Added Pin To Net: NetName=EN_GPS Pin=GPS1-7
+Added Member To Class: ClassName=Digitalizador_RPi Member=Component GPS1 GPS-BREAKOUT-V3
+Added Room: Name=Digitalizador_RPi

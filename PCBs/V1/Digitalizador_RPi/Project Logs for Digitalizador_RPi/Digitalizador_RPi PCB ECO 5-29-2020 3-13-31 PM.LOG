@@ -1,0 +1,38 @@
+Removed Pin From Net: NetName=+12V Pin=P10-1
+Removed Pin From Net: NetName=GND Pin=P10-2
+Removed Pin From Net: NetName=C1+ Pin=P10-3
+Removed Pin From Net: NetName=C1- Pin=P10-4
+Removed Pin From Net: NetName=C2+ Pin=P10-5
+Removed Pin From Net: NetName=C2- Pin=P10-6
+Removed Pin From Net: NetName=C3+ Pin=P10-7
+Removed Pin From Net: NetName=C3- Pin=P10-8
+Change Component Footprint: Designator=P10 Old Footprint=MOLEX-8 New Footprint=HDR1X6
+Added Component: Designator=C47(RAD0.1)
+Add component. Clean all parameters for all variants
+Add component (AddParameter): Name = "LatestRevisionDate"; Value = "17-Jul-2002"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "LatestRevisionNote"; Value = "Re-released for DXP Platform."; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "PackageDescription"; Value = "Radial Cap, Thru-Hole; 2 Leads; 0.3 in Pin Spacing"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "PackageReference"; Value = "RAD-0.3"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Published"; Value = "8-Jun-2000"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Publisher"; Value = "Altium Limited"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Value"; Value = "100nF"; VariantName = "[No Variations]"
+Added Component: Designator=P11(HDR1X4)
+Add component. Clean all parameters for all variants
+Add component (AddParameter): Name = "LatestRevisionDate"; Value = "17-Jul-2002"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "LatestRevisionNote"; Value = "Re-released for DXP Platform."; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Publisher"; Value = "Altium Limited"; VariantName = "[No Variations]"
+Added Pin To Net: NetName=GND Pin=C47-1
+Added Pin To Net: NetName=-12V Pin=C47-2
+Added Pin To Net: NetName=C1+ Pin=P10-1
+Added Pin To Net: NetName=C1- Pin=P10-2
+Added Pin To Net: NetName=C2+ Pin=P10-3
+Added Pin To Net: NetName=C2- Pin=P10-4
+Added Pin To Net: NetName=C3+ Pin=P10-5
+Added Pin To Net: NetName=C3- Pin=P10-6
+Added Pin To Net: NetName=+12V Pin=P11-1
+Added Pin To Net: NetName=GND Pin=P11-2
+Added Pin To Net: NetName=-12V Pin=P11-3
+Added Pin To Net: NetName=GND Pin=P11-4
+Added Member To Class: ClassName=Digitalizador_RPi Member=Component C47 Cap
+Added Member To Class: ClassName=Digitalizador_RPi Member=Component P11 Molex Alim Geofono
+Added Room: Name=Digitalizador_RPi

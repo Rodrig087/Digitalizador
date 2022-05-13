@@ -1,0 +1,713 @@
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html">
+<style type="text/css">
+		h1, h2, h3, h4, h5, h6 {
+			font-family : segoe ui;
+			color : black;
+			background-color : #EDE7D9;
+			padding: 0.3em;
+		}
+
+		h1 {
+			font-size: 1.2em;
+		}		
+
+		h2 {
+			font-size: 1.2em;
+		}
+
+		body {
+			font-family : segoe ui;
+		}
+
+		td, th {
+			padding: 0.5em;
+			text-align : left;
+			width: 10em;
+		}
+		th {
+			background-color : #EEEEEE;
+
+		}
+		th.column1, td.column1 {
+			text-align: left;
+			width : auto;
+		}
+		table {
+			width : 100%;
+			font-size: 0.9em;
+		}
+
+		.DRC_summary_header {
+			padding-bottom : 0.1em;
+			border : 0px solid black;
+			width: 100%;
+			align: left;
+		}
+
+		.DRC_summary_header_col1,
+		.DRC_summary_header_col2, 
+		.DRC_summary_header_col3 {
+			color : black;
+			font-size:100%;
+			padding : 0em;
+			padding-top : 0.2em;
+			padding-bottom 0.2em;
+			border : 0px solid black;
+			vertical-align: top;
+			text-align: left;
+		}
+
+		.DRC_summary_header_col1 {
+			font-weight: bold;
+			width: 8em;
+		}
+
+		.DRC_summary_header_col2 {
+			width: 0.1em;
+		
+		}
+
+		.DRC_summary_header_col3 {
+			width : auto;
+		}
+
+		.header_holder {
+		    Width = 100%;
+		    border = 0px solid green;
+		    padding = 0;
+		}
+
+
+		.front_matter, .front_matter_column1, .front_matter_column2, .front_matter_column3
+		{
+			left : 0;
+			top : 0;
+			padding: 0em;
+			padding-top : 0.1em;
+			border : 0px solid black;
+			width : 100%;
+			vertical-align: top;
+			text-align: left;
+		}
+
+		.front_matter_column1 {
+			width : 8em;
+			font-weight: bold;
+		}
+
+		.front_matter_column2 {
+			width: 0.1em;
+		}
+
+		.front_matter_column3 {
+			width : auto;
+		}
+
+		.total_column1, .total_column {
+			font-weight : bold;
+		}
+		.total_column1 {
+			text-align : left;
+		}
+		.warning, .error {
+			color : red;
+			font-weight : bold;
+		}
+		tr.onmouseout_odd {
+			background-color : #white;
+		}
+		tr.onmouseout_even { 
+			background-color : #FAFAFA;
+		}
+		tr.onmouseover_odd, tr.onmouseover_even { 
+			background-color : #EEEEEE;
+		} 
+		a:link, a:visited, .q a:link,.q a:active,.q {
+			color: #21489e; 
+		}
+		a:link.callback, a:visited.callback { 
+			color: #21489e;
+		}
+		a:link.customize, a:visited.customize {
+			color: #C0C0C0;
+			position: absolute; 
+			right: 10px;
+		}	
+		p.contents_level1 {
+			font-weight : bold;
+			font-size : 110%;
+			margin : 0.5em;
+		}
+		p.contents_level2 {
+			position : relative;
+			left : 20px;
+			margin : 0.5em;
+		}
+	</style><script type="text/javascript">
+		function coordToMils(coord) {
+			var number = coord / 10000;
+			
+			if (number != number.toFixed(3))
+				number = number.toFixed(3);
+
+			return number + 'mil'
+		}
+
+		function coordToMM(coord) {
+			var number = 0.0254 * coord / 10000;
+			
+			if (number != number.toFixed(4))
+				number = number.toFixed(4);
+			
+			return number + 'mm'
+		}
+	
+		function convertCoord(coordNode, units) {
+			for (var i = 0; i < coordNode.childNodes.length; i++) {
+				coordNode.removeChild(coordNode.childNodes[i]);
+			}
+
+			var coord = coordNode.getAttribute('value');
+			if (coord != null) {
+				if (units == 'mm') {
+					textNode = document.createTextNode(coordToMM(coord));
+					coordNode.appendChild(textNode);
+				} else if (units == 'mil') {
+					textNode = document.createTextNode(coordToMils(coord));		
+					coordNode.appendChild(textNode);	
+				}
+			}
+		}
+	
+		function convertUnits(unitNode, units) {
+			for (var i = 0; i < unitNode.childNodes.length; i++) {
+				unitNode.removeChild(unitNode.childNodes[i]);		
+			}
+		
+			textNode = document.createTextNode(units); 
+			unitNode.appendChild(textNode);
+		}
+	
+		function changeUnits(radio_input, units) {
+			if (radio_input.checked) {
+			
+				var elements = document.getElementsByName('coordinate');
+				if (elements) {
+					for (var i = 0; i < elements.length; i++) {
+						convertCoord(elements[i], units);
+					}
+				}
+	
+				var elements = document.getElementsByName('units');
+				if (elements) {
+					for (var i = 0; i < elements.length; i++) {
+						convertUnits(elements[i], units);
+					}
+				}
+			}
+		}
+	</script><title>Design Rule Verification Report</title>
+</head>
+<body onload=""><img ALT="Altium" src="
+			file://C:\Users\Public\Documents\Altium\AD19\Templates\AD_logo.png
+		"><h1>Design Rule Verification Report</h1>
+<table class="header_holder">
+<td class="column1">
+<table class="front_matter">
+<tr class="front_matter">
+<td class="front_matter_column1">Date:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">14/12/2021</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Time:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">10:54:04</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Elapsed Time:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">00:00:06</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Filename:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3"><a href="file:///G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc" class="file"><acronym title="G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc">G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc</acronym></a></td>
+</tr>
+</table>
+</td>
+<td class="column2">
+<table class="DRC_summary_header">
+<tr>
+<td class="DRC_summary_header_col1">Warnings:</td>
+<td class="DRC_summary_header_col2"></td>
+<td class="DRC_summary_header_col3">0</td></tr>
+<tr>
+<td class="DRC_summary_header_col1">Rule Violations:</td>
+<td class="DRC_summary_header_col2"></td>
+<td class="DRC_summary_header_col3" style="color : red">99</td></tr>
+</table>
+</td>
+</table><a name="ID1JVLJHASGZIKC22NN1YHVQ0DOE0VINB1YRRVUCJXPL0ZSWW0Z0WL"><h2>Summary</h2></a><table>
+<tr>
+<th class="column1">Warnings</th>
+<th class="column2">Count</th>
+</tr>
+<tr>
+<td style="font-weight : bold; text-align : right" class="column1">Total</td>
+<td style="font-weight : bold" class="column2">0</td>
+</tr>
+</table><br><table>
+<tr>
+<th class="column1">Rule Violations</th>
+<th class="column2">Count</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDGAEBIRWSQE5GGBPUPRSHRJU51Y1ZEFS1LO23D4ICQBK1L3TWEL">Clearance Constraint (Gap=0.2mm) (InPolygonClass('GENERAL_GROUND')),(OnLayer('Bottom Layer') or OnLayer('Top Layer'))</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#ID1LX1H1KBGBCFHOIJ401L3CNXIETSEIEML4YMYQK4N3KQJU40VPYM">Clearance Constraint (Gap=0.2mm) (IsPad And (HoleDiameter &gt; 0) And (PadIsPlated = 'False')),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDM2MJMRMWERBQETQNC3NIJEJ4ICIBWV2Y1FULZXJZAVXXTSP1GOAO">Clearance Constraint (Gap=0.2mm) (IsPad And (HoleDiameter &gt; 0) And (PadIsPlated = 'True')),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDRSRUO0GWYPGVNJICGB5J3Y2QMHJWXDR2JR2TIIO2LCKJIQMJDHRI">Clearance Constraint (Gap=0.127mm) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDFFCTLZIRIVUKLTALI1U54RJBXHY4JAPQRAUPSWPCL32YRINNVTVL">Clearance Constraint (Gap=0.254mm) (OnLayer('Top Layer')),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDDVR0T4SAIFF0IAQ2ZTFECBE22FTAJHNYNMBEXBD2FSBJUQX1PWIF">Clearance Constraint (Gap=0.254mm) (OnLayer('Bottom Layer')),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDJJLJHX5JWRCXH0JZXSEN4U3C1BXAD1LA0W5XJVJAJOWEPQCLGSRD">Clearance Constraint (Gap=0.3mm) (OnLayer('Keep-Out Layer')),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDTBOOZNAIAFIGPCGI2MPWJXIWODKSDPORLKRPZXKFZQ3YZBAO0MS">Clearance Constraint (Gap=0.254mm) (IsPad And (HoleDiameter &gt; 0) And InPadClass('MOUSE_BITES')),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDOFBD2PYBYGEWJSO3YOUQSCHX2BU123H1AEJIMNNXPL5Q2CTISFB">Clearance Constraint (Gap=0.254mm) (IsPad  And (HoleDiameter &gt; 0) And (Not InPadClass('FIX')) And (PadIsPlated = 'True')),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDBFE54Q3ROQZTO4SHLEHYLPJZKEKXKI1KTSF1AXK4JNNZG4NV4BLK">Clearance Constraint (Gap=0.2mm) (All),(IsVia)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDDG5H2TF2ZR3FCZLFKKNRC0DSELJDXTDHB24IPEKWZEEMERZEXYDD">Clearance Constraint (Gap=0.381mm) (IsPad And InPadClass('FIX')),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDYZCMARC4WVZ4PROVWJKLL0UJ1ECH10BNX3G4XDCUZUA1WCYTYYC">Short-Circuit Constraint (Allowed=No) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#ID0TUU5NOPZH4EIPBIJQWCVZ5VXBBFIELJDNO4S1LTGRSTQLQRZ12J">Un-Routed Net Constraint ( (All) )</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDTXEJXEP1KERTOKYRSK53C5BN0HBCUQH2ZSC1ZSHLDPJQPLVTMEVF">Modified Polygon (Allow modified: No), (Allow shelved: No)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDSTJ0J24US30NBIN5HRLGGFSTJFIMUX41OHXY1XMVPCCSOMXPGBN">Width Constraint (Min=0.125mm) (Max=2.54mm) (Preferred=0.25mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDEYNJB04FKJZMDDKJFPWB1U1RCERY55JVS35YN1KJKCRRAJ3UHTI">Width Constraint (Min=0.15mm) (Max=2.54mm) (Preferred=0.254mm) (OnLayer('Top Overlay') Or OnLayer('Bottom Overlay'))</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDJ2E1M4CNGKYYENVZ0O10SM2C2EEGE0QQE2IAO1G1RV2OWV4JJBGB">Width Constraint (Min=0.2mm) (Max=2.54mm) (Preferred=0.35mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDX51R54SULHK2GVCAQOCWX3TQLNWFOJZLPHFN4OF2S2OMQ1XFRVEC">Power Plane Connect Rule(Relief Connect )(Expansion=0.508mm) (Conductor Width=0.254mm) (Air Gap=0.254mm) (Entries=4) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDTSIQ1I3FFD2XD5PLE5L5OKQB0JUO2CNPZSIVIMMRWDKB4CLA4IKF">Minimum Annular Ring (Minimum=0.076mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#ID0E1WE5LDH2TOBUAFDPFLEKMYAJH3TDQIJE1UZSCW0LM4YQ3G3MYM">Hole Size Constraint (Min=0.2mm) (Max=6.3mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDKZLUEZUECSLKLWJEXT1KLYWYIEHNKYZOU4ETEJTDMEPIDGRS5YH">Hole Size Constraint (Min=0.65mm) (Max=6.35mm) (IsPad And (HoleDiameter &gt; 0) And (HoleType = 'Slot') And (PadIsPlated = 'True'))</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDEQG4CWHG3FLYFU0TH4MCO4V0YEYIQ0MZVQHLVUJDDNWQDHC5R2OB">Hole Size Constraint (Min=1mm) (Max=6.35mm) (IsPad And (HoleDiameter &gt; 0) And (HoleType = 'Slot') And (PadIsPlated = 'False'))</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDHKU4XRS3PZSEHVUZMN24W2DWDKEPBQ11X0GR4TGLE0HAI4DDYNKK">Hole Size Constraint (Min=0.2mm) (Max=6.35mm) (IsPad And (HoleDiameter &gt; 0) And (PadIsPlated = 'True'))</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDBIW1SBHP0XY05LAV0YJSKYXYGBMTOYVKQLUEEJKRUHCODRUNXIP">Hole Size Constraint (Min=0.5mm) (Max=6.35mm) (IsPad And (HoleDiameter &gt; 0) And (PadIsPlated = 'False'))</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDK50USNHEECNLP3SX43SHJUJM2LP54LKX5ESRC4BPZOBFHKOERPCP">Hole To Hole Clearance (Gap=0.508mm) (IsPad And (HoleDiameter &gt; 0)),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDL31VUTYHHWOANOFAHHKL203RTKBQEBDQZUCS5WHFR2GVI2NFFQDO">Hole To Hole Clearance (Gap=0.254mm) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDGYZJ4PYW2BYVN4FGD3HUQ4I3SGBSQZFH1JHDYGTKHUIFINLBSWI">Hole To Hole Clearance (Gap=0.254mm) (IsPad And (HoleDiameter &gt; 0) And InPadClass('MOUSE_BITES')),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#ID52PEU44SJ2IUEGG1CKNYDCBEMGDMP4MINLXMGYHNULLGISTPDKTF">Hole To Hole Clearance (Gap=0.508mm) (IsVia And (HoleDiameter &gt; 0)),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDCR1UHPXJT4FBHXTUP3ONREHTZOY3OGKRQMHTKOONLQW313TCB1GN">Minimum Solder Mask Sliver (Gap=0.1mm) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDUEJIHYQLB1O4BI4IY31APL3NTICMLTPK2BLI54EXBQVYZE1PZIQE">Minimum Solder Mask Sliver (Gap=0mm) (IsPad And (HoleDiameter &gt; 0) And InPadClass('MOUSE_BITES')),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDANFEBHRA3HIEDMOBFDNJM2O4TBZ5BIY2M4IQX4BB5V54WZV0KPZB">Silk To Solder Mask (Clearance=0.1mm) (IsPad),(All)</a></td>
+<td class="column2">99</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#ID10D50R3IPZMBJGMRO43LPCNGKF5YKUKJTTNF5ZN4TTI2MQQEHU2C">Silk to Silk (Clearance=0.1mm) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDD34UA5B5GNEMEWB4CPWGLP2WZHGQF2LZEG2FDCOE3FMFVRCXZJYH">Net Antennae (Tolerance=0mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDFSSXZCHIJRF4IJX2DHS23BGEMDDNJE4JF32T12D4IVOTDHMW1QNK">Board Clearance Constraint (Gap=0mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#ID0PWEI0TNQJKGCUZ5WHPJUA1BUIRDWESCELE05MKDTKV10UMDUSWD">Height Constraint (Min=0mm) (Max=25.4mm) (Prefered=12.7mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr>
+<td style="font-weight : bold; text-align : right" class="column1">Total</td>
+<td style="font-weight : bold" class="column2">99</td>
+</tr>
+</table><br><a name="IDANFEBHRA3HIEDMOBFDNJM2O4TBZ5BIY2M4IQX4BB5V54WZV0KPZB"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Silk To Solder Mask (Clearance=0.1mm) (IsPad),(All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3676.166mil|Location2.X=3681.353mil|Location1.Y=1721.854mil|Location2.Y=1727.042mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3676.166mil|Location2.X=3681.353mil|Location1.Y=1721.854mil|Location2.Y=1727.042mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.095mm &lt; 0.1mm) Between Arc (66.04mm,11.49mm) on Top Overlay And Pad BT1-1(66.04mm,20.09mm) on Top Layer [Top Overlay] to [Top Solder] clearance [0.095mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1446.639mil|Location2.X=1451.826mil|Location1.Y=3031.064mil|Location2.Y=3036.251mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1446.639mil|Location2.X=1451.826mil|Location1.Y=3031.064mil|Location2.Y=3036.251mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.079mm &lt; 0.1mm) Between Pad IC1-1(10.5mm,51.8mm) on Top Layer And Track (11.55mm,49.3mm)(11.55mm,52.3mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.079mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1547.838mil|Location2.X=1553.025mil|Location1.Y=3031.283mil|Location2.Y=3036.47mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1547.838mil|Location2.X=1553.025mil|Location1.Y=3031.283mil|Location2.Y=3036.47mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.062mm &lt; 0.1mm) Between Pad IC1-10(14.9mm,51.8mm) on Top Layer And Track (13.85mm,49.3mm)(13.85mm,52.3mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.062mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1446.639mil|Location2.X=1451.826mil|Location1.Y=3011.38mil|Location2.Y=3016.567mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1446.639mil|Location2.X=1451.826mil|Location1.Y=3011.38mil|Location2.Y=3016.567mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.079mm &lt; 0.1mm) Between Pad IC1-2(10.5mm,51.3mm) on Top Layer And Track (11.55mm,49.3mm)(11.55mm,52.3mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.079mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1446.639mil|Location2.X=1451.826mil|Location1.Y=2991.694mil|Location2.Y=2996.881mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1446.639mil|Location2.X=1451.826mil|Location1.Y=2991.694mil|Location2.Y=2996.881mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.079mm &lt; 0.1mm) Between Pad IC1-3(10.5mm,50.8mm) on Top Layer And Track (11.55mm,49.3mm)(11.55mm,52.3mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.079mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1446.639mil|Location2.X=1451.826mil|Location1.Y=2972.01mil|Location2.Y=2977.197mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1446.639mil|Location2.X=1451.826mil|Location1.Y=2972.01mil|Location2.Y=2977.197mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.079mm &lt; 0.1mm) Between Pad IC1-4(10.5mm,50.3mm) on Top Layer And Track (11.55mm,49.3mm)(11.55mm,52.3mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.079mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1446.639mil|Location2.X=1451.826mil|Location1.Y=2952.324mil|Location2.Y=2957.511mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1446.639mil|Location2.X=1451.826mil|Location1.Y=2952.324mil|Location2.Y=2957.511mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.079mm &lt; 0.1mm) Between Pad IC1-5(10.5mm,49.8mm) on Top Layer And Track (11.55mm,49.3mm)(11.55mm,52.3mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.079mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1547.838mil|Location2.X=1553.025mil|Location1.Y=2952.543mil|Location2.Y=2957.73mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1547.838mil|Location2.X=1553.025mil|Location1.Y=2952.543mil|Location2.Y=2957.73mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.062mm &lt; 0.1mm) Between Pad IC1-6(14.9mm,49.8mm) on Top Layer And Track (13.85mm,49.3mm)(13.85mm,52.3mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.062mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1547.838mil|Location2.X=1553.025mil|Location1.Y=2972.229mil|Location2.Y=2977.416mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1547.838mil|Location2.X=1553.025mil|Location1.Y=2972.229mil|Location2.Y=2977.416mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.062mm &lt; 0.1mm) Between Pad IC1-7(14.9mm,50.3mm) on Top Layer And Track (13.85mm,49.3mm)(13.85mm,52.3mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.062mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1547.838mil|Location2.X=1553.025mil|Location1.Y=2991.913mil|Location2.Y=2997.1mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1547.838mil|Location2.X=1553.025mil|Location1.Y=2991.913mil|Location2.Y=2997.1mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.062mm &lt; 0.1mm) Between Pad IC1-8(14.9mm,50.8mm) on Top Layer And Track (13.85mm,49.3mm)(13.85mm,52.3mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.062mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1547.838mil|Location2.X=1553.025mil|Location1.Y=3011.599mil|Location2.Y=3016.786mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1547.838mil|Location2.X=1553.025mil|Location1.Y=3011.599mil|Location2.Y=3016.786mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.062mm &lt; 0.1mm) Between Pad IC1-9(14.9mm,51.3mm) on Top Layer And Track (13.85mm,49.3mm)(13.85mm,52.3mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.062mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2534.371mil|Location2.X=2539.558mil|Location1.Y=3440.917mil|Location2.Y=3446.104mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2534.371mil|Location2.X=2539.558mil|Location1.Y=3440.917mil|Location2.Y=3446.104mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.098mm &lt; 0.1mm) Between Pad IC4-1(38.1mm,62.23mm) on Top Layer And Track (39.188mm,53.155mm)(39.188mm,62.855mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.098mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2534.371mil|Location2.X=2539.558mil|Location1.Y=3210.603mil|Location2.Y=3215.79mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2534.371mil|Location2.X=2539.558mil|Location1.Y=3210.603mil|Location2.Y=3215.79mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.098mm &lt; 0.1mm) Between Pad IC4-10(38.1mm,56.38mm) on Top Layer And Track (39.188mm,53.155mm)(39.188mm,62.855mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.098mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2534.371mil|Location2.X=2539.558mil|Location1.Y=3185.011mil|Location2.Y=3190.198mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2534.371mil|Location2.X=2539.558mil|Location1.Y=3185.011mil|Location2.Y=3190.198mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.098mm &lt; 0.1mm) Between Pad IC4-11(38.1mm,55.73mm) on Top Layer And Track (39.188mm,53.155mm)(39.188mm,62.855mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.098mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2534.371mil|Location2.X=2539.558mil|Location1.Y=3159.421mil|Location2.Y=3164.608mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2534.371mil|Location2.X=2539.558mil|Location1.Y=3159.421mil|Location2.Y=3164.608mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.098mm &lt; 0.1mm) Between Pad IC4-12(38.1mm,55.08mm) on Top Layer And Track (39.188mm,53.155mm)(39.188mm,62.855mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.098mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2534.371mil|Location2.X=2539.558mil|Location1.Y=3133.831mil|Location2.Y=3139.018mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2534.371mil|Location2.X=2539.558mil|Location1.Y=3133.831mil|Location2.Y=3139.018mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.098mm &lt; 0.1mm) Between Pad IC4-13(38.1mm,54.43mm) on Top Layer And Track (39.188mm,53.155mm)(39.188mm,62.855mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.098mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2534.371mil|Location2.X=2539.558mil|Location1.Y=3108.239mil|Location2.Y=3113.426mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2534.371mil|Location2.X=2539.558mil|Location1.Y=3108.239mil|Location2.Y=3113.426mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.098mm &lt; 0.1mm) Between Pad IC4-14(38.1mm,53.78mm) on Top Layer And Track (39.188mm,53.155mm)(39.188mm,62.855mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.098mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2691.78mil|Location2.X=2696.967mil|Location1.Y=3108.239mil|Location2.Y=3113.426mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2691.78mil|Location2.X=2696.967mil|Location1.Y=3108.239mil|Location2.Y=3113.426mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.098mm &lt; 0.1mm) Between Pad IC4-15(43.976mm,53.78mm) on Top Layer And Track (42.888mm,53.155mm)(42.888mm,62.855mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.098mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2691.78mil|Location2.X=2696.967mil|Location1.Y=3133.831mil|Location2.Y=3139.018mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2691.78mil|Location2.X=2696.967mil|Location1.Y=3133.831mil|Location2.Y=3139.018mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.098mm &lt; 0.1mm) Between Pad IC4-16(43.976mm,54.43mm) on Top Layer And Track (42.888mm,53.155mm)(42.888mm,62.855mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.098mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2691.78mil|Location2.X=2696.967mil|Location1.Y=3159.421mil|Location2.Y=3164.608mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2691.78mil|Location2.X=2696.967mil|Location1.Y=3159.421mil|Location2.Y=3164.608mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.098mm &lt; 0.1mm) Between Pad IC4-17(43.976mm,55.08mm) on Top Layer And Track (42.888mm,53.155mm)(42.888mm,62.855mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.098mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2691.78mil|Location2.X=2696.967mil|Location1.Y=3185.011mil|Location2.Y=3190.198mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2691.78mil|Location2.X=2696.967mil|Location1.Y=3185.011mil|Location2.Y=3190.198mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.098mm &lt; 0.1mm) Between Pad IC4-18(43.976mm,55.73mm) on Top Layer And Track (42.888mm,53.155mm)(42.888mm,62.855mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.098mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2691.78mil|Location2.X=2696.967mil|Location1.Y=3210.603mil|Location2.Y=3215.79mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2691.78mil|Location2.X=2696.967mil|Location1.Y=3210.603mil|Location2.Y=3215.79mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.098mm &lt; 0.1mm) Between Pad IC4-19(43.976mm,56.38mm) on Top Layer And Track (42.888mm,53.155mm)(42.888mm,62.855mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.098mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2534.371mil|Location2.X=2539.558mil|Location1.Y=3415.327mil|Location2.Y=3420.514mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2534.371mil|Location2.X=2539.558mil|Location1.Y=3415.327mil|Location2.Y=3420.514mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.098mm &lt; 0.1mm) Between Pad IC4-2(38.1mm,61.58mm) on Top Layer And Track (39.188mm,53.155mm)(39.188mm,62.855mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.098mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2691.78mil|Location2.X=2696.967mil|Location1.Y=3236.193mil|Location2.Y=3241.38mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2691.78mil|Location2.X=2696.967mil|Location1.Y=3236.193mil|Location2.Y=3241.38mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.098mm &lt; 0.1mm) Between Pad IC4-20(43.976mm,57.03mm) on Top Layer And Track (42.888mm,53.155mm)(42.888mm,62.855mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.098mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2691.78mil|Location2.X=2696.967mil|Location1.Y=3261.783mil|Location2.Y=3266.97mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2691.78mil|Location2.X=2696.967mil|Location1.Y=3261.783mil|Location2.Y=3266.97mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.098mm &lt; 0.1mm) Between Pad IC4-21(43.976mm,57.68mm) on Top Layer And Track (42.888mm,53.155mm)(42.888mm,62.855mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.098mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2691.78mil|Location2.X=2696.967mil|Location1.Y=3287.373mil|Location2.Y=3292.56mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2691.78mil|Location2.X=2696.967mil|Location1.Y=3287.373mil|Location2.Y=3292.56mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.098mm &lt; 0.1mm) Between Pad IC4-22(43.976mm,58.33mm) on Top Layer And Track (42.888mm,53.155mm)(42.888mm,62.855mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.098mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2691.78mil|Location2.X=2696.967mil|Location1.Y=3312.965mil|Location2.Y=3318.152mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2691.78mil|Location2.X=2696.967mil|Location1.Y=3312.965mil|Location2.Y=3318.152mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.098mm &lt; 0.1mm) Between Pad IC4-23(43.976mm,58.98mm) on Top Layer And Track (42.888mm,53.155mm)(42.888mm,62.855mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.098mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2691.78mil|Location2.X=2696.967mil|Location1.Y=3338.555mil|Location2.Y=3343.742mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2691.78mil|Location2.X=2696.967mil|Location1.Y=3338.555mil|Location2.Y=3343.742mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.098mm &lt; 0.1mm) Between Pad IC4-24(43.976mm,59.63mm) on Top Layer And Track (42.888mm,53.155mm)(42.888mm,62.855mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.098mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2691.78mil|Location2.X=2696.967mil|Location1.Y=3364.145mil|Location2.Y=3369.332mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2691.78mil|Location2.X=2696.967mil|Location1.Y=3364.145mil|Location2.Y=3369.332mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.098mm &lt; 0.1mm) Between Pad IC4-25(43.976mm,60.28mm) on Top Layer And Track (42.888mm,53.155mm)(42.888mm,62.855mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.098mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2691.78mil|Location2.X=2696.967mil|Location1.Y=3389.735mil|Location2.Y=3394.922mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2691.78mil|Location2.X=2696.967mil|Location1.Y=3389.735mil|Location2.Y=3394.922mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.098mm &lt; 0.1mm) Between Pad IC4-26(43.976mm,60.93mm) on Top Layer And Track (42.888mm,53.155mm)(42.888mm,62.855mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.098mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2691.78mil|Location2.X=2696.967mil|Location1.Y=3415.327mil|Location2.Y=3420.514mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2691.78mil|Location2.X=2696.967mil|Location1.Y=3415.327mil|Location2.Y=3420.514mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.098mm &lt; 0.1mm) Between Pad IC4-27(43.976mm,61.58mm) on Top Layer And Track (42.888mm,53.155mm)(42.888mm,62.855mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.098mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2691.78mil|Location2.X=2696.967mil|Location1.Y=3440.917mil|Location2.Y=3446.104mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2691.78mil|Location2.X=2696.967mil|Location1.Y=3440.917mil|Location2.Y=3446.104mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.098mm &lt; 0.1mm) Between Pad IC4-28(43.976mm,62.23mm) on Top Layer And Track (42.888mm,53.155mm)(42.888mm,62.855mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.098mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2534.371mil|Location2.X=2539.558mil|Location1.Y=3389.735mil|Location2.Y=3394.922mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2534.371mil|Location2.X=2539.558mil|Location1.Y=3389.735mil|Location2.Y=3394.922mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.098mm &lt; 0.1mm) Between Pad IC4-3(38.1mm,60.93mm) on Top Layer And Track (39.188mm,53.155mm)(39.188mm,62.855mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.098mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2534.371mil|Location2.X=2539.558mil|Location1.Y=3364.145mil|Location2.Y=3369.332mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2534.371mil|Location2.X=2539.558mil|Location1.Y=3364.145mil|Location2.Y=3369.332mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.098mm &lt; 0.1mm) Between Pad IC4-4(38.1mm,60.28mm) on Top Layer And Track (39.188mm,53.155mm)(39.188mm,62.855mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.098mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2534.371mil|Location2.X=2539.558mil|Location1.Y=3338.555mil|Location2.Y=3343.742mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2534.371mil|Location2.X=2539.558mil|Location1.Y=3338.555mil|Location2.Y=3343.742mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.098mm &lt; 0.1mm) Between Pad IC4-5(38.1mm,59.63mm) on Top Layer And Track (39.188mm,53.155mm)(39.188mm,62.855mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.098mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2534.371mil|Location2.X=2539.558mil|Location1.Y=3312.965mil|Location2.Y=3318.152mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2534.371mil|Location2.X=2539.558mil|Location1.Y=3312.965mil|Location2.Y=3318.152mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.098mm &lt; 0.1mm) Between Pad IC4-6(38.1mm,58.98mm) on Top Layer And Track (39.188mm,53.155mm)(39.188mm,62.855mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.098mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2534.371mil|Location2.X=2539.558mil|Location1.Y=3287.373mil|Location2.Y=3292.56mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2534.371mil|Location2.X=2539.558mil|Location1.Y=3287.373mil|Location2.Y=3292.56mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.098mm &lt; 0.1mm) Between Pad IC4-7(38.1mm,58.33mm) on Top Layer And Track (39.188mm,53.155mm)(39.188mm,62.855mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.098mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2534.371mil|Location2.X=2539.558mil|Location1.Y=3261.783mil|Location2.Y=3266.97mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2534.371mil|Location2.X=2539.558mil|Location1.Y=3261.783mil|Location2.Y=3266.97mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.098mm &lt; 0.1mm) Between Pad IC4-8(38.1mm,57.68mm) on Top Layer And Track (39.188mm,53.155mm)(39.188mm,62.855mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.098mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2534.371mil|Location2.X=2539.558mil|Location1.Y=3236.193mil|Location2.Y=3241.38mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2534.371mil|Location2.X=2539.558mil|Location1.Y=3236.193mil|Location2.Y=3241.38mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.098mm &lt; 0.1mm) Between Pad IC4-9(38.1mm,57.03mm) on Top Layer And Track (39.188mm,53.155mm)(39.188mm,62.855mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.098mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3734.371mil|Location2.X=3739.558mil|Location1.Y=3440.917mil|Location2.Y=3446.104mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3734.371mil|Location2.X=3739.558mil|Location1.Y=3440.917mil|Location2.Y=3446.104mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.098mm &lt; 0.1mm) Between Pad IC6-1(68.58mm,62.23mm) on Top Layer And Track (69.668mm,53.155mm)(69.668mm,62.855mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.098mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3734.371mil|Location2.X=3739.558mil|Location1.Y=3210.603mil|Location2.Y=3215.79mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3734.371mil|Location2.X=3739.558mil|Location1.Y=3210.603mil|Location2.Y=3215.79mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.098mm &lt; 0.1mm) Between Pad IC6-10(68.58mm,56.38mm) on Top Layer And Track (69.668mm,53.155mm)(69.668mm,62.855mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.098mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3734.371mil|Location2.X=3739.558mil|Location1.Y=3185.011mil|Location2.Y=3190.198mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3734.371mil|Location2.X=3739.558mil|Location1.Y=3185.011mil|Location2.Y=3190.198mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.098mm &lt; 0.1mm) Between Pad IC6-11(68.58mm,55.73mm) on Top Layer And Track (69.668mm,53.155mm)(69.668mm,62.855mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.098mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3734.371mil|Location2.X=3739.558mil|Location1.Y=3159.421mil|Location2.Y=3164.608mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3734.371mil|Location2.X=3739.558mil|Location1.Y=3159.421mil|Location2.Y=3164.608mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.098mm &lt; 0.1mm) Between Pad IC6-12(68.58mm,55.08mm) on Top Layer And Track (69.668mm,53.155mm)(69.668mm,62.855mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.098mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3734.371mil|Location2.X=3739.558mil|Location1.Y=3133.831mil|Location2.Y=3139.018mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3734.371mil|Location2.X=3739.558mil|Location1.Y=3133.831mil|Location2.Y=3139.018mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.098mm &lt; 0.1mm) Between Pad IC6-13(68.58mm,54.43mm) on Top Layer And Track (69.668mm,53.155mm)(69.668mm,62.855mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.098mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3734.371mil|Location2.X=3739.558mil|Location1.Y=3108.239mil|Location2.Y=3113.426mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3734.371mil|Location2.X=3739.558mil|Location1.Y=3108.239mil|Location2.Y=3113.426mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.098mm &lt; 0.1mm) Between Pad IC6-14(68.58mm,53.78mm) on Top Layer And Track (69.668mm,53.155mm)(69.668mm,62.855mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.098mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3891.78mil|Location2.X=3896.967mil|Location1.Y=3108.239mil|Location2.Y=3113.426mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3891.78mil|Location2.X=3896.967mil|Location1.Y=3108.239mil|Location2.Y=3113.426mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.098mm &lt; 0.1mm) Between Pad IC6-15(74.456mm,53.78mm) on Top Layer And Track (73.368mm,53.155mm)(73.368mm,62.855mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.098mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3891.78mil|Location2.X=3896.967mil|Location1.Y=3133.831mil|Location2.Y=3139.018mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3891.78mil|Location2.X=3896.967mil|Location1.Y=3133.831mil|Location2.Y=3139.018mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.098mm &lt; 0.1mm) Between Pad IC6-16(74.456mm,54.43mm) on Top Layer And Track (73.368mm,53.155mm)(73.368mm,62.855mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.098mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3891.78mil|Location2.X=3896.967mil|Location1.Y=3159.421mil|Location2.Y=3164.608mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3891.78mil|Location2.X=3896.967mil|Location1.Y=3159.421mil|Location2.Y=3164.608mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.098mm &lt; 0.1mm) Between Pad IC6-17(74.456mm,55.08mm) on Top Layer And Track (73.368mm,53.155mm)(73.368mm,62.855mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.098mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3891.78mil|Location2.X=3896.967mil|Location1.Y=3185.011mil|Location2.Y=3190.198mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3891.78mil|Location2.X=3896.967mil|Location1.Y=3185.011mil|Location2.Y=3190.198mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.098mm &lt; 0.1mm) Between Pad IC6-18(74.456mm,55.73mm) on Top Layer And Track (73.368mm,53.155mm)(73.368mm,62.855mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.098mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3891.78mil|Location2.X=3896.967mil|Location1.Y=3210.603mil|Location2.Y=3215.79mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3891.78mil|Location2.X=3896.967mil|Location1.Y=3210.603mil|Location2.Y=3215.79mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.098mm &lt; 0.1mm) Between Pad IC6-19(74.456mm,56.38mm) on Top Layer And Track (73.368mm,53.155mm)(73.368mm,62.855mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.098mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3734.371mil|Location2.X=3739.558mil|Location1.Y=3415.327mil|Location2.Y=3420.514mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3734.371mil|Location2.X=3739.558mil|Location1.Y=3415.327mil|Location2.Y=3420.514mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.098mm &lt; 0.1mm) Between Pad IC6-2(68.58mm,61.58mm) on Top Layer And Track (69.668mm,53.155mm)(69.668mm,62.855mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.098mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3891.78mil|Location2.X=3896.967mil|Location1.Y=3236.193mil|Location2.Y=3241.38mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3891.78mil|Location2.X=3896.967mil|Location1.Y=3236.193mil|Location2.Y=3241.38mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.098mm &lt; 0.1mm) Between Pad IC6-20(74.456mm,57.03mm) on Top Layer And Track (73.368mm,53.155mm)(73.368mm,62.855mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.098mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3891.78mil|Location2.X=3896.967mil|Location1.Y=3261.783mil|Location2.Y=3266.97mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3891.78mil|Location2.X=3896.967mil|Location1.Y=3261.783mil|Location2.Y=3266.97mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.098mm &lt; 0.1mm) Between Pad IC6-21(74.456mm,57.68mm) on Top Layer And Track (73.368mm,53.155mm)(73.368mm,62.855mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.098mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3891.78mil|Location2.X=3896.967mil|Location1.Y=3287.373mil|Location2.Y=3292.56mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3891.78mil|Location2.X=3896.967mil|Location1.Y=3287.373mil|Location2.Y=3292.56mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.098mm &lt; 0.1mm) Between Pad IC6-22(74.456mm,58.33mm) on Top Layer And Track (73.368mm,53.155mm)(73.368mm,62.855mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.098mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3891.78mil|Location2.X=3896.967mil|Location1.Y=3312.965mil|Location2.Y=3318.152mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3891.78mil|Location2.X=3896.967mil|Location1.Y=3312.965mil|Location2.Y=3318.152mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.098mm &lt; 0.1mm) Between Pad IC6-23(74.456mm,58.98mm) on Top Layer And Track (73.368mm,53.155mm)(73.368mm,62.855mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.098mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3891.78mil|Location2.X=3896.967mil|Location1.Y=3338.555mil|Location2.Y=3343.742mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3891.78mil|Location2.X=3896.967mil|Location1.Y=3338.555mil|Location2.Y=3343.742mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.098mm &lt; 0.1mm) Between Pad IC6-24(74.456mm,59.63mm) on Top Layer And Track (73.368mm,53.155mm)(73.368mm,62.855mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.098mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3891.78mil|Location2.X=3896.967mil|Location1.Y=3364.145mil|Location2.Y=3369.332mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3891.78mil|Location2.X=3896.967mil|Location1.Y=3364.145mil|Location2.Y=3369.332mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.098mm &lt; 0.1mm) Between Pad IC6-25(74.456mm,60.28mm) on Top Layer And Track (73.368mm,53.155mm)(73.368mm,62.855mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.098mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3891.78mil|Location2.X=3896.967mil|Location1.Y=3389.735mil|Location2.Y=3394.922mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3891.78mil|Location2.X=3896.967mil|Location1.Y=3389.735mil|Location2.Y=3394.922mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.098mm &lt; 0.1mm) Between Pad IC6-26(74.456mm,60.93mm) on Top Layer And Track (73.368mm,53.155mm)(73.368mm,62.855mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.098mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3891.78mil|Location2.X=3896.967mil|Location1.Y=3415.327mil|Location2.Y=3420.514mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3891.78mil|Location2.X=3896.967mil|Location1.Y=3415.327mil|Location2.Y=3420.514mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.098mm &lt; 0.1mm) Between Pad IC6-27(74.456mm,61.58mm) on Top Layer And Track (73.368mm,53.155mm)(73.368mm,62.855mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.098mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3891.78mil|Location2.X=3896.967mil|Location1.Y=3440.917mil|Location2.Y=3446.104mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3891.78mil|Location2.X=3896.967mil|Location1.Y=3440.917mil|Location2.Y=3446.104mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.098mm &lt; 0.1mm) Between Pad IC6-28(74.456mm,62.23mm) on Top Layer And Track (73.368mm,53.155mm)(73.368mm,62.855mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.098mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3734.371mil|Location2.X=3739.558mil|Location1.Y=3389.735mil|Location2.Y=3394.922mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3734.371mil|Location2.X=3739.558mil|Location1.Y=3389.735mil|Location2.Y=3394.922mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.098mm &lt; 0.1mm) Between Pad IC6-3(68.58mm,60.93mm) on Top Layer And Track (69.668mm,53.155mm)(69.668mm,62.855mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.098mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3734.371mil|Location2.X=3739.558mil|Location1.Y=3364.145mil|Location2.Y=3369.332mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3734.371mil|Location2.X=3739.558mil|Location1.Y=3364.145mil|Location2.Y=3369.332mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.098mm &lt; 0.1mm) Between Pad IC6-4(68.58mm,60.28mm) on Top Layer And Track (69.668mm,53.155mm)(69.668mm,62.855mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.098mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3734.371mil|Location2.X=3739.558mil|Location1.Y=3338.555mil|Location2.Y=3343.742mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3734.371mil|Location2.X=3739.558mil|Location1.Y=3338.555mil|Location2.Y=3343.742mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.098mm &lt; 0.1mm) Between Pad IC6-5(68.58mm,59.63mm) on Top Layer And Track (69.668mm,53.155mm)(69.668mm,62.855mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.098mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3734.371mil|Location2.X=3739.558mil|Location1.Y=3312.965mil|Location2.Y=3318.152mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3734.371mil|Location2.X=3739.558mil|Location1.Y=3312.965mil|Location2.Y=3318.152mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.098mm &lt; 0.1mm) Between Pad IC6-6(68.58mm,58.98mm) on Top Layer And Track (69.668mm,53.155mm)(69.668mm,62.855mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.098mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3734.371mil|Location2.X=3739.558mil|Location1.Y=3287.373mil|Location2.Y=3292.56mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3734.371mil|Location2.X=3739.558mil|Location1.Y=3287.373mil|Location2.Y=3292.56mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.098mm &lt; 0.1mm) Between Pad IC6-7(68.58mm,58.33mm) on Top Layer And Track (69.668mm,53.155mm)(69.668mm,62.855mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.098mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3734.371mil|Location2.X=3739.558mil|Location1.Y=3261.783mil|Location2.Y=3266.97mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3734.371mil|Location2.X=3739.558mil|Location1.Y=3261.783mil|Location2.Y=3266.97mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.098mm &lt; 0.1mm) Between Pad IC6-8(68.58mm,57.68mm) on Top Layer And Track (69.668mm,53.155mm)(69.668mm,62.855mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.098mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3734.371mil|Location2.X=3739.558mil|Location1.Y=3236.193mil|Location2.Y=3241.38mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3734.371mil|Location2.X=3739.558mil|Location1.Y=3236.193mil|Location2.Y=3241.38mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.098mm &lt; 0.1mm) Between Pad IC6-9(68.58mm,57.03mm) on Top Layer And Track (69.668mm,53.155mm)(69.668mm,62.855mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.098mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4934.371mil|Location2.X=4939.558mil|Location1.Y=3440.917mil|Location2.Y=3446.104mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4934.371mil|Location2.X=4939.558mil|Location1.Y=3440.917mil|Location2.Y=3446.104mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.098mm &lt; 0.1mm) Between Pad IC8-1(99.06mm,62.23mm) on Top Layer And Track (100.148mm,53.155mm)(100.148mm,62.855mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.098mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4934.371mil|Location2.X=4939.558mil|Location1.Y=3210.603mil|Location2.Y=3215.79mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4934.371mil|Location2.X=4939.558mil|Location1.Y=3210.603mil|Location2.Y=3215.79mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.098mm &lt; 0.1mm) Between Pad IC8-10(99.06mm,56.38mm) on Top Layer And Track (100.148mm,53.155mm)(100.148mm,62.855mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.098mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4934.371mil|Location2.X=4939.558mil|Location1.Y=3185.011mil|Location2.Y=3190.198mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4934.371mil|Location2.X=4939.558mil|Location1.Y=3185.011mil|Location2.Y=3190.198mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.098mm &lt; 0.1mm) Between Pad IC8-11(99.06mm,55.73mm) on Top Layer And Track (100.148mm,53.155mm)(100.148mm,62.855mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.098mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4934.371mil|Location2.X=4939.558mil|Location1.Y=3159.421mil|Location2.Y=3164.608mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4934.371mil|Location2.X=4939.558mil|Location1.Y=3159.421mil|Location2.Y=3164.608mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.098mm &lt; 0.1mm) Between Pad IC8-12(99.06mm,55.08mm) on Top Layer And Track (100.148mm,53.155mm)(100.148mm,62.855mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.098mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4934.371mil|Location2.X=4939.558mil|Location1.Y=3133.831mil|Location2.Y=3139.018mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4934.371mil|Location2.X=4939.558mil|Location1.Y=3133.831mil|Location2.Y=3139.018mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.098mm &lt; 0.1mm) Between Pad IC8-13(99.06mm,54.43mm) on Top Layer And Track (100.148mm,53.155mm)(100.148mm,62.855mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.098mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4934.371mil|Location2.X=4939.558mil|Location1.Y=3108.239mil|Location2.Y=3113.426mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4934.371mil|Location2.X=4939.558mil|Location1.Y=3108.239mil|Location2.Y=3113.426mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.098mm &lt; 0.1mm) Between Pad IC8-14(99.06mm,53.78mm) on Top Layer And Track (100.148mm,53.155mm)(100.148mm,62.855mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.098mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5091.78mil|Location2.X=5096.967mil|Location1.Y=3108.239mil|Location2.Y=3113.426mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5091.78mil|Location2.X=5096.967mil|Location1.Y=3108.239mil|Location2.Y=3113.426mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.098mm &lt; 0.1mm) Between Pad IC8-15(104.936mm,53.78mm) on Top Layer And Track (103.848mm,53.155mm)(103.848mm,62.855mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.098mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5091.78mil|Location2.X=5096.967mil|Location1.Y=3133.831mil|Location2.Y=3139.018mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5091.78mil|Location2.X=5096.967mil|Location1.Y=3133.831mil|Location2.Y=3139.018mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.098mm &lt; 0.1mm) Between Pad IC8-16(104.936mm,54.43mm) on Top Layer And Track (103.848mm,53.155mm)(103.848mm,62.855mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.098mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5091.78mil|Location2.X=5096.967mil|Location1.Y=3159.421mil|Location2.Y=3164.608mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5091.78mil|Location2.X=5096.967mil|Location1.Y=3159.421mil|Location2.Y=3164.608mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.098mm &lt; 0.1mm) Between Pad IC8-17(104.936mm,55.08mm) on Top Layer And Track (103.848mm,53.155mm)(103.848mm,62.855mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.098mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5091.78mil|Location2.X=5096.967mil|Location1.Y=3185.011mil|Location2.Y=3190.198mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5091.78mil|Location2.X=5096.967mil|Location1.Y=3185.011mil|Location2.Y=3190.198mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.098mm &lt; 0.1mm) Between Pad IC8-18(104.936mm,55.73mm) on Top Layer And Track (103.848mm,53.155mm)(103.848mm,62.855mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.098mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5091.78mil|Location2.X=5096.967mil|Location1.Y=3210.603mil|Location2.Y=3215.79mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5091.78mil|Location2.X=5096.967mil|Location1.Y=3210.603mil|Location2.Y=3215.79mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.098mm &lt; 0.1mm) Between Pad IC8-19(104.936mm,56.38mm) on Top Layer And Track (103.848mm,53.155mm)(103.848mm,62.855mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.098mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4934.371mil|Location2.X=4939.558mil|Location1.Y=3415.327mil|Location2.Y=3420.514mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4934.371mil|Location2.X=4939.558mil|Location1.Y=3415.327mil|Location2.Y=3420.514mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.098mm &lt; 0.1mm) Between Pad IC8-2(99.06mm,61.58mm) on Top Layer And Track (100.148mm,53.155mm)(100.148mm,62.855mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.098mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5091.78mil|Location2.X=5096.967mil|Location1.Y=3236.193mil|Location2.Y=3241.38mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5091.78mil|Location2.X=5096.967mil|Location1.Y=3236.193mil|Location2.Y=3241.38mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.098mm &lt; 0.1mm) Between Pad IC8-20(104.936mm,57.03mm) on Top Layer And Track (103.848mm,53.155mm)(103.848mm,62.855mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.098mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5091.78mil|Location2.X=5096.967mil|Location1.Y=3261.783mil|Location2.Y=3266.97mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5091.78mil|Location2.X=5096.967mil|Location1.Y=3261.783mil|Location2.Y=3266.97mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.098mm &lt; 0.1mm) Between Pad IC8-21(104.936mm,57.68mm) on Top Layer And Track (103.848mm,53.155mm)(103.848mm,62.855mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.098mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5091.78mil|Location2.X=5096.967mil|Location1.Y=3287.373mil|Location2.Y=3292.56mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5091.78mil|Location2.X=5096.967mil|Location1.Y=3287.373mil|Location2.Y=3292.56mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.098mm &lt; 0.1mm) Between Pad IC8-22(104.936mm,58.33mm) on Top Layer And Track (103.848mm,53.155mm)(103.848mm,62.855mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.098mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5091.78mil|Location2.X=5096.967mil|Location1.Y=3312.965mil|Location2.Y=3318.152mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5091.78mil|Location2.X=5096.967mil|Location1.Y=3312.965mil|Location2.Y=3318.152mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.098mm &lt; 0.1mm) Between Pad IC8-23(104.936mm,58.98mm) on Top Layer And Track (103.848mm,53.155mm)(103.848mm,62.855mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.098mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5091.78mil|Location2.X=5096.967mil|Location1.Y=3338.555mil|Location2.Y=3343.742mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5091.78mil|Location2.X=5096.967mil|Location1.Y=3338.555mil|Location2.Y=3343.742mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.098mm &lt; 0.1mm) Between Pad IC8-24(104.936mm,59.63mm) on Top Layer And Track (103.848mm,53.155mm)(103.848mm,62.855mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.098mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5091.78mil|Location2.X=5096.967mil|Location1.Y=3364.145mil|Location2.Y=3369.332mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5091.78mil|Location2.X=5096.967mil|Location1.Y=3364.145mil|Location2.Y=3369.332mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.098mm &lt; 0.1mm) Between Pad IC8-25(104.936mm,60.28mm) on Top Layer And Track (103.848mm,53.155mm)(103.848mm,62.855mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.098mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5091.78mil|Location2.X=5096.967mil|Location1.Y=3389.735mil|Location2.Y=3394.922mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5091.78mil|Location2.X=5096.967mil|Location1.Y=3389.735mil|Location2.Y=3394.922mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.098mm &lt; 0.1mm) Between Pad IC8-26(104.936mm,60.93mm) on Top Layer And Track (103.848mm,53.155mm)(103.848mm,62.855mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.098mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5091.78mil|Location2.X=5096.967mil|Location1.Y=3415.327mil|Location2.Y=3420.514mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5091.78mil|Location2.X=5096.967mil|Location1.Y=3415.327mil|Location2.Y=3420.514mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.098mm &lt; 0.1mm) Between Pad IC8-27(104.936mm,61.58mm) on Top Layer And Track (103.848mm,53.155mm)(103.848mm,62.855mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.098mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5091.78mil|Location2.X=5096.967mil|Location1.Y=3440.917mil|Location2.Y=3446.104mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5091.78mil|Location2.X=5096.967mil|Location1.Y=3440.917mil|Location2.Y=3446.104mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.098mm &lt; 0.1mm) Between Pad IC8-28(104.936mm,62.23mm) on Top Layer And Track (103.848mm,53.155mm)(103.848mm,62.855mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.098mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4934.371mil|Location2.X=4939.558mil|Location1.Y=3389.735mil|Location2.Y=3394.922mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4934.371mil|Location2.X=4939.558mil|Location1.Y=3389.735mil|Location2.Y=3394.922mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.098mm &lt; 0.1mm) Between Pad IC8-3(99.06mm,60.93mm) on Top Layer And Track (100.148mm,53.155mm)(100.148mm,62.855mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.098mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4934.371mil|Location2.X=4939.558mil|Location1.Y=3364.145mil|Location2.Y=3369.332mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4934.371mil|Location2.X=4939.558mil|Location1.Y=3364.145mil|Location2.Y=3369.332mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.098mm &lt; 0.1mm) Between Pad IC8-4(99.06mm,60.28mm) on Top Layer And Track (100.148mm,53.155mm)(100.148mm,62.855mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.098mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4934.371mil|Location2.X=4939.558mil|Location1.Y=3338.555mil|Location2.Y=3343.742mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4934.371mil|Location2.X=4939.558mil|Location1.Y=3338.555mil|Location2.Y=3343.742mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.098mm &lt; 0.1mm) Between Pad IC8-5(99.06mm,59.63mm) on Top Layer And Track (100.148mm,53.155mm)(100.148mm,62.855mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.098mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4934.371mil|Location2.X=4939.558mil|Location1.Y=3312.965mil|Location2.Y=3318.152mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4934.371mil|Location2.X=4939.558mil|Location1.Y=3312.965mil|Location2.Y=3318.152mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.098mm &lt; 0.1mm) Between Pad IC8-6(99.06mm,58.98mm) on Top Layer And Track (100.148mm,53.155mm)(100.148mm,62.855mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.098mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4934.371mil|Location2.X=4939.558mil|Location1.Y=3287.373mil|Location2.Y=3292.56mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4934.371mil|Location2.X=4939.558mil|Location1.Y=3287.373mil|Location2.Y=3292.56mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.098mm &lt; 0.1mm) Between Pad IC8-7(99.06mm,58.33mm) on Top Layer And Track (100.148mm,53.155mm)(100.148mm,62.855mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.098mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4934.371mil|Location2.X=4939.558mil|Location1.Y=3261.783mil|Location2.Y=3266.97mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4934.371mil|Location2.X=4939.558mil|Location1.Y=3261.783mil|Location2.Y=3266.97mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.098mm &lt; 0.1mm) Between Pad IC8-8(99.06mm,57.68mm) on Top Layer And Track (100.148mm,53.155mm)(100.148mm,62.855mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.098mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4934.371mil|Location2.X=4939.558mil|Location1.Y=3236.193mil|Location2.Y=3241.38mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4934.371mil|Location2.X=4939.558mil|Location1.Y=3236.193mil|Location2.Y=3241.38mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.098mm &lt; 0.1mm) Between Pad IC8-9(99.06mm,57.03mm) on Top Layer And Track (100.148mm,53.155mm)(100.148mm,62.855mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.098mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4563.754mil|Location2.X=4567.378mil|Location1.Y=2072.598mil|Location2.Y=2076.222mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4563.754mil|Location2.X=4567.378mil|Location1.Y=2072.598mil|Location2.Y=2076.222mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.1mm) Between Pad Q1-1(90.86mm,26.735mm) on Top Layer And Track (82.28mm,27.29mm)(97.52mm,27.29mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4488.162mil|Location2.X=4491.786mil|Location1.Y=2072.598mil|Location2.Y=2076.222mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4488.162mil|Location2.X=4491.786mil|Location1.Y=2072.598mil|Location2.Y=2076.222mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.1mm) Between Pad Q1-2(88.94mm,26.735mm) on Top Layer And Track (82.28mm,27.29mm)(97.52mm,27.29mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4237.558mil|Location2.X=4241.182mil|Location1.Y=1724.562mil|Location2.Y=1728.186mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4237.558mil|Location2.X=4241.182mil|Location1.Y=1724.562mil|Location2.Y=1728.186mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.1mm) Between Pad Q2-3(82.28mm,19.05mm) on Top Layer And Track (82.28mm,12.05mm)(82.28mm,27.29mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4359.98mil|Location2.X=4365.167mil|Location1.Y=2065.935mil|Location2.Y=2071.122mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=G:\My Drive\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\PCB\Digitalizador_RPi_V2\Digitalizador_RPi\Digitalizador_RPi.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4359.98mil|Location2.X=4365.167mil|Location1.Y=2065.935mil|Location2.Y=2071.122mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.045mm &lt; 0.1mm) Between Pad R5-1(86.09mm,26.635mm) on Top Layer And Track (82.28mm,27.29mm)(97.52mm,27.29mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.045mm]</acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br></body>
+</html>

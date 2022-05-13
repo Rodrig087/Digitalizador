@@ -1,0 +1,35 @@
+Added Component: Designator=Q7(SOT523)
+Add component. Clean all parameters for all variants
+Added Component: Designator=R120(0805)
+Add component. Clean all parameters for all variants
+Add component (AddParameter): Name = "LatestRevisionDate"; Value = "17-Jul-2002"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "LatestRevisionNote"; Value = "Re-released for DXP Platform."; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "PackageDescription"; Value = "Axial Device, Thru-Hole; 2 Leads; 0.3 in Pin Spacing"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "PackageReference"; Value = "AXIAL-0.3"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Published"; Value = "8-Jun-2000"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Publisher"; Value = "Altium Limited"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Value"; Value = "10k"; VariantName = "[No Variations]"
+Added Component: Designator=R121(0805)
+Add component. Clean all parameters for all variants
+Add component (AddParameter): Name = "LatestRevisionDate"; Value = "17-Jul-2002"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "LatestRevisionNote"; Value = "Re-released for DXP Platform."; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "PackageDescription"; Value = "Axial Device, Thru-Hole; 2 Leads; 0.3 in Pin Spacing"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "PackageReference"; Value = "AXIAL-0.3"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Published"; Value = "8-Jun-2000"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Publisher"; Value = "Altium Limited"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Value"; Value = "10k"; VariantName = "[No Variations]"
+Added Pin To Net: NetName=+3.3V Pin=Q7-1
+Added Pin To Net: NetName=+3.3V Pin=R120-2
+Added Pin To Net: NetName=+5V Pin=R121-2
+Added Pin To Net: NetName=PIN_EXTRA_3.3V Pin=P12-40
+Added Pin To Net: NetName=PIN_EXTRA_3.3V Pin=Q7-2
+Added Pin To Net: NetName=PIN_EXTRA_3.3V Pin=R120-1
+Added Net: Name=PIN_EXTRA_3.3V
+Added Pin To Net: NetName=PIN_EXTRA_5V Pin=Q7-3
+Added Pin To Net: NetName=PIN_EXTRA_5V Pin=R121-1
+Added Pin To Net: NetName=PIN_EXTRA_5V Pin=U4-33
+Added Net: Name=PIN_EXTRA_5V
+Added Member To Class: ClassName=Digitalizador_RPi Member=Component Q7 2N7002T
+Added Member To Class: ClassName=Digitalizador_RPi Member=Component R120 Res1
+Added Member To Class: ClassName=Digitalizador_RPi Member=Component R121 Res1
+Added Room: Name=Digitalizador_RPi

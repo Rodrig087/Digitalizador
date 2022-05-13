@@ -1,0 +1,9 @@
+Removed Pin From Net: NetName=Señal3 Pin=U4-10
+Removed Pin From Net: NetName=Referencia Pin=U4-36
+Removed Pin From Net: NetName=Señal1 Pin=U4-37
+Removed Pin From Net: NetName=Señal2 Pin=U4-38
+Added Pin To Net: NetName=Referencia Pin=U4-35
+Added Pin To Net: NetName=Señal1 Pin=U4-36
+Added Pin To Net: NetName=Señal2 Pin=U4-37
+Added Pin To Net: NetName=Señal3 Pin=U4-38
+Added Room: Name=Digitalizador_RPi

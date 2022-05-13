@@ -1,0 +1,5 @@
+Change Component Footprint: Designator=R15 Old Footprint=AXIAL-0.3 New Footprint=0805
+Change Component Footprint: Designator=R16 Old Footprint=AXIAL-0.3 New Footprint=0805
+Change Component Footprint: Designator=C4 Old Footprint=lenteja New Footprint=0603
+Change Component Footprint: Designator=C15 Old Footprint=lenteja New Footprint=0603
+Added Room: Name=Digitalizador_RPi

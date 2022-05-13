@@ -1,0 +1,12 @@
+Output: NC Drill Files
+Type  : NC Drill
+From  : Project [Digitalizador_RPi.PrjPcb]
+   Generated File[Digitalizador_RPi.TXT]
+   Generated File[Digitalizador_RPi.LDP]
+   Generated File[Digitalizador_RPi.DRR]
+
+
+Files Generated   : 3
+Documents Printed : 0
+
+Finished Output Generation At 11:49:46 On 14/12/2021

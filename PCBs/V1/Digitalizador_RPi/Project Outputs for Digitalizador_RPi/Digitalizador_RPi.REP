@@ -1,0 +1,14 @@
+*************************************************************
+FileName = Digitalizador_RPi.GBR
+AutoAperture = True
+*************************************************************
+Generating : Keep-Out Layer
+      File : Digitalizador_RPi.GKO
+
+    Adding Layer      : Keep-Out Layer
+
+
+Used DCodes :
+    D10
+*************************************************************
+

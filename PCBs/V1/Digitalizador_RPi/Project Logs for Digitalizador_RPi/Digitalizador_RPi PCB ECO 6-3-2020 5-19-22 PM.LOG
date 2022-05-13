@@ -1,0 +1,9 @@
+Change Component Footprint: Designator=C10 Old Footprint=lenteja New Footprint=0603
+Change Component Footprint: Designator=C11 Old Footprint=lenteja New Footprint=0603
+Change Component Footprint: Designator=C24 Old Footprint=Lenteja New Footprint=0603
+Change Component Footprint: Designator=C25 Old Footprint=Lenteja New Footprint=0603
+Change Component Footprint: Designator=C34 Old Footprint=Lenteja New Footprint=0603
+Change Component Footprint: Designator=C35 Old Footprint=Lenteja New Footprint=0603
+Change Component Footprint: Designator=C44 Old Footprint=Lenteja New Footprint=0603
+Change Component Footprint: Designator=C45 Old Footprint=Lenteja New Footprint=0603
+Added Room: Name=Digitalizador_RPi

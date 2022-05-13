@@ -1,0 +1,17 @@
+Added Component: Designator=IC?(LGA-24)
+Add component. Clean all parameters for all variants
+Add component (AddParameter): Name = "Arrow Part Number"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Arrow Price/Stock"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Datasheet Link"; Value = "https://www.mouser.com/datasheet/2/783/BSCH_S_A0010801761_1-2525115.pdf"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Height"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Info"; Value = "LGA-24 Motion Sensors - Accelerometers ROHS"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "JLCPCB Basic"; Value = "No"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "JLCPCB Part #"; Value = "C464452"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "JLCPCB Price"; Value = "7.0457"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer_Name"; Value = "Bosch Sensortec"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer_Part_Number"; Value = "BHI160B"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Mouser Part Number"; Value = "262-BHI160B"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Mouser Price/Stock"; Value = "https://www.mouser.com/ProductDetail/Bosch/BHI160B?qs=qSfuJ%252Bfl%2Fd4gguUCihLWmA%3D%3D"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Package"; Value = "LGA-24"; VariantName = "[No Variations]"
+Added Member To Class: ClassName=Fuente_Alimentacion Member=Component IC? BHI160B
+Added Room: Name=Fuente_Alimentacion

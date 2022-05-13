@@ -1,0 +1,26 @@
+Added Pin To Net: NetName=+2.5V Pin=P1-6
+Added Net: Name=+2.5V
+Added Pin To Net: NetName=+3.3V Pin=P1-4
+Added Net: Name=+3.3V
+Added Pin To Net: NetName=+5V_CONM Pin=P1-2
+Added Net: Name=+5V_CONM
+Added Pin To Net: NetName=+5V Pin=P1-3
+Added Net: Name=+5V
+Added Pin To Net: NetName=+8V Pin=P2-4
+Added Net: Name=+8V
+Added Pin To Net: NetName=+12V Pin=P2-1
+Added Net: Name=+12V
+Added Pin To Net: NetName=-2.5V Pin=P1-7
+Added Net: Name=-2.5V
+Added Pin To Net: NetName=-8V Pin=P2-5
+Added Net: Name=-8V
+Added Pin To Net: NetName=-12V Pin=P2-2
+Added Net: Name=-12V
+Added Pin To Net: NetName=GND Pin=P1-1
+Added Pin To Net: NetName=GND Pin=P1-5
+Added Pin To Net: NetName=GND Pin=P1-8
+Added Pin To Net: NetName=GND Pin=P2-3
+Added Pin To Net: NetName=GND Pin=P2-6
+Added Net: Name=GND
+Added Class: Name=Digitalizador_RPi
+Added Room: Name=Digitalizador_RPi

@@ -1,0 +1,92 @@
+Removed Pin From Net: NetName=LED_RPi_1 Pin=P12-32
+Removed Pin From Net: NetName=LED_RPi_2 Pin=P12-36
+Added Component: Designator=R117(0805)
+Add component. Clean all parameters for all variants
+Add component (AddParameter): Name = "LatestRevisionDate"; Value = "17-Jul-2002"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "LatestRevisionNote"; Value = "Re-released for DXP Platform."; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "PackageDescription"; Value = "Axial Device, Thru-Hole; 2 Leads; 0.3 in Pin Spacing"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "PackageReference"; Value = "AXIAL-0.3"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Published"; Value = "8-Jun-2000"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Publisher"; Value = "Altium Limited"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Value"; Value = "5k"; VariantName = "[No Variations]"
+Added Component: Designator=R118(0805)
+Add component. Clean all parameters for all variants
+Add component (AddParameter): Name = "LatestRevisionDate"; Value = "17-Jul-2002"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "LatestRevisionNote"; Value = "Re-released for DXP Platform."; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "PackageDescription"; Value = "Axial Device, Thru-Hole; 2 Leads; 0.3 in Pin Spacing"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "PackageReference"; Value = "AXIAL-0.3"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Published"; Value = "8-Jun-2000"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Publisher"; Value = "Altium Limited"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Value"; Value = "5k"; VariantName = "[No Variations]"
+Added Pin To Net: NetName=LED_RPi_1 Pin=R117-1
+Added Pin To Net: NetName=LED_RPi_2 Pin=R118-1
+Added Pin To Net: NetName=NetP12_32 Pin=P12-32
+Added Pin To Net: NetName=NetP12_32 Pin=R117-2
+Added Net: Name=NetP12_32
+Added Pin To Net: NetName=NetP12_36 Pin=P12-36
+Added Pin To Net: NetName=NetP12_36 Pin=R118-2
+Added Net: Name=NetP12_36
+Added Member To Class: ClassName=Digitalizador_RPi Member=Component C3 Cap
+Added Member To Class: ClassName=Digitalizador_RPi Member=Component C4 Cap Pol1
+Added Member To Class: ClassName=Digitalizador_RPi Member=Component C5 Cap Pol1
+Added Member To Class: ClassName=Digitalizador_RPi Member=Component C6 Cap
+Added Member To Class: ClassName=Digitalizador_RPi Member=Component C8 Cap
+Added Member To Class: ClassName=Digitalizador_RPi Member=Component C9 Cap Pol1
+Added Member To Class: ClassName=Digitalizador_RPi Member=Component C13 Cap
+Added Member To Class: ClassName=Digitalizador_RPi Member=Component C14 Cap
+Added Member To Class: ClassName=Digitalizador_RPi Member=Component C16 Cap Pol1
+Added Member To Class: ClassName=Digitalizador_RPi Member=Component C19 Cap
+Added Member To Class: ClassName=Digitalizador_RPi Member=Component C21 Cap Pol1
+Added Member To Class: ClassName=Digitalizador_RPi Member=Component C24 Cap
+Added Member To Class: ClassName=Digitalizador_RPi Member=Component C48 Cap
+Added Member To Class: ClassName=Digitalizador_RPi Member=Component C49 Cap
+Added Member To Class: ClassName=Digitalizador_RPi Member=Component C50 Cap
+Added Member To Class: ClassName=Digitalizador_RPi Member=Component C51 Cap
+Added Member To Class: ClassName=Digitalizador_RPi Member=Component C54 Cap
+Added Member To Class: ClassName=Digitalizador_RPi Member=Component C56 Cap
+Added Member To Class: ClassName=Digitalizador_RPi Member=Component P2 Conector Pines Extra
+Added Member To Class: ClassName=Digitalizador_RPi Member=Component P3 JumperAliment+2.5
+Added Member To Class: ClassName=Digitalizador_RPi Member=Component P6 Molex Geofono
+Added Member To Class: ClassName=Digitalizador_RPi Member=Component P8 Jumper Alim RPi
+Added Member To Class: ClassName=Digitalizador_RPi Member=Component P9 Grabador
+Added Member To Class: ClassName=Digitalizador_RPi Member=Component R1 Res1
+Added Member To Class: ClassName=Digitalizador_RPi Member=Component R3 Res1
+Added Member To Class: ClassName=Digitalizador_RPi Member=Component R5 Res1
+Added Member To Class: ClassName=Digitalizador_RPi Member=Component R7 Res1
+Added Member To Class: ClassName=Digitalizador_RPi Member=Component R10 Res1
+Added Member To Class: ClassName=Digitalizador_RPi Member=Component R15 RPot
+Added Member To Class: ClassName=Digitalizador_RPi Member=Component R18 Res1
+Added Member To Class: ClassName=Digitalizador_RPi Member=Component R19 Res1
+Added Member To Class: ClassName=Digitalizador_RPi Member=Component R21 
+Added Member To Class: ClassName=Digitalizador_RPi Member=Component R23 Res1
+Added Member To Class: ClassName=Digitalizador_RPi Member=Component R25 
+Added Member To Class: ClassName=Digitalizador_RPi Member=Component R28 
+Added Member To Class: ClassName=Digitalizador_RPi Member=Component R29 
+Added Member To Class: ClassName=Digitalizador_RPi Member=Component R31 Res1
+Added Member To Class: ClassName=Digitalizador_RPi Member=Component R32 Res1
+Added Member To Class: ClassName=Digitalizador_RPi Member=Component R34 
+Added Member To Class: ClassName=Digitalizador_RPi Member=Component R35 Res1
+Added Member To Class: ClassName=Digitalizador_RPi Member=Component R38 Res1
+Added Member To Class: ClassName=Digitalizador_RPi Member=Component R39 
+Added Member To Class: ClassName=Digitalizador_RPi Member=Component R41 
+Added Member To Class: ClassName=Digitalizador_RPi Member=Component R42 
+Added Member To Class: ClassName=Digitalizador_RPi Member=Component R43 
+Added Member To Class: ClassName=Digitalizador_RPi Member=Component R45 Res1
+Added Member To Class: ClassName=Digitalizador_RPi Member=Component R46 Res1
+Added Member To Class: ClassName=Digitalizador_RPi Member=Component R48 Res1
+Added Member To Class: ClassName=Digitalizador_RPi Member=Component R50 Res1
+Added Member To Class: ClassName=Digitalizador_RPi Member=Component R52 
+Added Member To Class: ClassName=Digitalizador_RPi Member=Component R54 
+Added Member To Class: ClassName=Digitalizador_RPi Member=Component R55 
+Added Member To Class: ClassName=Digitalizador_RPi Member=Component R56 Res1
+Added Member To Class: ClassName=Digitalizador_RPi Member=Component R58 
+Added Member To Class: ClassName=Digitalizador_RPi Member=Component R59 
+Added Member To Class: ClassName=Digitalizador_RPi Member=Component R61 
+Added Member To Class: ClassName=Digitalizador_RPi Member=Component R63 Res1
+Added Member To Class: ClassName=Digitalizador_RPi Member=Component R64 
+Added Member To Class: ClassName=Digitalizador_RPi Member=Component R65 Res1
+Added Member To Class: ClassName=Digitalizador_RPi Member=Component R117 Res1
+Added Member To Class: ClassName=Digitalizador_RPi Member=Component R118 Res1
+Added Member To Class: ClassName=Digitalizador_RPi Member=Component U4 DSPIC30F3014-20I/P
+Added Member To Class: ClassName=Digitalizador_RPi Member=Component U6 LM337H
+Added Room: Name=Digitalizador_RPi

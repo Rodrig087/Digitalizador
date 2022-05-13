@@ -1,0 +1,379 @@
+Added Component: Designator=C1(CAP-1.5-4.0MM)
+Add component. Clean all parameters for all variants
+Added Component: Designator=C2(RADIAL-0.1)
+Add component. Clean all parameters for all variants
+Added Component: Designator=C3(RADIAL-0.1)
+Add component. Clean all parameters for all variants
+Added Component: Designator=C4(CAP-1.5-3.0MM)
+Add component. Clean all parameters for all variants
+Added Component: Designator=C5(RADIAL-0.1)
+Add component. Clean all parameters for all variants
+Added Component: Designator=C6(RADIAL-0.1)
+Add component. Clean all parameters for all variants
+Added Component: Designator=C7(CAP-1.5-3.0MM)
+Add component. Clean all parameters for all variants
+Added Component: Designator=C8(RADIAL-0.1)
+Add component. Clean all parameters for all variants
+Added Component: Designator=C9(RADIAL-0.1)
+Add component. Clean all parameters for all variants
+Added Component: Designator=C10(CAP-1.5-3.0MM)
+Add component. Clean all parameters for all variants
+Added Component: Designator=C11(CAP-1.5-3.0MM)
+Add component. Clean all parameters for all variants
+Added Component: Designator=C12(CAP-1.5-3.0MM)
+Add component. Clean all parameters for all variants
+Added Component: Designator=C13(RADIAL-0.1)
+Add component. Clean all parameters for all variants
+Added Component: Designator=C14(RADIAL-0.1)
+Add component. Clean all parameters for all variants
+Added Component: Designator=C15(CAP-1.5-3.0MM)
+Add component. Clean all parameters for all variants
+Added Component: Designator=C16(RADIAL-0.1)
+Add component. Clean all parameters for all variants
+Added Component: Designator=C17(RADIAL-0.1)
+Add component. Clean all parameters for all variants
+Added Component: Designator=C18(CAP-1.5-3.0MM)
+Add component. Clean all parameters for all variants
+Added Component: Designator=C19(RADIAL-0.1)
+Add component. Clean all parameters for all variants
+Added Component: Designator=C20(RADIAL-0.1)
+Add component. Clean all parameters for all variants
+Added Component: Designator=C21(CAP-1.5-3.0MM)
+Add component. Clean all parameters for all variants
+Added Component: Designator=C22(RADIAL-0.1)
+Add component. Clean all parameters for all variants
+Added Component: Designator=C23(RADIAL-0.1)
+Add component. Clean all parameters for all variants
+Added Component: Designator=C24(CAP-1.5-3.0MM)
+Add component. Clean all parameters for all variants
+Added Component: Designator=C25(RADIAL-0.1)
+Add component. Clean all parameters for all variants
+Added Component: Designator=C26(RADIAL-0.1)
+Add component. Clean all parameters for all variants
+Added Component: Designator=C27(CAP-1.5-3.0MM)
+Add component. Clean all parameters for all variants
+Added Component: Designator=C28(RADIAL-0.1)
+Add component. Clean all parameters for all variants
+Added Component: Designator=C29(RADIAL-0.1)
+Add component. Clean all parameters for all variants
+Added Component: Designator=D1(SODFL4725X110N)
+Add component. Clean all parameters for all variants
+Add component (AddParameter): Name = "Arrow Part Number"; Value = "PMEG3020EP,115"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Arrow Price/Stock"; Value = "https://www.arrow.com/en/products/pmeg3020ep115/nexperia?region=nac"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Datasheet Link"; Value = "https://componentsearchengine.com/Datasheets/2/PMEG3020EP,115.pdf"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Height"; Value = "1.1mm"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Info"; Value = "30V 2A 360mV @ 2A SOD-128 Schottky Barrier Diodes (SBD) ROHS"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "JLCPCB Basic"; Value = "No"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "JLCPCB Part #"; Value = "C513108"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "JLCPCB Price"; Value = "0.1911"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer_Name"; Value = "Nexperia"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer_Part_Number"; Value = "PMEG3020EP,115"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Mouser Part Number"; Value = "771-PMEG3020EP115"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Mouser Price/Stock"; Value = "https://www.mouser.co.uk/ProductDetail/Nexperia/PMEG3020EP115?qs=GcY6OjH1zdnlY%252B06tUqEyw%3D%3D"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Package"; Value = "SOD-128"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Value"; Value = "30V 2A 360mV"; VariantName = "[No Variations]"
+Added Component: Designator=D2(SODFL4725X110N)
+Add component. Clean all parameters for all variants
+Add component (AddParameter): Name = "Arrow Part Number"; Value = "PMEG3020EP,115"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Arrow Price/Stock"; Value = "https://www.arrow.com/en/products/pmeg3020ep115/nexperia?region=nac"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Datasheet Link"; Value = "https://componentsearchengine.com/Datasheets/2/PMEG3020EP,115.pdf"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Height"; Value = "1.1mm"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Info"; Value = "30V 2A 360mV @ 2A SOD-128 Schottky Barrier Diodes (SBD) ROHS"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "JLCPCB Basic"; Value = "No"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "JLCPCB Part #"; Value = "C513108"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "JLCPCB Price"; Value = "0.1911"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer_Name"; Value = "Nexperia"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer_Part_Number"; Value = "PMEG3020EP,115"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Mouser Part Number"; Value = "771-PMEG3020EP115"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Mouser Price/Stock"; Value = "https://www.mouser.co.uk/ProductDetail/Nexperia/PMEG3020EP115?qs=GcY6OjH1zdnlY%252B06tUqEyw%3D%3D"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Package"; Value = "SOD-128"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Value"; Value = "30V 2A 360mV"; VariantName = "[No Variations]"
+Added Component: Designator=D3(SODFL4725X110N)
+Add component. Clean all parameters for all variants
+Add component (AddParameter): Name = "Arrow Part Number"; Value = "PMEG3020EP,115"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Arrow Price/Stock"; Value = "https://www.arrow.com/en/products/pmeg3020ep115/nexperia?region=nac"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Datasheet Link"; Value = "https://componentsearchengine.com/Datasheets/2/PMEG3020EP,115.pdf"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Height"; Value = "1.1mm"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Info"; Value = "30V 2A 360mV @ 2A SOD-128 Schottky Barrier Diodes (SBD) ROHS"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "JLCPCB Basic"; Value = "No"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "JLCPCB Part #"; Value = "C513108"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "JLCPCB Price"; Value = "0.1911"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer_Name"; Value = "Nexperia"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer_Part_Number"; Value = "PMEG3020EP,115"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Mouser Part Number"; Value = "771-PMEG3020EP115"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Mouser Price/Stock"; Value = "https://www.mouser.co.uk/ProductDetail/Nexperia/PMEG3020EP115?qs=GcY6OjH1zdnlY%252B06tUqEyw%3D%3D"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Package"; Value = "SOD-128"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Value"; Value = "30V 2A 360mV"; VariantName = "[No Variations]"
+Added Component: Designator=D4(SODFL4725X110N)
+Add component. Clean all parameters for all variants
+Add component (AddParameter): Name = "Arrow Part Number"; Value = "PMEG3020EP,115"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Arrow Price/Stock"; Value = "https://www.arrow.com/en/products/pmeg3020ep115/nexperia?region=nac"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Datasheet Link"; Value = "https://componentsearchengine.com/Datasheets/2/PMEG3020EP,115.pdf"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Height"; Value = "1.1mm"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Info"; Value = "30V 2A 360mV @ 2A SOD-128 Schottky Barrier Diodes (SBD) ROHS"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "JLCPCB Basic"; Value = "No"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "JLCPCB Part #"; Value = "C513108"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "JLCPCB Price"; Value = "0.1911"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer_Name"; Value = "Nexperia"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer_Part_Number"; Value = "PMEG3020EP,115"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Mouser Part Number"; Value = "771-PMEG3020EP115"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Mouser Price/Stock"; Value = "https://www.mouser.co.uk/ProductDetail/Nexperia/PMEG3020EP115?qs=GcY6OjH1zdnlY%252B06tUqEyw%3D%3D"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Package"; Value = "SOD-128"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Value"; Value = "30V 2A 360mV"; VariantName = "[No Variations]"
+Added Component: Designator=IC1(TO270P460X1020X2008-3P)
+Add component. Clean all parameters for all variants
+Add component (AddParameter): Name = "Arrow Part Number"; Value = "L7808CV"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Arrow Price/Stock"; Value = "https://www.arrow.com/en/products/l7808cv/stmicroelectronics"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Datasheet Link"; Value = "http://www.st.com/web/en/resource/technical/document/datasheet/CD00000444.pdf"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Height"; Value = "4.6mm"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Info"; Value = "TO-220-3 Linear Voltage Regulators (LDO) ROHS"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "JLCPCB Basic"; Value = "No"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "JLCPCB Part #"; Value = "C519076"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "JLCPCB Price"; Value = "0.2029"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer_Name"; Value = "STMicroelectronics"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer_Part_Number"; Value = "L7808CV"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Mouser Part Number"; Value = "511-L7808CV"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Mouser Price/Stock"; Value = "https://www.mouser.co.uk/ProductDetail/STMicroelectronics/L7808CV?qs=ewe0KQ%2FSs5GFsjTXbJ%252ByYA%3D%3D"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Package"; Value = "TO-220-3"; VariantName = "[No Variations]"
+Added Component: Designator=IC2(TO270P460X1020X2008-3P)
+Add component. Clean all parameters for all variants
+Add component (AddParameter): Name = "Arrow Part Number"; Value = "L7908CV"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Arrow Price/Stock"; Value = "https://www.arrow.com/en/products/l7908cv/stmicroelectronics"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Datasheet Link"; Value = "http://www.st.com/web/en/resource/technical/document/datasheet/CD00000450.pdf"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Height"; Value = "4.6mm"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Info"; Value = "1.1V @ 1A(typ) - - Fixed -35V -8V TO-220(TO-220-3) Linear Voltage Regulators (LDO) ROHS"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "JLCPCB Basic"; Value = "No"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "JLCPCB Part #"; Value = "C26162"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "JLCPCB Price"; Value = "0.4063"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer_Name"; Value = "STMicroelectronics"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer_Part_Number"; Value = "L7908CV"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Mouser Part Number"; Value = "511-L7908CV"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Mouser Price/Stock"; Value = "https://www.mouser.co.uk/ProductDetail/STMicroelectronics/L7908CV?qs=W%252B4obUA0F3a1iCcgpeCvfA%3D%3D"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Package"; Value = "TO-220,TO-220-3"; VariantName = "[No Variations]"
+Added Component: Designator=IC3(DIP794W56P254L938H457Q8N)
+Add component. Clean all parameters for all variants
+Add component (AddParameter): Name = "Arrow Part Number"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Arrow Price/Stock"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Datasheet Link"; Value = "https://datasheet.datasheetarchive.com/originals/distributors/Datasheets-18/DSA-345107.pdf"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Height"; Value = "4.572mm"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Info"; Value = "20V - DIP-8 DC-DC Converters ROHS"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "JLCPCB Basic"; Value = "No"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "JLCPCB Part #"; Value = "C14340"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "JLCPCB Price"; Value = "2.6457"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer_Name"; Value = "Maxim Integrated"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer_Part_Number"; Value = "ICL7662CPA+"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Mouser Part Number"; Value = "700-ICL7662CPA"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Mouser Price/Stock"; Value = "https://www.mouser.co.uk/ProductDetail/Maxim-Integrated/ICL7662CPA%2b?qs=0Y9aZN%252BMVCV5CIR47Klr4Q%3D%3D"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Package"; Value = "DIP-8"; VariantName = "[No Variations]"
+Added Component: Designator=IC4(DIP794W56P254L938H457Q8N)
+Add component. Clean all parameters for all variants
+Add component (AddParameter): Name = "Arrow Part Number"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Arrow Price/Stock"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Datasheet Link"; Value = "https://datasheet.datasheetarchive.com/originals/distributors/Datasheets-18/DSA-345107.pdf"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Height"; Value = "4.572mm"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Info"; Value = "20V - DIP-8 DC-DC Converters ROHS"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "JLCPCB Basic"; Value = "No"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "JLCPCB Part #"; Value = "C14340"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "JLCPCB Price"; Value = "2.6457"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer_Name"; Value = "Maxim Integrated"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer_Part_Number"; Value = "ICL7662CPA+"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Mouser Part Number"; Value = "700-ICL7662CPA"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Mouser Price/Stock"; Value = "https://www.mouser.co.uk/ProductDetail/Maxim-Integrated/ICL7662CPA%2b?qs=0Y9aZN%252BMVCV5CIR47Klr4Q%3D%3D"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Package"; Value = "DIP-8"; VariantName = "[No Variations]"
+Added Component: Designator=IC5(TO255P460X1020X2008-3P)
+Add component. Clean all parameters for all variants
+Add component (AddParameter): Name = "Arrow Part Number"; Value = "L7805CV"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Arrow Price/Stock"; Value = "https://www.arrow.com/en/products/l7805cv/stmicroelectronics"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Datasheet Link"; Value = "http://www.st.com/web/en/resource/technical/document/datasheet/CD00000444.pdf"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Height"; Value = "4.6mm"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Info"; Value = "35V 2V @ 1A(typ) - - Fixed 5V TO-220(TO-220-3) Linear Voltage Regulators (LDO) ROHS"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "JLCPCB Basic"; Value = "No"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "JLCPCB Part #"; Value = "C111887"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "JLCPCB Price"; Value = "0.2153"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer_Name"; Value = "STMicroelectronics"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer_Part_Number"; Value = "L7805CV"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Mouser Part Number"; Value = "511-L7805CV"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Mouser Price/Stock"; Value = "https://www.mouser.co.uk/ProductDetail/STMicroelectronics/L7805CV?qs=9NrABl3fj%2FqplZAHiYUxWg%3D%3D"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Package"; Value = "TO-220,TO-220-3"; VariantName = "[No Variations]"
+Added Component: Designator=IC6(SOT229P700X180-4N)
+Add component. Clean all parameters for all variants
+Add component (AddParameter): Name = "Arrow Part Number"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Arrow Price/Stock"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Datasheet Link"; Value = "https://datasheet.lcsc.com/szlcsc/Advanced-Monolithic-Systems-AMS-AMS1117-2-5_C12087.pdf"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Height"; Value = "1.8mm"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Info"; Value = "15V 1.3V @ 1A - - Fixed 2.5V SOT-223 Linear Voltage Regulators (LDO) ROHS"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "JLCPCB Basic"; Value = "No"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "JLCPCB Part #"; Value = "C12087"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "JLCPCB Price"; Value = "0.1709"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer_Name"; Value = "Advanced Monolithic Systems"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer_Part_Number"; Value = "AMS1117-2.5"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Mouser Part Number"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Mouser Price/Stock"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Package"; Value = "SOT-223"; VariantName = "[No Variations]"
+Added Component: Designator=IC7(SOT95P280X130-3N)
+Add component. Clean all parameters for all variants
+Add component (AddParameter): Name = "Arrow Part Number"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Arrow Price/Stock"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Datasheet Link"; Value = "http://www.mouser.com/ds/2/760/XC6902-846637.pdf"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Height"; Value = "1.3mm"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Info"; Value = "Fixed -2.5V Linear Voltage Regulators (LDO) ROHS"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer_Name"; Value = "Torex"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer_Part_Number"; Value = "XC6902N251MR-G"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Mouser Part Number"; Value = "865-XC6902N251MR-G"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Mouser Price/Stock"; Value = "https://www.mouser.co.uk/ProductDetail/Torex-Semiconductor/XC6902N251MR-G/?qs=AsjdqWjXhJ97TLkuQPXWBQ%3D%3D"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Package"; Value = "SOT-23"; VariantName = "[No Variations]"
+Added Component: Designator=P1(SIP-8X1P-M-V)
+Add component. Clean all parameters for all variants
+Added Component: Designator=P2(SIP-6X1P-M-V)
+Add component. Clean all parameters for all variants
+Added Component: Designator=P3(MOLEX-2P)
+Add component. Clean all parameters for all variants
+Added Component: Designator=U1(SOT229P700X180-4N)
+Add component. Clean all parameters for all variants
+Add component (AddParameter): Name = "Arrow Part Number"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Arrow Price/Stock"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Datasheet Link"; Value = "http://www.advanced-monolithic.com/pdf/ds1117.pdf"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Height"; Value = "1.8mm"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Info"; Value = "15V 1.3V @ 800mA - - Fixed 3.3V SOT-223 Linear Voltage Regulators (LDO) ROHS"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "JLCPCB Part #"; Value = "C6186"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "JLCPCB Price"; Value = "0.1605"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer_Name"; Value = "Advanced Monolithic Systems"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer_Part_Number"; Value = "AMS1117-3.3"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Mouser Part Number"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Mouser Price/Stock"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Package"; Value = "SOT-223-3"; VariantName = "[No Variations]"
+Added Component: Designator=U2(360-MINI-SD-v1)
+Add component. Clean all parameters for all variants
+Added Pin To Net: NetName=+2.5V Pin=C24-1
+Added Pin To Net: NetName=+2.5V Pin=C25-1
+Added Pin To Net: NetName=+2.5V Pin=C26-1
+Added Pin To Net: NetName=+2.5V Pin=IC6-2
+Added Pin To Net: NetName=+2.5V Pin=P1-6
+Added Net: Name=+2.5V
+Added Pin To Net: NetName=+3.3V Pin=C21-1
+Added Pin To Net: NetName=+3.3V Pin=C22-1
+Added Pin To Net: NetName=+3.3V Pin=C23-1
+Added Pin To Net: NetName=+3.3V Pin=P1-4
+Added Pin To Net: NetName=+3.3V Pin=U1-2
+Added Net: Name=+3.3V
+Added Pin To Net: NetName=+5V_CONM Pin=C15-1
+Added Pin To Net: NetName=+5V_CONM Pin=C16-1
+Added Pin To Net: NetName=+5V_CONM Pin=C17-1
+Added Pin To Net: NetName=+5V_CONM Pin=P1-2
+Added Pin To Net: NetName=+5V_CONM Pin=U2-3
+Added Net: Name=+5V_CONM
+Added Pin To Net: NetName=+5V Pin=C18-1
+Added Pin To Net: NetName=+5V Pin=C19-1
+Added Pin To Net: NetName=+5V Pin=C20-1
+Added Pin To Net: NetName=+5V Pin=IC5-3
+Added Pin To Net: NetName=+5V Pin=IC6-3
+Added Pin To Net: NetName=+5V Pin=P1-3
+Added Pin To Net: NetName=+5V Pin=U1-3
+Added Net: Name=+5V
+Added Pin To Net: NetName=+8V Pin=C4-1
+Added Pin To Net: NetName=+8V Pin=C5-1
+Added Pin To Net: NetName=+8V Pin=C6-1
+Added Pin To Net: NetName=+8V Pin=IC1-3
+Added Pin To Net: NetName=+8V Pin=IC5-1
+Added Pin To Net: NetName=+8V Pin=P2-4
+Added Pin To Net: NetName=+8V Pin=U2-1
+Added Net: Name=+8V
+Added Pin To Net: NetName=+12V Pin=C1-1
+Added Pin To Net: NetName=+12V Pin=C2-1
+Added Pin To Net: NetName=+12V Pin=C3-1
+Added Pin To Net: NetName=+12V Pin=D2-1
+Added Pin To Net: NetName=+12V Pin=D4-1
+Added Pin To Net: NetName=+12V Pin=IC1-1
+Added Pin To Net: NetName=+12V Pin=IC3-8
+Added Pin To Net: NetName=+12V Pin=IC4-8
+Added Pin To Net: NetName=+12V Pin=P2-1
+Added Net: Name=+12V
+Added Pin To Net: NetName=-2.5V Pin=C27-2
+Added Pin To Net: NetName=-2.5V Pin=C28-1
+Added Pin To Net: NetName=-2.5V Pin=C29-1
+Added Pin To Net: NetName=-2.5V Pin=IC7-1
+Added Pin To Net: NetName=-2.5V Pin=P1-7
+Added Net: Name=-2.5V
+Added Pin To Net: NetName=-8V Pin=C12-2
+Added Pin To Net: NetName=-8V Pin=C13-1
+Added Pin To Net: NetName=-8V Pin=C14-1
+Added Pin To Net: NetName=-8V Pin=IC2-3
+Added Pin To Net: NetName=-8V Pin=IC7-3
+Added Pin To Net: NetName=-8V Pin=P2-5
+Added Net: Name=-8V
+Added Pin To Net: NetName=-12V Pin=C7-2
+Added Pin To Net: NetName=-12V Pin=C8-1
+Added Pin To Net: NetName=-12V Pin=C9-1
+Added Pin To Net: NetName=-12V Pin=IC2-2
+Added Pin To Net: NetName=-12V Pin=IC3-5
+Added Pin To Net: NetName=-12V Pin=IC4-5
+Added Pin To Net: NetName=-12V Pin=P2-2
+Added Net: Name=-12V
+Added Pin To Net: NetName=GND Pin=C1-2
+Added Pin To Net: NetName=GND Pin=C2-2
+Added Pin To Net: NetName=GND Pin=C3-2
+Added Pin To Net: NetName=GND Pin=C4-2
+Added Pin To Net: NetName=GND Pin=C5-2
+Added Pin To Net: NetName=GND Pin=C6-2
+Added Pin To Net: NetName=GND Pin=C7-1
+Added Pin To Net: NetName=GND Pin=C8-2
+Added Pin To Net: NetName=GND Pin=C9-2
+Added Pin To Net: NetName=GND Pin=C12-1
+Added Pin To Net: NetName=GND Pin=C13-2
+Added Pin To Net: NetName=GND Pin=C14-2
+Added Pin To Net: NetName=GND Pin=C18-2
+Added Pin To Net: NetName=GND Pin=C19-2
+Added Pin To Net: NetName=GND Pin=C20-2
+Added Pin To Net: NetName=GND Pin=C21-2
+Added Pin To Net: NetName=GND Pin=C22-2
+Added Pin To Net: NetName=GND Pin=C23-2
+Added Pin To Net: NetName=GND Pin=C24-2
+Added Pin To Net: NetName=GND Pin=C25-2
+Added Pin To Net: NetName=GND Pin=C26-2
+Added Pin To Net: NetName=GND Pin=C27-1
+Added Pin To Net: NetName=GND Pin=C28-2
+Added Pin To Net: NetName=GND Pin=C29-2
+Added Pin To Net: NetName=GND Pin=D1-2
+Added Pin To Net: NetName=GND Pin=D3-2
+Added Pin To Net: NetName=GND Pin=IC1-2
+Added Pin To Net: NetName=GND Pin=IC2-1
+Added Pin To Net: NetName=GND Pin=IC3-3
+Added Pin To Net: NetName=GND Pin=IC4-3
+Added Pin To Net: NetName=GND Pin=IC5-2
+Added Pin To Net: NetName=GND Pin=IC6-1
+Added Pin To Net: NetName=GND Pin=IC7-2
+Added Pin To Net: NetName=GND Pin=P1-1
+Added Pin To Net: NetName=GND Pin=P1-5
+Added Pin To Net: NetName=GND Pin=P1-8
+Added Pin To Net: NetName=GND Pin=P2-3
+Added Pin To Net: NetName=GND Pin=P2-6
+Added Pin To Net: NetName=GND Pin=U1-1
+Added Pin To Net: NetName=GND Pin=U2-2
+Added Net: Name=GND
+Added Pin To Net: NetName=NetC10_1 Pin=C10-1
+Added Pin To Net: NetName=NetC10_1 Pin=IC3-2
+Added Net: Name=NetC10_1
+Added Pin To Net: NetName=NetC10_2 Pin=C10-2
+Added Pin To Net: NetName=NetC10_2 Pin=IC3-4
+Added Net: Name=NetC10_2
+Added Pin To Net: NetName=NetC11_1 Pin=C11-1
+Added Pin To Net: NetName=NetC11_1 Pin=IC4-2
+Added Net: Name=NetC11_1
+Added Pin To Net: NetName=NetC11_2 Pin=C11-2
+Added Pin To Net: NetName=NetC11_2 Pin=IC4-4
+Added Net: Name=NetC11_2
+Added Pin To Net: NetName=NetC15_2 Pin=C15-2
+Added Pin To Net: NetName=NetC15_2 Pin=C16-2
+Added Pin To Net: NetName=NetC15_2 Pin=C17-2
+Added Pin To Net: NetName=NetC15_2 Pin=U2-4
+Added Net: Name=NetC15_2
+Added Pin To Net: NetName=NetD1_1 Pin=D1-1
+Added Pin To Net: NetName=NetD1_1 Pin=D2-2
+Added Pin To Net: NetName=NetD1_1 Pin=P3-1
+Added Net: Name=NetD1_1
+Added Pin To Net: NetName=NetD3_1 Pin=D3-1
+Added Pin To Net: NetName=NetD3_1 Pin=D4-2
+Added Pin To Net: NetName=NetD3_1 Pin=P3-2
+Added Net: Name=NetD3_1
+Added Class: Name=Fuente_Alimentacion
+Added Room: Name=Fuente_Alimentacion

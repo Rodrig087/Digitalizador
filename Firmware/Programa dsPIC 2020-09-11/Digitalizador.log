@@ -1,0 +1,39 @@
+0	1	mikroCdsPIC.exe -MSF -DBG -pP30F4013 -DL -SSA -O11111114 -fo120 -N"H:\Mi unidad\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\Programa dsPIC 2020-09-11\Digitalizador.mcpds" -SP"C:\Users\Public\Documents\Mikroelektronika\mikroC PRO for dsPIC\Defs\" -SP"C:\Users\Public\Documents\Mikroelektronika\mikroC PRO for dsPIC\Uses\" -SP"H:\Mi unidad\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\Programa dsPIC 2020-09-11\" -IP"C:\Users\Public\Documents\Mikroelektronika\mikroC PRO for dsPIC\Uses\" -IP"H:\Mi unidad\IVAN PALACIOS\Digitalizador\Digitalizador 3 Canales - RPi\Programa dsPIC 2020-09-11\" "Digitalizador.c" "__Lib_Math.mcl" "__Lib_MathDouble.mcl" "__Lib_System.mcl" "__Lib_Delays.mcl" "__Lib_CType.mcl" "__Lib_CStdlib.mcl" "__Lib_SoftI2C.mcl" "__Lib_SPI_1.mcl" "__Lib_UART_12_p30.mcl"	 
+diagnostics: 0	121	Loading...	 
+diagnostics: 0	122	Compilation Started	__Lib_Delays.c
+diagnostics: 695	123	Compiled Successfully	__Lib_Delays.c
+diagnostics: 0	122	Compilation Started	stdbool.h
+hint: 42	1163	Variable 'HV' has been declared, but not used	ds1307_functions.c
+hint: 42	1163	Variable 'LV' has been declared, but not used	ds1307_functions.c
+hint: 237	1163	Variable 'valDummyRec' has been declared, but not used	Digitalizador.c
+hint: 0	1004	interrupt handler (Timer3Interrupt at 0x0022)	Digitalizador.c
+warning: 640	1505	Suspicious pointer conversion	Digitalizador.c
+warning: 641	1505	Suspicious pointer conversion	Digitalizador.c
+warning: 642	1505	Suspicious pointer conversion	Digitalizador.c
+warning: 690	1505	Suspicious pointer conversion	Digitalizador.c
+warning: 696	1505	Suspicious pointer conversion	Digitalizador.c
+hint: 0	1004	interrupt handler (interruptSPI1 at 0x0024)	Digitalizador.c
+warning: 847	1505	Suspicious pointer conversion	Digitalizador.c
+warning: 856	1505	Suspicious pointer conversion	Digitalizador.c
+warning: 893	1505	Suspicious pointer conversion	Digitalizador.c
+warning: 901	1505	Suspicious pointer conversion	Digitalizador.c
+hint: 0	1004	interrupt handler (ExternalInterrupt0_GPS at 0x0014)	Digitalizador.c
+hint: 0	1004	interrupt handler (ExternalInterrupt2_RTC at 0x0042)	Digitalizador.c
+hint: 0	1004	interrupt handler (interruptU1RX at 0x0026)	Digitalizador.c
+diagnostics: 1237	123	Compiled Successfully	Digitalizador.c
+hint: 75	1164	Variable 'fechaGPS' has been eliminated by optimizer	Digitalizador.c
+hint: 114	1164	Variable 'horaGPS' has been eliminated by optimizer	Digitalizador.c
+hint: 26	1164	Variable 'LV' has been eliminated by optimizer	Digitalizador.c
+hint: 26	1164	Variable 'HV' has been eliminated by optimizer	Digitalizador.c
+hint: 34	1164	Variable 'HV' has been eliminated by optimizer	Digitalizador.c
+hint: 34	1164	Variable 'LV' has been eliminated by optimizer	Digitalizador.c
+hint: 282	1164	Variable 'valDummyRec' has been eliminated by optimizer	Digitalizador.c
+hint: 500	1164	Variable 'valDummyRec' has been eliminated by optimizer	Digitalizador.c
+diagnostics: 0	127	All files Compiled in 1437 ms	 
+hint: 0	1144	Used RX (bytes): 32 (100%)   Free RX (bytes): 0 (0%)	Used RX (bytes): 32 (100%)   Free RX (bytes): 0 (0%)
+hint: 0	1144	Static RAM (bytes): 509   Dynamic RAM (bytes): 1538	Static RAM (bytes): 509   Dynamic RAM (bytes): 1538
+hint: 0	1144	Used ROM (bytes): 5256 (16%)  Free ROM (bytes): 27512 (84%)	Used ROM (bytes): 5256 (16%)  Free ROM (bytes): 27512 (84%)
+diagnostics: 0	125	Project Linked Successfully	Digitalizador.mcpds
+diagnostics: 0	128	Linked in 2016 ms	 
+diagnostics: 0	129	Project 'Digitalizador.mcpds' completed: 3860 ms	 
+diagnostics: 0	103	Finished successfully: 12 may. 2022, 14:35:20	Digitalizador.mcpds

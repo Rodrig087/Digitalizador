@@ -1,0 +1,53 @@
+Added Component: Designator=U1(MULTIPLEXORADG706SMD)
+Add component. Clean all parameters for all variants
+Added Pin To Net: NetName=+2.5V Pin=U1-1
+Added Pin To Net: NetName=+2.5V Pin=U1-18
+Added Net: Name=+2.5V
+Added Pin To Net: NetName=-2.5V Pin=U1-27
+Added Net: Name=-2.5V
+Added Pin To Net: NetName=A0 Pin=U1-17
+Added Net: Name=A0
+Added Pin To Net: NetName=A1 Pin=U1-16
+Added Net: Name=A1
+Added Pin To Net: NetName=A2 Pin=U1-15
+Added Net: Name=A2
+Added Pin To Net: NetName=A3 Pin=U1-14
+Added Net: Name=A3
+Added Pin To Net: NetName=GND Pin=U1-12
+Added Net: Name=GND
+Added Pin To Net: NetName=NetP1_1 Pin=U1-4
+Added Net: Name=NetP1_1
+Added Pin To Net: NetName=NetP1_2 Pin=U1-5
+Added Net: Name=NetP1_2
+Added Pin To Net: NetName=NetP1_3 Pin=U1-6
+Added Net: Name=NetP1_3
+Added Pin To Net: NetName=NetP1_4 Pin=U1-7
+Added Net: Name=NetP1_4
+Added Pin To Net: NetName=NetP1_5 Pin=U1-8
+Added Net: Name=NetP1_5
+Added Pin To Net: NetName=NetP1_6 Pin=U1-9
+Added Net: Name=NetP1_6
+Added Pin To Net: NetName=NetP1_7 Pin=U1-10
+Added Net: Name=NetP1_7
+Added Pin To Net: NetName=NetP1_8 Pin=U1-11
+Added Net: Name=NetP1_8
+Added Pin To Net: NetName=NetP1_9 Pin=U1-26
+Added Net: Name=NetP1_9
+Added Pin To Net: NetName=NetP1_10 Pin=U1-25
+Added Net: Name=NetP1_10
+Added Pin To Net: NetName=NetP1_11 Pin=U1-24
+Added Net: Name=NetP1_11
+Added Pin To Net: NetName=NetP1_12 Pin=U1-23
+Added Net: Name=NetP1_12
+Added Pin To Net: NetName=NetP1_13 Pin=U1-22
+Added Net: Name=NetP1_13
+Added Pin To Net: NetName=NetP1_14 Pin=U1-21
+Added Net: Name=NetP1_14
+Added Pin To Net: NetName=NetP1_15 Pin=U1-20
+Added Net: Name=NetP1_15
+Added Pin To Net: NetName=NetP1_16 Pin=U1-19
+Added Net: Name=NetP1_16
+Added Pin To Net: NetName=RES1 Pin=U1-28
+Added Net: Name=RES1
+Added Class: Name=Digitalizador_RPi
+Added Room: Name=Digitalizador_RPi

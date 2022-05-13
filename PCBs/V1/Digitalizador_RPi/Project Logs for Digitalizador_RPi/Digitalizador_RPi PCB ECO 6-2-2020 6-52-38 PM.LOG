@@ -1,0 +1,97 @@
+Change Component DesignItemId : Designator=R42 Old DesignItemId= New DesignItemId=Res1
+Change Component DesignItemId : Designator=R43 Old DesignItemId= New DesignItemId=Res1
+Change Component DesignItemId : Designator=R44 Old DesignItemId= New DesignItemId=Res1
+Change Component DesignItemId : Designator=R45 Old DesignItemId= New DesignItemId=Res1
+Change Component DesignItemId : Designator=R46 Old DesignItemId= New DesignItemId=Res1
+Change Component DesignItemId : Designator=R47 Old DesignItemId= New DesignItemId=Res1
+Change Component DesignItemId : Designator=R48 Old DesignItemId= New DesignItemId=Res1
+Change Component DesignItemId : Designator=R49 Old DesignItemId= New DesignItemId=Res1
+Change Component DesignItemId : Designator=R50 Old DesignItemId= New DesignItemId=Res1
+Change Component DesignItemId : Designator=R51 Old DesignItemId= New DesignItemId=Res1
+Change Component DesignItemId : Designator=R52 Old DesignItemId= New DesignItemId=Res1
+Change Component DesignItemId : Designator=R53 Old DesignItemId= New DesignItemId=Res1
+Change Component Footprint: Designator=R6 Old Footprint=AXIAL-0.3 New Footprint=0805
+Change Component Footprint: Designator=R9 Old Footprint=AXIAL-0.3 New Footprint=0805
+Change Component Footprint: Designator=R14 Old Footprint=AXIAL-0.3 New Footprint=0805
+Change Component Footprint: Designator=R15 Old Footprint=AXIAL-0.3 New Footprint=0805
+Change Component Footprint: Designator=R18 Old Footprint=AXIAL-0.3 New Footprint=0805
+Change Component Footprint: Designator=R21 Old Footprint=AXIAL-0.3 New Footprint=0805
+Change Component Footprint: Designator=R26 Old Footprint=AXIAL-0.3 New Footprint=0805
+Change Component Footprint: Designator=R27 Old Footprint=AXIAL-0.3 New Footprint=0805
+Change Component Footprint: Designator=R30 Old Footprint=AXIAL-0.3 New Footprint=0805
+Change Component Footprint: Designator=R33 Old Footprint=AXIAL-0.3 New Footprint=0805
+Change Component Footprint: Designator=R38 Old Footprint=AXIAL-0.3 New Footprint=0805
+Change Component Footprint: Designator=R39 Old Footprint=AXIAL-0.3 New Footprint=0805
+Change component parameters: Designator = "R43"; Footprint = "AXIAL-0.3"; UniqueID = "\UQPFVSKP"
+Change component parameters. Clean all parameters for all variants
+Change component parameters (AddParameter): Name = "LatestRevisionDate"; Value = "17-Jul-2002"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "LatestRevisionNote"; Value = "Re-released for DXP Platform."; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "PackageDescription"; Value = "Axial Device, Thru-Hole; 2 Leads; 0.3 in Pin Spacing"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "PackageReference"; Value = "AXIAL-0.3"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Published"; Value = "8-Jun-2000"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Publisher"; Value = "Altium Limited"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "5k"; VariantName = "[No Variations]"
+Change component parameters: Designator = "R44"; Footprint = "AXIAL-0.3"; UniqueID = "\TKCGIPNR"
+Change component parameters. Clean all parameters for all variants
+Change component parameters (AddParameter): Name = "LatestRevisionDate"; Value = "17-Jul-2002"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "LatestRevisionNote"; Value = "Re-released for DXP Platform."; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "PackageDescription"; Value = "Axial Device, Thru-Hole; 2 Leads; 0.3 in Pin Spacing"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "PackageReference"; Value = "AXIAL-0.3"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Published"; Value = "8-Jun-2000"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Publisher"; Value = "Altium Limited"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "5k"; VariantName = "[No Variations]"
+Change component parameters: Designator = "R45"; Footprint = "AXIAL-0.3"; UniqueID = "\LAGWZPFL"
+Change component parameters. Clean all parameters for all variants
+Change component parameters (AddParameter): Name = "LatestRevisionDate"; Value = "17-Jul-2002"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "LatestRevisionNote"; Value = "Re-released for DXP Platform."; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "PackageDescription"; Value = "Axial Device, Thru-Hole; 2 Leads; 0.3 in Pin Spacing"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "PackageReference"; Value = "AXIAL-0.3"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Published"; Value = "8-Jun-2000"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Publisher"; Value = "Altium Limited"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "5k"; VariantName = "[No Variations]"
+Change component parameters: Designator = "R46"; Footprint = "AXIAL-0.3"; UniqueID = "\FXZPUXJB"
+Change component parameters. Clean all parameters for all variants
+Change component parameters (AddParameter): Name = "LatestRevisionDate"; Value = "17-Jul-2002"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "LatestRevisionNote"; Value = "Re-released for DXP Platform."; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "PackageDescription"; Value = "Axial Device, Thru-Hole; 2 Leads; 0.3 in Pin Spacing"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "PackageReference"; Value = "AXIAL-0.3"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Published"; Value = "8-Jun-2000"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Publisher"; Value = "Altium Limited"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "5k"; VariantName = "[No Variations]"
+Change component parameters: Designator = "R48"; Footprint = "AXIAL-0.3"; UniqueID = "\SCUWCGKQ"
+Change component parameters. Clean all parameters for all variants
+Change component parameters (AddParameter): Name = "LatestRevisionDate"; Value = "17-Jul-2002"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "LatestRevisionNote"; Value = "Re-released for DXP Platform."; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "PackageDescription"; Value = "Axial Device, Thru-Hole; 2 Leads; 0.3 in Pin Spacing"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "PackageReference"; Value = "AXIAL-0.3"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Published"; Value = "8-Jun-2000"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Publisher"; Value = "Altium Limited"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "5k"; VariantName = "[No Variations]"
+Change component parameters: Designator = "R49"; Footprint = "AXIAL-0.3"; UniqueID = "\SPHBJRFF"
+Change component parameters. Clean all parameters for all variants
+Change component parameters (AddParameter): Name = "LatestRevisionDate"; Value = "17-Jul-2002"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "LatestRevisionNote"; Value = "Re-released for DXP Platform."; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "PackageDescription"; Value = "Axial Device, Thru-Hole; 2 Leads; 0.3 in Pin Spacing"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "PackageReference"; Value = "AXIAL-0.3"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Published"; Value = "8-Jun-2000"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Publisher"; Value = "Altium Limited"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "5k"; VariantName = "[No Variations]"
+Change component parameters: Designator = "R50"; Footprint = "AXIAL-0.3"; UniqueID = "\RQVNSFWA"
+Change component parameters. Clean all parameters for all variants
+Change component parameters (AddParameter): Name = "LatestRevisionDate"; Value = "17-Jul-2002"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "LatestRevisionNote"; Value = "Re-released for DXP Platform."; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "PackageDescription"; Value = "Axial Device, Thru-Hole; 2 Leads; 0.3 in Pin Spacing"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "PackageReference"; Value = "AXIAL-0.3"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Published"; Value = "8-Jun-2000"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Publisher"; Value = "Altium Limited"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "5k"; VariantName = "[No Variations]"
+Change component parameters: Designator = "R51"; Footprint = "AXIAL-0.3"; UniqueID = "\IUOVHJJL"
+Change component parameters. Clean all parameters for all variants
+Change component parameters (AddParameter): Name = "LatestRevisionDate"; Value = "17-Jul-2002"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "LatestRevisionNote"; Value = "Re-released for DXP Platform."; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "PackageDescription"; Value = "Axial Device, Thru-Hole; 2 Leads; 0.3 in Pin Spacing"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "PackageReference"; Value = "AXIAL-0.3"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Published"; Value = "8-Jun-2000"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Publisher"; Value = "Altium Limited"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "5k"; VariantName = "[No Variations]"
+Added Room: Name=Digitalizador_RPi

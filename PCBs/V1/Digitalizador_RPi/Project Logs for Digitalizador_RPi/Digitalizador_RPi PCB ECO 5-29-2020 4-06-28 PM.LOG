@@ -1,0 +1,3 @@
+Change Component Footprint: Designator=P5 Old Footprint=HDR1X4 New Footprint=MOLEX-4
+Change Component Footprint: Designator=P4 Old Footprint=HDR1X6 New Footprint=MOLEX-6
+Added Room: Name=Digitalizador_RPi

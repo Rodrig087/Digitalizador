@@ -6,6 +6,7 @@
 // Si se utiliza el terminal:
 // Para compilar:
 // g++ -Wall -o ExampleBCM2835-spi ExampleBCM2835-spi.cpp -lbcm2835 -lwiringPi
+// g++ Digitalizador_2022-05-12_VALE.cpp -o /home/rsa/Ejecutables/digitalizador -lbcm2835 -lwiringPi 
 // Para ejecutar:
 // sudo ./ExampleBCM2835-spi
 

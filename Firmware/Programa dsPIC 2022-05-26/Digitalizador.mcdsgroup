@@ -1,0 +1,6 @@
+[PROJECTS]
+Count=2
+Project0=..\Programa dsPIC 30F4013 - V1\Amplificador.mcpds
+Project1=Digitalizador.mcpds
+[ActiveProject]
+Index=1

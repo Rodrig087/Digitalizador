@@ -1,0 +1,66 @@
+[DEVICE]
+Name=P30F3014
+Clock=120000000
+[MEMORY_MODEL]
+Value=0
+[BUILD_TYPE]
+Value=0
+[ACTIVE_TAB]
+Value=Digitalizador.c
+[USE_EEPROM]
+Value=0
+[USE_HEAP]
+Value=0
+[HEAP_SIZE]
+Value=0
+[EEPROM_DEFINITION]
+Value=
+[EXPANDED_NODES]
+0=Digitalizador.mcpds
+1=Sources
+Count=2
+[LIB_EXPANDED_NODES]
+0=mikroE Libraries
+1=System Libraries
+Count=2
+[FILES]
+Count=1
+File0=Digitalizador.c
+[BINARIES]
+Count=0
+[IMAGES]
+Count=0
+ActiveImageIndex=-1
+[OPENED_FILES]
+Count=3
+File0=Digitalizador.c
+File1=GestionTiempo.c
+File2=ds1307_functions.c
+[EEPROM]
+Count=0
+[ACTIVE_COMMENTS_FILES]
+Count=0
+[OTHER_FILES]
+Count=0
+[SEARCH_PATH]
+Count=3
+Path0=C:\Users\Public\Documents\Mikroelektronika\mikroC PRO for dsPIC\Defs\
+Path1=C:\Users\Public\Documents\Mikroelektronika\mikroC PRO for dsPIC\uses\
+Path2=C:\Users\Ivan\Desktop\Milton Muñoz\Proyectos\Git\Digitalizador\Digitalizador\Firmware\Programa dsPIC 2022-05-26\
+[HEADER_PATH]
+Count=1
+Path0=C:\Users\Ivan\Desktop\Milton Muñoz\Proyectos\Git\Digitalizador\Digitalizador\Firmware\Programa dsPIC 2022-05-26\
+[HEADERS]
+Count=0
+[PLDS]
+Count=0
+[Useses]
+Count=5
+File0=UART
+File1=C_Stdlib
+File2=C_Type
+File3=SPI
+File4=Software_I2C
+[EXPANDED NODES]
+Node1=Sources
+Count=1

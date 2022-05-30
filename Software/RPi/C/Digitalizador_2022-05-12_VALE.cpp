@@ -6,7 +6,7 @@
 // Si se utiliza el terminal:
 // Para compilar:
 // g++ -Wall -o ExampleBCM2835-spi ExampleBCM2835-spi.cpp -lbcm2835 -lwiringPi
-// g++ Digitalizador_2022-05-12_VALE.cpp -o /home/rsa/Ejecutables/digitalizador -lbcm2835 -lwiringPi 
+// g++ /home/rsa/Programas/Digitalizador_2022-05-12_VALE.cpp -o /home/rsa/Ejecutables/digitalizador -lbcm2835 -lwiringPi
 // Para ejecutar:
 // sudo ./ExampleBCM2835-spi
 
@@ -163,7 +163,7 @@ unsigned char vectorTimeDSPIC[6];
 // Objeto tipo File para el archivo donde se guardan los datos
 FILE * objFile;
 // String con el path donde se van a crear los archivos, tambien la extension y el formato del nombre de archivo
-string path = "/home/pi/Digitalizador/", extFile = ".dat", nombreArchivo = "YYMMDDhhmmss";
+string path = "/home/rsa/Resultados/RegistroContinuo/", extFile = ".dat", nombreArchivo = "YYMMDDhhmmss";
 // Declara el ptrArchivoCompleto con memoria dinamica, este contendra el path + nombreArchivo + extFile
 string *ptrArchivoCompleto;
 // Bandera que se activa al inicio del muestreo o cuando hay cambio de dia, para crear un nuevo archivo
@@ -638,6 +638,7 @@ void RecibirBytesMuestra (bool incluyeTiempo) {
                 // Se guarda el tiempo, que corresponde al minuto anterior. Recordar que siempre
                 // se guarda los datos anteriores porque se van almacenando, estos son 8 bytes
                 // de las dos variables tipo long
+				cout << "Entro" << endl;
                 GuardarDatosEnArchivo(vectorBytesTimeDSPIC, (numBytesFechaMasHoraMSB + numBytesHoraToRec));
             }
 

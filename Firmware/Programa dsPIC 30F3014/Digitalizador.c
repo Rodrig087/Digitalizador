@@ -19,7 +19,9 @@
 // del GPS, del RTC, del Sistema y de la RPi
 #include <GestionTiempo.c>
 // Incluye las funciones del DS1307
-#include <DS1307_Functions.c>
+//#include <DS1307_Functions.c>
+// Incluye las funciones del DS3231
+#include <DS3231_Functions.c>
 
 
 // Incluye la libreria GPS, adicionalmente se debe habilitar las librerias de
@@ -246,13 +248,14 @@ void main() {
      // Retardo para que se ejecute la ultima interrupcion y comunicacion con la
      // RPi
      Delay_ms(100);
-     
+
      while (1) {
 
            // Aumenta la variable de contadorWDT y reinicia el WDT, para evitar
            // que se cuelgue el micro
            contadorWDT ++;
            CheckWatchDog();
+
 
            // Siempre envia una sola interrupcion por ciclo, porque no son
            // prioritarias
@@ -270,10 +273,16 @@ void main() {
                  GenerarInterrupcionRPi(ENV_TIME_SIS);
            }
 
+           
+           //Inicio prueba
+           //LED_2 = ~LED_2;
+           //Delay_ms(250);
+           //Fin prueba
+
            // Overflow condition para el SPI, hay que leer SPI1BUF
            // SPIROV_bit
 
-           Delay_ms(1);
+           //Delay_ms(1);
      }
 }
 
@@ -420,7 +429,11 @@ void Setup () {
      //*************** Configuracion del reloj a tiempo real *******************
      //*************************************************************************
      // Inicio y configuración del reloj DS1307 (RTC)
-     DS1307Inicio();
+     //DS1307Inicio();
+     // DS3231 library variable declaration
+     //RTC_Time *mytime;
+     // enable SQW output with frequency of 1Hz
+     IntSqw_Set(OUT_1Hz);
      
      // Pin RD9 como entrada, para generar una interrupcion del reloj INT2
      TRISD9_bit = 1;         // Como entrada la señal del reloj
@@ -1011,6 +1024,7 @@ void ExternalInterrupt2_RTC() org IVT_ADDR_INT2INTERRUPT{
           // Pasa los datos de tiempo de variables long a un vector, para
           // poder actualizar el DS1307
           PasarTiempoToVector(horaLongRTC, fechaLongRTC, vectorTiempoRTC);
+          /*
           // Actualiza todos los parametros del RTC
           DS1307SetAnos(vectorTiempoRTC[0]);
           DS1307SetMeses(vectorTiempoRTC[1]);
@@ -1018,6 +1032,7 @@ void ExternalInterrupt2_RTC() org IVT_ADDR_INT2INTERRUPT{
           DS1307SetHoras(vectorTiempoRTC[3]);
           DS1307SetMinutos(vectorTiempoRTC[4]);
           DS1307SetSegundos(vectorTiempoRTC[5]);
+          */
      // Caso contrario continua con el incremento del tiempo en segundos
      } else {
           // Aumenta en 1 los segundos del dia

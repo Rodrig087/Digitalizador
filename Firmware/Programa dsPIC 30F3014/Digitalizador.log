@@ -1,0 +1,27 @@
+0	1	mikroCdsPIC.exe -MSF -DBG -pP30F3014 -DL -SSA -O11111114 -fo120 -N"C:\Users\Ivan\Desktop\Milton Muñoz\Proyectos\Git\Digitalizador\Digitalizador\Firmware\Programa dsPIC 30F3014\Digitalizador.mcpds" -SP"C:\Users\Public\Documents\Mikroelektronika\mikroC PRO for dsPIC\defs\" -SP"C:\Users\Public\Documents\Mikroelektronika\mikroC PRO for dsPIC\uses\" -SP"C:\Users\Ivan\Desktop\Milton Muñoz\Proyectos\Git\Digitalizador\Digitalizador\Firmware\Programa dsPIC 30F3014\" -SP"C:\Users\Ivan\Desktop\Milton Muñoz\Proyectos\Git\Digitalizador\Digitalizador\Firmware\Programa dsPIC 2022-05-26\" -IP"C:\Users\Ivan\Desktop\Milton Muñoz\Proyectos\Git\Digitalizador\Digitalizador\Firmware\Programa dsPIC 2022-05-26\" -IP"C:\Users\Ivan\Desktop\Milton Muñoz\Proyectos\Git\Digitalizador\Digitalizador\Firmware\Programa dsPIC 30F3014\" "Digitalizador.c" "__Lib_Math.mcl" "__Lib_MathDouble.mcl" "__Lib_System.mcl" "__Lib_Delays.mcl" "__Lib_CType.mcl" "__Lib_CStdlib.mcl" "__Lib_SoftI2C.mcl" "__Lib_SPI_1.mcl" "__Lib_UART_12_p30.mcl"	 
+diagnostics: 0	121	Loading...	 
+diagnostics: 0	122	Compilation Started	stdbool.h
+hint: 239	1163	Variable 'valDummyRec' has been declared, but not used	Digitalizador.c
+hint: 0	1004	interrupt handler (Timer3Interrupt at 0x0022)	Digitalizador.c
+hint: 0	1004	interrupt handler (interruptSPI1 at 0x0024)	Digitalizador.c
+hint: 0	1004	interrupt handler (ExternalInterrupt0_GPS at 0x0014)	Digitalizador.c
+hint: 0	1004	interrupt handler (ExternalInterrupt2_RTC at 0x0042)	Digitalizador.c
+hint: 0	1004	interrupt handler (interruptU1RX at 0x0026)	Digitalizador.c
+diagnostics: 1252	123	Compiled Successfully	Digitalizador.c
+hint: 75	1164	Variable 'fechaGPS' has been eliminated by optimizer	Digitalizador.c
+hint: 114	1164	Variable 'horaGPS' has been eliminated by optimizer	Digitalizador.c
+hint: 218	1164	Variable 'ctrl_reg' has been eliminated by optimizer	Digitalizador.c
+hint: 227	1164	Variable 'stat_reg' has been eliminated by optimizer	Digitalizador.c
+hint: 235	1164	Variable 'stat_reg' has been eliminated by optimizer	Digitalizador.c
+hint: 243	1164	Variable 'ctrl_reg' has been eliminated by optimizer	Digitalizador.c
+hint: 251	1164	Variable 'ctrl_reg' has been eliminated by optimizer	Digitalizador.c
+hint: 291	1164	Variable 'valDummyRec' has been eliminated by optimizer	Digitalizador.c
+hint: 513	1164	Variable 'valDummyRec' has been eliminated by optimizer	Digitalizador.c
+diagnostics: 0	127	All files Compiled in 125 ms	 
+hint: 0	1144	Used RX (bytes): 32 (100%)   Free RX (bytes): 0 (0%)	Used RX (bytes): 32 (100%)   Free RX (bytes): 0 (0%)
+hint: 0	1144	Static RAM (bytes): 509   Dynamic RAM (bytes): 1538	Static RAM (bytes): 509   Dynamic RAM (bytes): 1538
+hint: 0	1144	Used ROM (bytes): 4292 (26%)  Free ROM (bytes): 12092 (74%)	Used ROM (bytes): 4292 (26%)  Free ROM (bytes): 12092 (74%)
+diagnostics: 0	125	Project Linked Successfully	Digitalizador.mcpds
+diagnostics: 0	128	Linked in 78 ms	 
+diagnostics: 0	129	Project 'Digitalizador.mcpds' completed: 250 ms	 
+diagnostics: 0	103	Finished successfully: 30 may. 2022, 12:33:28	Digitalizador.mcpds

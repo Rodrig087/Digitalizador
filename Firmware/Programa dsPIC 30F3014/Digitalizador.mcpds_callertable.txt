@@ -1,0 +1,55 @@
+main
+	Setup
+		InitTimer3
+		SPI1_Init_Advanced
+		UART1_Init
+			Get_Fosc_kHz
+			Get_Fosc_Per_Cyc
+			Delay_100ms
+			_Multiply_32x32
+			_Modulus_32x32
+			_Divide_32x32
+		UART1_Write_Text
+			UART1_Write
+		IntSqw_Set
+			RTC_Read_Reg
+				Soft_I2C_Start
+					Delay_1us
+					PutZerosToLATSda
+					PutZerosToLATScl
+				Soft_I2C_Write
+					Delay_1us
+					PutZerosToLATScl
+					PutZerosToLATSda
+				Soft_I2C_Read
+					Delay_1us
+					PutZerosToLATScl
+					PutZerosToLATSda
+				Soft_I2C_Stop
+					PutZerosToLATSda
+					Delay_1us
+			RTC_Write_Reg
+				Soft_I2C_Start
+				Soft_I2C_Write
+				Soft_I2C_Stop
+	GenerarInterrupcionRPi
+	CheckWatchDog
+ExternalInterrupt2_RTC
+	PasarTiempoToVector
+		_Divide_32x32
+		_Modulus_32x32
+	_Modulus_32x32
+interruptU1RX
+	RecuperarHoraGPS
+		atoi
+			isdigit
+		_Multiply_32x32
+	RecuperarFechaGPS
+		atoi
+		_Multiply_32x32
+	_Modulus_32x32
+interruptSPI1
+Timer3Interrupt
+	LeerCanalADC
+	GenerarInterrupcionRPi
+ExternalInterrupt0_GPS

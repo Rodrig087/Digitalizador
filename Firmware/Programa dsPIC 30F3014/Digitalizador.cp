@@ -1,10 +1,10 @@
-#line 1 "C:/Users/Ivan/Desktop/Milton Muñoz/Proyectos/Git/Digitalizador/Digitalizador/Firmware/Programa dsPIC 30F3014/Digitalizador.c"
+#line 1 "C:/Users/milto/Milton/RSA/Git/Digitalizador/Digitalizador/Firmware/Programa dsPIC 30F3014/Digitalizador.c"
 #line 1 "c:/users/public/documents/mikroelektronika/mikroc pro for dspic/include/stdbool.h"
 
 
 
  typedef char _Bool;
-#line 1 "c:/users/ivan/desktop/milton muñoz/proyectos/git/digitalizador/digitalizador/firmware/programa dspic 30f3014/gestiontiempo.c"
+#line 1 "c:/users/milto/milton/rsa/git/digitalizador/digitalizador/firmware/librerias/gestiontiempo.c"
 
 
 
@@ -32,7 +32,7 @@ unsigned long PasarHoraToSegundos(unsigned char horas, unsigned char minutos, un
  horaEnSegundos = (horas*3600) + (minutos*60) + (segundos);
  return horaEnSegundos;
 }
-#line 40 "c:/users/ivan/desktop/milton muñoz/proyectos/git/digitalizador/digitalizador/firmware/programa dspic 30f3014/gestiontiempo.c"
+#line 40 "c:/users/milto/milton/rsa/git/digitalizador/digitalizador/firmware/librerias/gestiontiempo.c"
 void PasarTiempoToVector (unsigned long longHora, unsigned long longFecha, unsigned char *tramaTiempoSistema) {
 
  unsigned char anio, mes, dia, hora, minuto, segundo;
@@ -138,208 +138,33 @@ unsigned long RecuperarHoraGPS(unsigned char *tramaDatosGPS) {
  horaGPS = (tramaTiempo[0]*3600) + (tramaTiempo[1]*60) + (tramaTiempo[2]);
  return horaGPS;
 }
-#line 1 "c:/users/ivan/desktop/milton muñoz/proyectos/git/digitalizador/digitalizador/firmware/programa dspic 30f3014/ds3231_functions.c"
-#line 1 "c:/users/public/documents/mikroelektronika/mikroc pro for dspic/include/stdint.h"
+#line 1 "c:/users/milto/milton/rsa/git/digitalizador/digitalizador/firmware/librerias/tiempo_ds3231.c"
+#line 32 "c:/users/milto/milton/rsa/git/digitalizador/digitalizador/firmware/librerias/tiempo_ds3231.c"
+unsigned char bcd_to_decimal(unsigned char number);
+unsigned char decimal_to_bcd(unsigned char number);
+void RTC_Write_Reg(unsigned char reg_address, unsigned char reg_value);
+unsigned char RTC_Read_Reg(unsigned char reg_address);
+void DS3231_init();
+void DS3231_setTime(unsigned long longHora, unsigned long longFecha);
+unsigned long DS3231_getHour();
+unsigned long DS3231_getDate();
 
 
 
 
-typedef signed char int8_t;
-typedef signed int int16_t;
-typedef signed long int int32_t;
 
 
-typedef unsigned char uint8_t;
-typedef unsigned int uint16_t;
-typedef unsigned long int uint32_t;
-
-
-typedef signed char int_least8_t;
-typedef signed int int_least16_t;
-typedef signed long int int_least32_t;
-
-
-typedef unsigned char uint_least8_t;
-typedef unsigned int uint_least16_t;
-typedef unsigned long int uint_least32_t;
-
-
-
-typedef signed int int_fast8_t;
-typedef signed int int_fast16_t;
-typedef signed long int int_fast32_t;
-
-
-typedef unsigned int uint_fast8_t;
-typedef unsigned int uint_fast16_t;
-typedef unsigned long int uint_fast32_t;
-
-
-typedef signed int intptr_t;
-typedef unsigned int uintptr_t;
-
-
-typedef signed long int intmax_t;
-typedef unsigned long int uintmax_t;
-#line 34 "c:/users/ivan/desktop/milton muñoz/proyectos/git/digitalizador/digitalizador/firmware/programa dspic 30f3014/ds3231_functions.c"
-typedef enum
-{
- SUNDAY = 1,
- MONDAY,
- TUESDAY,
- WEDNESDAY,
- THURSDAY,
- FRIDAY,
- SATURDAY
-} RTC_DOW;
-
-typedef enum
-{
- JANUARY = 1,
- FEBRUARY,
- MARCH,
- APRIL,
- MAY,
- JUNE,
- JULY,
- AUGUST,
- SEPTEMBER,
- OCTOBER,
- NOVEMBER,
- DECEMBER
-} RTC_Month;
-
-typedef struct rtc_tm
-{
- uint8_t seconds;
- uint8_t minutes;
- uint8_t hours;
- RTC_DOW dow;
- uint8_t day;
- uint8_t month;
- uint8_t year;
-} RTC_Time;
-
-typedef enum
-{
- ONCE_PER_SECOND = 0x0F,
- SECONDS_MATCH = 0x0E,
- MINUTES_SECONDS_MATCH = 0x0C,
- HOURS_MINUTES_SECONDS_MATCH = 0x08,
- DATE_HOURS_MINUTES_SECONDS_MATCH = 0x0,
- DAY_HOURS_MINUTES_SECONDS_MATCH = 0x10
-} al1;
-
-typedef enum
-{
- ONCE_PER_MINUTE = 0x0E,
- MINUTES_MATCH = 0x0C,
- HOURS_MINUTES_MATCH = 0x08,
- DATE_HOURS_MINUTES_MATCH = 0x0,
- DAY_HOURS_MINUTES_MATCH = 0x10
-} al2;
-
-typedef enum
-{
- OUT_OFF = 0x00,
- OUT_INT = 0x04,
- OUT_1Hz = 0x40,
- OUT_1024Hz = 0x48,
- OUT_4096Hz = 0x50,
- OUT_8192Hz = 0x58
-} INT_SQW;
-
-RTC_Time c_time, c_alarm1, c_alarm2;
-
-
-
-uint8_t bcd_to_decimal(uint8_t number);
-uint8_t decimal_to_bcd(uint8_t number);
-uint8_t alarm_cfg(uint8_t n, uint8_t i);
-void RTC_Set(RTC_Time *time_t);
-RTC_Time *RTC_Get();
-void IntSqw_Set(INT_SQW _config);
-void Enable_32kHZ();
-void Disable_32kHZ();
-void OSC_Start();
-void OSC_Stop();
-int16_t Get_Temperature();
-uint8_t RTC_Read_Reg(uint8_t reg_address);
-void RTC_Write_Reg(uint8_t reg_address, uint8_t reg_value);
-
-
-
-
-uint8_t bcd_to_decimal(uint8_t number)
-{
+unsigned char bcd_to_decimal(unsigned char number){
  return ( (number >> 4) * 10 + (number & 0x0F) );
 }
 
 
-uint8_t decimal_to_bcd(uint8_t number)
-{
+unsigned char decimal_to_bcd(unsigned char number){
  return ( ((number / 10) << 4) + (number % 10) );
 }
 
 
-void RTC_Set(RTC_Time *time_t)
-{
-
- time_t->day = decimal_to_bcd(time_t->day);
- time_t->month = decimal_to_bcd(time_t->month);
- time_t->year = decimal_to_bcd(time_t->year);
- time_t->hours = decimal_to_bcd(time_t->hours);
- time_t->minutes = decimal_to_bcd(time_t->minutes);
- time_t->seconds = decimal_to_bcd(time_t->seconds);
-
-
-
-  Soft_I2C_Start ();
-  Soft_I2C_Write ( 0xD0 );
-  Soft_I2C_Write ( 0x00 );
-  Soft_I2C_Write (time_t->seconds);
-  Soft_I2C_Write (time_t->minutes);
-  Soft_I2C_Write (time_t->hours);
-  Soft_I2C_Write (time_t->dow);
-  Soft_I2C_Write (time_t->day);
-  Soft_I2C_Write (time_t->month);
-  Soft_I2C_Write (time_t->year);
-  Soft_I2C_Stop ();
-}
-
-
-RTC_Time *RTC_Get()
-{
-  Soft_I2C_Start ();
-  Soft_I2C_Write ( 0xD0 );
-  Soft_I2C_Write ( 0x00 );
-  Soft_I2C_Start ();
-  Soft_I2C_Write ( 0xD0  | 0x01);
- c_time.seconds =  Soft_I2C_Read (1);
- c_time.minutes =  Soft_I2C_Read (1);
- c_time.hours =  Soft_I2C_Read (1);
- c_time.dow =  Soft_I2C_Read (1);
- c_time.day =  Soft_I2C_Read (1);
- c_time.month =  Soft_I2C_Read (1);
- c_time.year =  Soft_I2C_Read (0);
-  Soft_I2C_Stop ();
-
-
- c_time.seconds = bcd_to_decimal(c_time.seconds);
- c_time.minutes = bcd_to_decimal(c_time.minutes);
- c_time.hours = bcd_to_decimal(c_time.hours);
- c_time.day = bcd_to_decimal(c_time.day);
- c_time.month = bcd_to_decimal(c_time.month);
- c_time.year = bcd_to_decimal(c_time.year);
-
-
- return &c_time;
-}
-
-
-
-void RTC_Write_Reg(uint8_t reg_address, uint8_t reg_value)
-{
+void RTC_Write_Reg(unsigned char reg_address, unsigned char reg_value){
   Soft_I2C_Start ();
   Soft_I2C_Write ( 0xD0 );
   Soft_I2C_Write (reg_address);
@@ -348,10 +173,8 @@ void RTC_Write_Reg(uint8_t reg_address, uint8_t reg_value)
 }
 
 
-uint8_t RTC_Read_Reg(uint8_t reg_address)
-{
- uint8_t reg_data;
-
+unsigned char RTC_Read_Reg(unsigned char reg_address){
+ unsigned char reg_data;
   Soft_I2C_Start ();
   Soft_I2C_Write ( 0xD0 );
   Soft_I2C_Write (reg_address);
@@ -359,51 +182,102 @@ uint8_t RTC_Read_Reg(uint8_t reg_address)
   Soft_I2C_Write ( 0xD0  | 0x01);
  reg_data =  Soft_I2C_Read (0);
   Soft_I2C_Stop ();
-
  return reg_data;
 }
 
 
-void IntSqw_Set(INT_SQW _config)
-{
- uint8_t ctrl_reg = RTC_Read_Reg( 0x0E );
- ctrl_reg &= 0xA3;
- ctrl_reg |= _config;
- RTC_Write_Reg( 0x0E , ctrl_reg);
+void DS3231_init(){
+ RTC_Write_Reg( 0x0E , 0x20);
 }
 
 
-void Enable_32kHZ()
-{
- uint8_t stat_reg = RTC_Read_Reg( 0x0F );
- stat_reg |= 0x08;
- RTC_Write_Reg( 0x0F , stat_reg);
+void DS3231_setTime(unsigned long longHora, unsigned long longFecha){
+
+ unsigned char hora;
+ unsigned char minuto;
+ unsigned char segundo;
+ unsigned char dia;
+ unsigned char mes;
+ unsigned char anio;
+
+
+ hora = (char)(longHora / 3600);
+ minuto = (char)((longHora%3600) / 60);
+ segundo = (char)((longHora%3600) % 60);
+
+
+ dia = (char)(longFecha / 10000);
+ mes = (char)((longFecha%10000) / 100);
+ anio = (char)((longFecha%10000) % 100);
+
+
+ segundo = decimal_to_bcd(segundo);
+ minuto = decimal_to_bcd(minuto);
+ hora = decimal_to_bcd(hora);
+ dia = decimal_to_bcd(dia);
+ mes = decimal_to_bcd(mes);
+ anio = decimal_to_bcd(anio);
+
+
+ RTC_Write_Reg( 0x00 ,segundo);
+ RTC_Write_Reg( 0x01 ,minuto);
+ RTC_Write_Reg( 0x02 ,hora);
+ RTC_Write_Reg( 0x04 ,dia);
+ RTC_Write_Reg( 0x05 ,mes);
+ RTC_Write_Reg( 0x06 ,anio);
+
 }
 
 
-void Disable_32kHZ()
-{
- uint8_t stat_reg = RTC_Read_Reg( 0x0F );
- stat_reg &= 0xF7;
- RTC_Write_Reg( 0x0F , stat_reg);
+unsigned long DS3231_getHour(){
+
+ unsigned short valueRead;
+ unsigned long hora;
+ unsigned long minuto;
+ unsigned long segundo;
+ unsigned long horaRTC;
+
+ valueRead = RTC_Read_Reg( 0x00 );
+ valueRead = bcd_to_decimal(valueRead);
+ segundo = (long)valueRead;
+ valueRead = RTC_Read_Reg( 0x01 );
+ valueRead = bcd_to_decimal(valueRead);
+ minuto = (long)valueRead;
+ valueRead = RTC_Read_Reg( 0x02 );
+ valueRead = bcd_to_decimal(valueRead);
+ hora = (long)valueRead;
+
+ horaRTC = (hora*3600)+(minuto*60)+(segundo);
+
+ return horaRTC;
+
 }
 
 
-void OSC_Start()
-{
- uint8_t ctrl_reg = RTC_Read_Reg( 0x0E );
- ctrl_reg &= 0x7F;
- RTC_Write_Reg( 0x0E , ctrl_reg);
-}
+unsigned long DS3231_getDate(){
 
+ unsigned short valueRead;
+ unsigned long dia;
+ unsigned long mes;
+ unsigned long anio;
+ unsigned long fechaRTC;
 
-void OSC_Stop()
-{
- uint8_t ctrl_reg = RTC_Read_Reg( 0x0E );
- ctrl_reg |= 0x80;
- RTC_Write_Reg( 0x0E , ctrl_reg);
+ valueRead = RTC_Read_Reg( 0x04 );
+ valueRead = bcd_to_decimal(valueRead);
+ dia = (long)valueRead;
+ valueRead = RTC_Read_Reg( 0x05 );
+ valueRead = bcd_to_decimal(valueRead);
+ mes = (long)valueRead;
+ valueRead = RTC_Read_Reg( 0x06 );
+ valueRead = bcd_to_decimal(valueRead);
+ anio = (long)valueRead;
+
+ fechaRTC = (anio*10000)+(mes*100)+(dia);
+
+ return fechaRTC;
+
 }
-#line 38 "C:/Users/Ivan/Desktop/Milton Muñoz/Proyectos/Git/Digitalizador/Digitalizador/Firmware/Programa dsPIC 30F3014/Digitalizador.c"
+#line 38 "C:/Users/milto/Milton/RSA/Git/Digitalizador/Digitalizador/Firmware/Programa dsPIC 30F3014/Digitalizador.c"
 sbit PIN_RPi at LATF1_bit;
 sbit PIN_RPi_DIRECTION at TRISF1_bit;
 
@@ -429,12 +303,12 @@ sbit LED_3_DIRECTION at TRISD1_bit;
 sbit LED_3 at LATD1_bit;
 sbit LED_4_DIRECTION at TRISB8_bit;
 sbit LED_4 at LATB8_bit;
-#line 114 "C:/Users/Ivan/Desktop/Milton Muñoz/Proyectos/Git/Digitalizador/Digitalizador/Firmware/Programa dsPIC 30F3014/Digitalizador.c"
+#line 114 "C:/Users/milto/Milton/RSA/Git/Digitalizador/Digitalizador/Firmware/Programa dsPIC 30F3014/Digitalizador.c"
 const unsigned char numBytesTiempo = 8;
 
 
 const unsigned int dimVectores = 256;
-#line 150 "C:/Users/Ivan/Desktop/Milton Muñoz/Proyectos/Git/Digitalizador/Digitalizador/Firmware/Programa dsPIC 30F3014/Digitalizador.c"
+#line 150 "C:/Users/milto/Milton/RSA/Git/Digitalizador/Digitalizador/Firmware/Programa dsPIC 30F3014/Digitalizador.c"
 unsigned char ganancia = 10;
 
 unsigned char fsample = 100;
@@ -560,7 +434,7 @@ void main() {
 
  GenerarInterrupcionRPi( 0XB3 );
  }
-#line 286 "C:/Users/Ivan/Desktop/Milton Muñoz/Proyectos/Git/Digitalizador/Digitalizador/Firmware/Programa dsPIC 30F3014/Digitalizador.c"
+#line 286 "C:/Users/milto/Milton/RSA/Git/Digitalizador/Digitalizador/Firmware/Programa dsPIC 30F3014/Digitalizador.c"
  }
 }
 
@@ -699,8 +573,15 @@ void Setup () {
  INT0IP_2_bit = 1;
  INT0IP_1_bit = 0;
  INT0IP_0_bit = 0;
-#line 436 "C:/Users/Ivan/Desktop/Milton Muñoz/Proyectos/Git/Digitalizador/Digitalizador/Firmware/Programa dsPIC 30F3014/Digitalizador.c"
- IntSqw_Set(OUT_1Hz);
+
+
+
+
+
+
+
+
+ DS3231_init();
 
 
  TRISD9_bit = 1;
@@ -735,7 +616,7 @@ void Setup () {
  return  0 ;
  }
 }
-#line 482 "C:/Users/Ivan/Desktop/Milton Muñoz/Proyectos/Git/Digitalizador/Digitalizador/Firmware/Programa dsPIC 30F3014/Digitalizador.c"
+#line 478 "C:/Users/milto/Milton/RSA/Git/Digitalizador/Digitalizador/Firmware/Programa dsPIC 30F3014/Digitalizador.c"
 void InitTimer3() {
 
 
@@ -812,7 +693,7 @@ void GenerarInterrupcionRPi(unsigned short operacion){
  Delay_us(40);
  PIN_RPi = 0;
 }
-#line 569 "C:/Users/Ivan/Desktop/Milton Muñoz/Proyectos/Git/Digitalizador/Digitalizador/Firmware/Programa dsPIC 30F3014/Digitalizador.c"
+#line 565 "C:/Users/milto/Milton/RSA/Git/Digitalizador/Digitalizador/Firmware/Programa dsPIC 30F3014/Digitalizador.c"
 unsigned int LeerCanalADC (unsigned int canal) {
  unsigned int valADCleido;
 
@@ -822,7 +703,7 @@ unsigned int LeerCanalADC (unsigned int canal) {
 
 
  ADCHS = 0X0000 | canal;
-#line 592 "C:/Users/Ivan/Desktop/Milton Muñoz/Proyectos/Git/Digitalizador/Digitalizador/Firmware/Programa dsPIC 30F3014/Digitalizador.c"
+#line 588 "C:/Users/milto/Milton/RSA/Git/Digitalizador/Digitalizador/Firmware/Programa dsPIC 30F3014/Digitalizador.c"
  ADCON3 = 0b0000000100101000;
 
 
@@ -1233,7 +1114,7 @@ void ExternalInterrupt0_GPS() org IVT_ADDR_INT0INTERRUPT{
  horaLongGPS = 0;
  }
 }
-#line 1013 "C:/Users/Ivan/Desktop/Milton Muñoz/Proyectos/Git/Digitalizador/Digitalizador/Firmware/Programa dsPIC 30F3014/Digitalizador.c"
+#line 1009 "C:/Users/milto/Milton/RSA/Git/Digitalizador/Digitalizador/Firmware/Programa dsPIC 30F3014/Digitalizador.c"
 void ExternalInterrupt2_RTC() org IVT_ADDR_INT2INTERRUPT{
 
  INT2IF_bit = 0;
@@ -1248,7 +1129,7 @@ void ExternalInterrupt2_RTC() org IVT_ADDR_INT2INTERRUPT{
 
 
  PasarTiempoToVector(horaLongRTC, fechaLongRTC, vectorTiempoRTC);
-#line 1037 "C:/Users/Ivan/Desktop/Milton Muñoz/Proyectos/Git/Digitalizador/Digitalizador/Firmware/Programa dsPIC 30F3014/Digitalizador.c"
+#line 1033 "C:/Users/milto/Milton/RSA/Git/Digitalizador/Digitalizador/Firmware/Programa dsPIC 30F3014/Digitalizador.c"
  } else {
 
  horaLongRTC ++;
@@ -1406,7 +1287,7 @@ void interruptU1RX() iv IVT_ADDR_U1RXINTERRUPT {
 
 
  isRecTiempoGPS =  1 ;
-#line 1211 "C:/Users/Ivan/Desktop/Milton Muñoz/Proyectos/Git/Digitalizador/Digitalizador/Firmware/Programa dsPIC 30F3014/Digitalizador.c"
+#line 1207 "C:/Users/milto/Milton/RSA/Git/Digitalizador/Digitalizador/Firmware/Programa dsPIC 30F3014/Digitalizador.c"
  horaLongRTC = horaLongGPS;
  fechaLongRTC = fechaLongGPS;
  isActualizarRTC =  1 ;
@@ -1424,7 +1305,7 @@ void interruptU1RX() iv IVT_ADDR_U1RXINTERRUPT {
 
 
  isRecTiempoGPS =  1 ;
-#line 1238 "C:/Users/Ivan/Desktop/Milton Muñoz/Proyectos/Git/Digitalizador/Digitalizador/Firmware/Programa dsPIC 30F3014/Digitalizador.c"
+#line 1234 "C:/Users/milto/Milton/RSA/Git/Digitalizador/Digitalizador/Firmware/Programa dsPIC 30F3014/Digitalizador.c"
  horaLongRTC = horaLongGPS;
  fechaLongRTC = fechaLongGPS;
  isActualizarRTC =  1 ;

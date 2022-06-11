@@ -11,27 +11,19 @@ main
 			_Divide_32x32
 		UART1_Write_Text
 			UART1_Write
-		IntSqw_Set
-			RTC_Read_Reg
-				Soft_I2C_Start
-					Delay_1us
-					PutZerosToLATSda
-					PutZerosToLATScl
-				Soft_I2C_Write
-					Delay_1us
-					PutZerosToLATScl
-					PutZerosToLATSda
-				Soft_I2C_Read
-					Delay_1us
-					PutZerosToLATScl
-					PutZerosToLATSda
-				Soft_I2C_Stop
-					PutZerosToLATSda
-					Delay_1us
+		DS3231_init
 			RTC_Write_Reg
 				Soft_I2C_Start
+					Delay_1us
+					PutZerosToLATSda
+					PutZerosToLATScl
 				Soft_I2C_Write
+					Delay_1us
+					PutZerosToLATScl
+					PutZerosToLATSda
 				Soft_I2C_Stop
+					PutZerosToLATSda
+					Delay_1us
 	GenerarInterrupcionRPi
 	CheckWatchDog
 ExternalInterrupt2_RTC

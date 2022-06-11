@@ -21,7 +21,7 @@
 // Incluye las funciones del DS1307
 //#include <DS1307_Functions.c>
 // Incluye las funciones del DS3231
-#include <DS3231_Functions.c>
+#include <Tiempo_DS3231.c>
 
 
 // Incluye la libreria GPS, adicionalmente se debe habilitar las librerias de
@@ -428,12 +428,8 @@ void Setup () {
      //*************************************************************************
      //*************** Configuracion del reloj a tiempo real *******************
      //*************************************************************************
-     // Inicio y configuración del reloj DS1307 (RTC)
-     //DS1307Inicio();
-     // DS3231 library variable declaration
-     //RTC_Time *mytime;
-     // enable SQW output with frequency of 1Hz
-     IntSqw_Set(OUT_1Hz);
+     // Inicio y configuración del reloj DS3231 (RTC)
+     DS3231_init();
      
      // Pin RD9 como entrada, para generar una interrupcion del reloj INT2
      TRISD9_bit = 1;         // Como entrada la señal del reloj

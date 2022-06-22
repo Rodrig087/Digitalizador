@@ -2019,10 +2019,6 @@ ldiv
 led
 led_2
 led_2_direction
-led_3
-led_3_direction
-led_4
-led_4_direction
 led_direction
 leercanaladc
 lock

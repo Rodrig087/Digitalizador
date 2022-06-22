@@ -295,14 +295,10 @@ sbit Soft_I2C_Sda_Direction at TRISD8_bit;
 
 
 
-sbit LED_DIRECTION at TRISB0_bit;
-sbit LED at LATB0_bit;
+sbit LED_DIRECTION at TRISB12_bit;
+sbit LED at LATB12_bit;
 sbit LED_2_DIRECTION at TRISD0_bit;
 sbit LED_2 at LATD0_bit;
-sbit LED_3_DIRECTION at TRISD1_bit;
-sbit LED_3 at LATD1_bit;
-sbit LED_4_DIRECTION at TRISB8_bit;
-sbit LED_4 at LATB8_bit;
 #line 114 "C:/Users/milto/Milton/RSA/Git/Digitalizador/Digitalizador/Firmware/Programa dsPIC 30F3014/Digitalizador.c"
 const unsigned char numBytesTiempo = 8;
 
@@ -468,13 +464,13 @@ void Setup () {
 
  LED_DIRECTION = 0;
  LED_2_DIRECTION = 0;
- LED_3_DIRECTION = 0;
- LED_4_DIRECTION = 0;
+
+
 
  LED = 1;
  LED_2 = 1;
- LED_3 = 1;
- LED_4 = 1;
+
+
  Delay_ms(300);
  LED = 0;
  LED_2 = 0;
@@ -668,12 +664,12 @@ void GenerarInterrupcionRPi(unsigned short operacion){
 
  tipoOperacion = operacion;
 
- LED_4 = ~LED_4;
+
 
 
  if (SPIROV_bit == 1) {
 
- LED_3 = ~LED_3;
+
 
 
  SPIROV_bit = 0;
@@ -1073,7 +1069,7 @@ void interruptSPI1 () org IVT_ADDR_SPI1INTERRUPT {
 void ExternalInterrupt0_GPS() org IVT_ADDR_INT0INTERRUPT{
 
  INT0IF_bit = 0;
-
+ LED = ~LED;
 
 
  if (isPPS_GPS ==  0 ) {
@@ -1129,7 +1125,9 @@ void ExternalInterrupt2_RTC() org IVT_ADDR_INT2INTERRUPT{
 
 
  PasarTiempoToVector(horaLongRTC, fechaLongRTC, vectorTiempoRTC);
-#line 1033 "C:/Users/milto/Milton/RSA/Git/Digitalizador/Digitalizador/Firmware/Programa dsPIC 30F3014/Digitalizador.c"
+
+ DS3231_setTime(horaLongRTC, fechaLongRTC);
+
  } else {
 
  horaLongRTC ++;
@@ -1287,7 +1285,7 @@ void interruptU1RX() iv IVT_ADDR_U1RXINTERRUPT {
 
 
  isRecTiempoGPS =  1 ;
-#line 1207 "C:/Users/milto/Milton/RSA/Git/Digitalizador/Digitalizador/Firmware/Programa dsPIC 30F3014/Digitalizador.c"
+#line 1200 "C:/Users/milto/Milton/RSA/Git/Digitalizador/Digitalizador/Firmware/Programa dsPIC 30F3014/Digitalizador.c"
  horaLongRTC = horaLongGPS;
  fechaLongRTC = fechaLongGPS;
  isActualizarRTC =  1 ;
@@ -1305,7 +1303,7 @@ void interruptU1RX() iv IVT_ADDR_U1RXINTERRUPT {
 
 
  isRecTiempoGPS =  1 ;
-#line 1234 "C:/Users/milto/Milton/RSA/Git/Digitalizador/Digitalizador/Firmware/Programa dsPIC 30F3014/Digitalizador.c"
+#line 1227 "C:/Users/milto/Milton/RSA/Git/Digitalizador/Digitalizador/Firmware/Programa dsPIC 30F3014/Digitalizador.c"
  horaLongRTC = horaLongGPS;
  fechaLongRTC = fechaLongGPS;
  isActualizarRTC =  1 ;

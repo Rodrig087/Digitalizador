@@ -30,6 +30,11 @@ ExternalInterrupt2_RTC
 	PasarTiempoToVector
 		_Divide_32x32
 		_Modulus_32x32
+	DS3231_setTime
+		decimal_to_bcd
+		RTC_Write_Reg
+		_Divide_32x32
+		_Modulus_32x32
 	_Modulus_32x32
 interruptU1RX
 	RecuperarHoraGPS

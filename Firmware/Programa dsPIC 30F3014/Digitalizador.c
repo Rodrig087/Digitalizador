@@ -52,14 +52,14 @@ sbit Soft_I2C_Sda_Direction at TRISD8_bit;
 // End Software I2C connections
 
 // Leds indicadores
-sbit LED_DIRECTION at TRISB0_bit;
-sbit LED at LATB0_bit;
+sbit LED_DIRECTION at TRISB12_bit;
+sbit LED at LATB12_bit;
 sbit LED_2_DIRECTION at TRISD0_bit;
 sbit LED_2 at LATD0_bit;
-sbit LED_3_DIRECTION at TRISD1_bit;
-sbit LED_3 at LATD1_bit;
-sbit LED_4_DIRECTION at TRISB8_bit;
-sbit LED_4 at LATB8_bit;
+//sbit LED_3_DIRECTION at TRISD1_bit;
+//sbit LED_3 at LATD1_bit;
+//sbit LED_4_DIRECTION at TRISB8_bit;
+//sbit LED_4 at LATB8_bit;
 //******************************************************************************
 //************************ Fin Definicion de pines *****************************
 //******************************************************************************
@@ -316,13 +316,13 @@ void Setup () {
      // Configura los leds como salidas
      LED_DIRECTION = 0;
      LED_2_DIRECTION = 0;
-     LED_3_DIRECTION = 0;
-     LED_4_DIRECTION = 0;
+     //LED_3_DIRECTION = 0;
+     //LED_4_DIRECTION = 0;
      // Enciende los leds
      LED = 1;
      LED_2 = 1;
-     LED_3 = 1;
-     LED_4 = 1;
+     //LED_3 = 1;
+     //LED_4 = 1;
      Delay_ms(300);
      LED = 0;
      LED_2 = 0;
@@ -526,12 +526,12 @@ void GenerarInterrupcionRPi(unsigned short operacion){
      // Carga en la variable el tipo de operacion requerido
      tipoOperacion = operacion;
 
-     LED_4 = ~LED_4;
+     //LED_4 = ~LED_4;
 
      // Analiza si la bandera de overflow del SPI esta activa
      if (SPIROV_bit == 1) {
          
-         LED_3 = ~LED_3;
+         //LED_3 = ~LED_3;
          
          // Limpia la bandera y el buffer
          SPIROV_bit = 0;
@@ -954,7 +954,7 @@ void interruptSPI1 () org  IVT_ADDR_SPI1INTERRUPT {
 void ExternalInterrupt0_GPS() org IVT_ADDR_INT0INTERRUPT{
      // Limpia la bandera de interrupcion
      INT0IF_bit = 0;
-//     LED_2 = ~LED_2;
+     LED = ~LED;
      
      // Si esta en false la bandera, la actualiza
      if (isPPS_GPS == false) {
@@ -1020,15 +1020,8 @@ void ExternalInterrupt2_RTC() org IVT_ADDR_INT2INTERRUPT{
           // Pasa los datos de tiempo de variables long a un vector, para
           // poder actualizar el DS1307
           PasarTiempoToVector(horaLongRTC, fechaLongRTC, vectorTiempoRTC);
-          /*
           // Actualiza todos los parametros del RTC
-          DS1307SetAnos(vectorTiempoRTC[0]);
-          DS1307SetMeses(vectorTiempoRTC[1]);
-          DS1307SetFechas(vectorTiempoRTC[2]);
-          DS1307SetHoras(vectorTiempoRTC[3]);
-          DS1307SetMinutos(vectorTiempoRTC[4]);
-          DS1307SetSegundos(vectorTiempoRTC[5]);
-          */
+          DS3231_setTime(horaLongRTC, fechaLongRTC);
      // Caso contrario continua con el incremento del tiempo en segundos
      } else {
           // Aumenta en 1 los segundos del dia

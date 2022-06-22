@@ -849,21 +849,13 @@ _Setup:
 ;Digitalizador.c,314 :: 		InitTimer3();
 	CALL	_InitTimer3
 ;Digitalizador.c,317 :: 		LED_DIRECTION = 0;
-	BCLR	TRISB0_bit, BitPos(TRISB0_bit+0)
+	BCLR	TRISB12_bit, BitPos(TRISB12_bit+0)
 ;Digitalizador.c,318 :: 		LED_2_DIRECTION = 0;
 	BCLR	TRISD0_bit, BitPos(TRISD0_bit+0)
-;Digitalizador.c,319 :: 		LED_3_DIRECTION = 0;
-	BCLR	TRISD1_bit, BitPos(TRISD1_bit+0)
-;Digitalizador.c,320 :: 		LED_4_DIRECTION = 0;
-	BCLR	TRISB8_bit, BitPos(TRISB8_bit+0)
 ;Digitalizador.c,322 :: 		LED = 1;
-	BSET	LATB0_bit, BitPos(LATB0_bit+0)
+	BSET	LATB12_bit, BitPos(LATB12_bit+0)
 ;Digitalizador.c,323 :: 		LED_2 = 1;
 	BSET	LATD0_bit, BitPos(LATD0_bit+0)
-;Digitalizador.c,324 :: 		LED_3 = 1;
-	BSET	LATD1_bit, BitPos(LATD1_bit+0)
-;Digitalizador.c,325 :: 		LED_4 = 1;
-	BSET	LATB8_bit, BitPos(LATB8_bit+0)
 ;Digitalizador.c,326 :: 		Delay_ms(300);
 	MOV	#46, W8
 	MOV	#50894, W7
@@ -873,7 +865,7 @@ L_Setup9:
 	DEC	W8
 	BRA NZ	L_Setup9
 ;Digitalizador.c,327 :: 		LED = 0;
-	BCLR	LATB0_bit, BitPos(LATB0_bit+0)
+	BCLR	LATB12_bit, BitPos(LATB12_bit+0)
 ;Digitalizador.c,328 :: 		LED_2 = 0;
 	BCLR	LATD0_bit, BitPos(LATD0_bit+0)
 ;Digitalizador.c,329 :: 		Delay_ms(300);
@@ -885,7 +877,7 @@ L_Setup11:
 	DEC	W8
 	BRA NZ	L_Setup11
 ;Digitalizador.c,330 :: 		LED = 1;
-	BSET	LATB0_bit, BitPos(LATB0_bit+0)
+	BSET	LATB12_bit, BitPos(LATB12_bit+0)
 ;Digitalizador.c,331 :: 		LED_2 = 1;
 	BSET	LATD0_bit, BitPos(LATD0_bit+0)
 ;Digitalizador.c,339 :: 		PIN_RPi = 0;
@@ -1127,13 +1119,9 @@ _GenerarInterrupcionRPi:
 ;Digitalizador.c,527 :: 		tipoOperacion = operacion;
 	MOV	#lo_addr(_tipoOperacion), W0
 	MOV.B	W10, [W0]
-;Digitalizador.c,529 :: 		LED_4 = ~LED_4;
-	BTG	LATB8_bit, BitPos(LATB8_bit+0)
 ;Digitalizador.c,532 :: 		if (SPIROV_bit == 1) {
 	BTSS	SPIROV_bit, BitPos(SPIROV_bit+0)
 	GOTO	L_GenerarInterrupcionRPi23
-;Digitalizador.c,534 :: 		LED_3 = ~LED_3;
-	BTG	LATD1_bit, BitPos(LATD1_bit+0)
 ;Digitalizador.c,537 :: 		SPIROV_bit = 0;
 	BCLR	SPIROV_bit, BitPos(SPIROV_bit+0)
 ;Digitalizador.c,541 :: 		if (SPI1IF_bit == 1) {
@@ -1932,6 +1920,8 @@ _ExternalInterrupt0_GPS:
 ;Digitalizador.c,954 :: 		void ExternalInterrupt0_GPS() org IVT_ADDR_INT0INTERRUPT{
 ;Digitalizador.c,956 :: 		INT0IF_bit = 0;
 	BCLR	INT0IF_bit, BitPos(INT0IF_bit+0)
+;Digitalizador.c,957 :: 		LED = ~LED;
+	BTG	LATB12_bit, BitPos(LATB12_bit+0)
 ;Digitalizador.c,960 :: 		if (isPPS_GPS == false) {
 	MOV	#lo_addr(_isPPS_GPS), W0
 	MOV.B	[W0], W0
@@ -2075,18 +2065,24 @@ L__ExternalInterrupt2_RTC229:
 	PUSH	W0
 	CALL	_PasarTiempoToVector
 	SUB	#2, W15
-;Digitalizador.c,1033 :: 		} else {
+;Digitalizador.c,1024 :: 		DS3231_setTime(horaLongRTC, fechaLongRTC);
+	MOV	_fechaLongRTC, W12
+	MOV	_fechaLongRTC+2, W13
+	MOV	_horaLongRTC, W10
+	MOV	_horaLongRTC+2, W11
+	CALL	_DS3231_setTime
+;Digitalizador.c,1026 :: 		} else {
 	GOTO	L_ExternalInterrupt2_RTC88
 L_ExternalInterrupt2_RTC87:
-;Digitalizador.c,1035 :: 		horaLongRTC ++;
+;Digitalizador.c,1028 :: 		horaLongRTC ++;
 	MOV	#1, W1
 	MOV	#0, W2
 	MOV	#lo_addr(_horaLongRTC), W0
 	ADD	W1, [W0], [W0++]
 	ADDC	W2, [W0], [W0--]
-;Digitalizador.c,1036 :: 		}
+;Digitalizador.c,1029 :: 		}
 L_ExternalInterrupt2_RTC88:
-;Digitalizador.c,1039 :: 		if (horaLongRTC == 86400) {
+;Digitalizador.c,1032 :: 		if (horaLongRTC == 86400) {
 	MOV	_horaLongRTC, W2
 	MOV	_horaLongRTC+2, W3
 	MOV	#20864, W0
@@ -2096,14 +2092,14 @@ L_ExternalInterrupt2_RTC88:
 	BRA Z	L__ExternalInterrupt2_RTC230
 	GOTO	L_ExternalInterrupt2_RTC89
 L__ExternalInterrupt2_RTC230:
-;Digitalizador.c,1040 :: 		horaLongRTC = 0;
+;Digitalizador.c,1033 :: 		horaLongRTC = 0;
 	CLR	W0
 	CLR	W1
 	MOV	W0, _horaLongRTC
 	MOV	W1, _horaLongRTC+2
-;Digitalizador.c,1041 :: 		}
+;Digitalizador.c,1034 :: 		}
 L_ExternalInterrupt2_RTC89:
-;Digitalizador.c,1048 :: 		if (horaLongGPS == 86390 && fuenteTiempoSistema == FUENTE_TIME_GPS) {
+;Digitalizador.c,1041 :: 		if (horaLongGPS == 86390 && fuenteTiempoSistema == FUENTE_TIME_GPS) {
 	MOV	_horaLongGPS, W2
 	MOV	_horaLongGPS+2, W3
 	MOV	#20854, W0
@@ -2120,24 +2116,24 @@ L__ExternalInterrupt2_RTC231:
 	GOTO	L__ExternalInterrupt2_RTC151
 L__ExternalInterrupt2_RTC232:
 L__ExternalInterrupt2_RTC150:
-;Digitalizador.c,1050 :: 		U1RXIE_bit = 1;
+;Digitalizador.c,1043 :: 		U1RXIE_bit = 1;
 	BSET	U1RXIE_bit, BitPos(U1RXIE_bit+0)
-;Digitalizador.c,1048 :: 		if (horaLongGPS == 86390 && fuenteTiempoSistema == FUENTE_TIME_GPS) {
+;Digitalizador.c,1041 :: 		if (horaLongGPS == 86390 && fuenteTiempoSistema == FUENTE_TIME_GPS) {
 L__ExternalInterrupt2_RTC152:
 L__ExternalInterrupt2_RTC151:
-;Digitalizador.c,1054 :: 		horaLongSistema = horaLongRTC;
+;Digitalizador.c,1047 :: 		horaLongSistema = horaLongRTC;
 	MOV	_horaLongRTC, W0
 	MOV	_horaLongRTC+2, W1
 	MOV	W0, _horaLongSistema
 	MOV	W1, _horaLongSistema+2
-;Digitalizador.c,1057 :: 		if (isComienzoMuestreo == true) {
+;Digitalizador.c,1050 :: 		if (isComienzoMuestreo == true) {
 	MOV	#lo_addr(_isComienzoMuestreo), W0
 	MOV.B	[W0], W0
 	CP.B	W0, #1
 	BRA Z	L__ExternalInterrupt2_RTC233
 	GOTO	L_ExternalInterrupt2_RTC93
 L__ExternalInterrupt2_RTC233:
-;Digitalizador.c,1059 :: 		if (isMuestreando == false && (horaLongRTC % 60) == 0) {
+;Digitalizador.c,1052 :: 		if (isMuestreando == false && (horaLongRTC % 60) == 0) {
 	MOV	#lo_addr(_isMuestreando), W0
 	MOV.B	[W0], W0
 	CP.B	W0, #0
@@ -2156,31 +2152,31 @@ L__ExternalInterrupt2_RTC234:
 	GOTO	L__ExternalInterrupt2_RTC153
 L__ExternalInterrupt2_RTC235:
 L__ExternalInterrupt2_RTC149:
-;Digitalizador.c,1060 :: 		isMuestreando = true;
+;Digitalizador.c,1053 :: 		isMuestreando = true;
 	MOV	#lo_addr(_isMuestreando), W1
 	MOV.B	#1, W0
 	MOV.B	W0, [W1]
-;Digitalizador.c,1062 :: 		isComienzoMuestreo = false;
+;Digitalizador.c,1055 :: 		isComienzoMuestreo = false;
 	MOV	#lo_addr(_isComienzoMuestreo), W1
 	CLR	W0
 	MOV.B	W0, [W1]
-;Digitalizador.c,1065 :: 		isPrimeraVezMuestreo = true;
+;Digitalizador.c,1058 :: 		isPrimeraVezMuestreo = true;
 	MOV	#lo_addr(_isPrimeraVezMuestreo), W1
 	MOV.B	#1, W0
 	MOV.B	W0, [W1]
-;Digitalizador.c,1059 :: 		if (isMuestreando == false && (horaLongRTC % 60) == 0) {
+;Digitalizador.c,1052 :: 		if (isMuestreando == false && (horaLongRTC % 60) == 0) {
 L__ExternalInterrupt2_RTC154:
 L__ExternalInterrupt2_RTC153:
-;Digitalizador.c,1067 :: 		}
+;Digitalizador.c,1060 :: 		}
 L_ExternalInterrupt2_RTC93:
-;Digitalizador.c,1070 :: 		if (isMuestreando == true) {
+;Digitalizador.c,1063 :: 		if (isMuestreando == true) {
 	MOV	#lo_addr(_isMuestreando), W0
 	MOV.B	[W0], W0
 	CP.B	W0, #1
 	BRA Z	L__ExternalInterrupt2_RTC236
 	GOTO	L_ExternalInterrupt2_RTC97
 L__ExternalInterrupt2_RTC236:
-;Digitalizador.c,1073 :: 		if ((horaLongRTC % 60) == 0 && isPrimeraVezMuestreo == false) {
+;Digitalizador.c,1066 :: 		if ((horaLongRTC % 60) == 0 && isPrimeraVezMuestreo == false) {
 	MOV	#60, W2
 	MOV	#0, W3
 	MOV	_horaLongRTC, W0
@@ -2199,27 +2195,27 @@ L__ExternalInterrupt2_RTC237:
 	GOTO	L__ExternalInterrupt2_RTC155
 L__ExternalInterrupt2_RTC238:
 L__ExternalInterrupt2_RTC148:
-;Digitalizador.c,1074 :: 		isEnviarHoraToRPi = true;
+;Digitalizador.c,1067 :: 		isEnviarHoraToRPi = true;
 	MOV	#lo_addr(_isEnviarHoraToRPi), W1
 	MOV.B	#1, W0
 	MOV.B	W0, [W1]
-;Digitalizador.c,1073 :: 		if ((horaLongRTC % 60) == 0 && isPrimeraVezMuestreo == false) {
+;Digitalizador.c,1066 :: 		if ((horaLongRTC % 60) == 0 && isPrimeraVezMuestreo == false) {
 L__ExternalInterrupt2_RTC156:
 L__ExternalInterrupt2_RTC155:
-;Digitalizador.c,1081 :: 		if (TON_T3CON_bit == 0) {
+;Digitalizador.c,1074 :: 		if (TON_T3CON_bit == 0) {
 	BTSC	TON_T3CON_bit, BitPos(TON_T3CON_bit+0)
 	GOTO	L_ExternalInterrupt2_RTC101
-;Digitalizador.c,1082 :: 		TON_T3CON_bit = 1;
+;Digitalizador.c,1075 :: 		TON_T3CON_bit = 1;
 	BSET	TON_T3CON_bit, BitPos(TON_T3CON_bit+0)
-;Digitalizador.c,1083 :: 		}
+;Digitalizador.c,1076 :: 		}
 L_ExternalInterrupt2_RTC101:
-;Digitalizador.c,1085 :: 		TMR3 = 0;
+;Digitalizador.c,1078 :: 		TMR3 = 0;
 	CLR	TMR3
-;Digitalizador.c,1088 :: 		T3IF_bit = 1;
+;Digitalizador.c,1081 :: 		T3IF_bit = 1;
 	BSET	T3IF_bit, BitPos(T3IF_bit+0)
-;Digitalizador.c,1089 :: 		}
+;Digitalizador.c,1082 :: 		}
 L_ExternalInterrupt2_RTC97:
-;Digitalizador.c,1090 :: 		}
+;Digitalizador.c,1083 :: 		}
 L_end_ExternalInterrupt2_RTC:
 	POP	W13
 	POP	W12
@@ -2243,23 +2239,23 @@ _interruptU1RX:
 	REPEAT	#12
 	PUSH	[W0++]
 
-;Digitalizador.c,1099 :: 		void interruptU1RX() iv IVT_ADDR_U1RXINTERRUPT {
-;Digitalizador.c,1103 :: 		U1RXIF_bit = 0;
+;Digitalizador.c,1092 :: 		void interruptU1RX() iv IVT_ADDR_U1RXINTERRUPT {
+;Digitalizador.c,1096 :: 		U1RXIF_bit = 0;
 	PUSH	W10
 	BCLR	U1RXIF_bit, BitPos(U1RXIF_bit+0)
-;Digitalizador.c,1105 :: 		byteGPS = U1RXREG;                                                                                                                                                                                                                                       //Lee el byte de la trama enviada por el GPS
+;Digitalizador.c,1098 :: 		byteGPS = U1RXREG;                                                                                                                                                                                                                                       //Lee el byte de la trama enviada por el GPS
 ; byteGPS start address is: 4 (W2)
 	MOV	U1RXREG, W2
-;Digitalizador.c,1107 :: 		OERR_bit = 0;
+;Digitalizador.c,1100 :: 		OERR_bit = 0;
 	BCLR	OERR_bit, BitPos(OERR_bit+0)
-;Digitalizador.c,1109 :: 		if (banTIGPS == 0){
+;Digitalizador.c,1102 :: 		if (banTIGPS == 0){
 	MOV	#lo_addr(_banTIGPS), W0
 	MOV.B	[W0], W0
 	CP.B	W0, #0
 	BRA Z	L__interruptU1RX240
 	GOTO	L_interruptU1RX102
 L__interruptU1RX240:
-;Digitalizador.c,1112 :: 		if ((byteGPS == 0x24) && (indice_gps == 0)){
+;Digitalizador.c,1105 :: 		if ((byteGPS == 0x24) && (indice_gps == 0)){
 	MOV.B	#36, W0
 	CP.B	W2, W0
 	BRA Z	L__interruptU1RX241
@@ -2271,48 +2267,48 @@ L__interruptU1RX241:
 	GOTO	L__interruptU1RX159
 L__interruptU1RX242:
 L__interruptU1RX158:
-;Digitalizador.c,1114 :: 		banTIGPS = 1;
+;Digitalizador.c,1107 :: 		banTIGPS = 1;
 	MOV	#lo_addr(_banTIGPS), W1
 	MOV.B	#1, W0
 	MOV.B	W0, [W1]
-;Digitalizador.c,1112 :: 		if ((byteGPS == 0x24) && (indice_gps == 0)){
+;Digitalizador.c,1105 :: 		if ((byteGPS == 0x24) && (indice_gps == 0)){
 L__interruptU1RX160:
 L__interruptU1RX159:
-;Digitalizador.c,1116 :: 		}
+;Digitalizador.c,1109 :: 		}
 L_interruptU1RX102:
-;Digitalizador.c,1118 :: 		if (banTIGPS == 1){
+;Digitalizador.c,1111 :: 		if (banTIGPS == 1){
 	MOV	#lo_addr(_banTIGPS), W0
 	MOV.B	[W0], W0
 	CP.B	W0, #1
 	BRA Z	L__interruptU1RX243
 	GOTO	L_interruptU1RX106
 L__interruptU1RX243:
-;Digitalizador.c,1121 :: 		if (byteGPS != 0x2A){
+;Digitalizador.c,1114 :: 		if (byteGPS != 0x2A){
 	MOV.B	#42, W0
 	CP.B	W2, W0
 	BRA NZ	L__interruptU1RX244
 	GOTO	L_interruptU1RX107
 L__interruptU1RX244:
-;Digitalizador.c,1123 :: 		tramaGPS[indice_gps] = byteGPS;
+;Digitalizador.c,1116 :: 		tramaGPS[indice_gps] = byteGPS;
 	MOV	#lo_addr(_tramaGPS), W1
 	MOV	#lo_addr(_indice_gps), W0
 	ADD	W1, [W0], W0
 	MOV.B	W2, [W0]
 ; byteGPS end address is: 4 (W2)
-;Digitalizador.c,1125 :: 		if (indice_gps < 70){
+;Digitalizador.c,1118 :: 		if (indice_gps < 70){
 	MOV	#70, W1
 	MOV	#lo_addr(_indice_gps), W0
 	CP	W1, [W0]
 	BRA GTU	L__interruptU1RX245
 	GOTO	L_interruptU1RX108
 L__interruptU1RX245:
-;Digitalizador.c,1126 :: 		indice_gps ++;
+;Digitalizador.c,1119 :: 		indice_gps ++;
 	MOV	#1, W1
 	MOV	#lo_addr(_indice_gps), W0
 	ADD	W1, [W0], [W0]
-;Digitalizador.c,1127 :: 		}
+;Digitalizador.c,1120 :: 		}
 L_interruptU1RX108:
-;Digitalizador.c,1132 :: 		if ((indice_gps > 5) && (tramaGPS[1] != 0x47) && (tramaGPS[2] != 0x50)  && (tramaGPS[3] != 0x52)  && (tramaGPS[4] != 0x4D)  && (tramaGPS[5] != 0x43)) {
+;Digitalizador.c,1125 :: 		if ((indice_gps > 5) && (tramaGPS[1] != 0x47) && (tramaGPS[2] != 0x50)  && (tramaGPS[3] != 0x52)  && (tramaGPS[4] != 0x4D)  && (tramaGPS[5] != 0x43)) {
 	MOV	_indice_gps, W0
 	CP	W0, #5
 	BRA GTU	L__interruptU1RX246
@@ -2354,54 +2350,54 @@ L__interruptU1RX250:
 	GOTO	L__interruptU1RX161
 L__interruptU1RX251:
 L__interruptU1RX157:
-;Digitalizador.c,1134 :: 		indice_gps = 0;
+;Digitalizador.c,1127 :: 		indice_gps = 0;
 	CLR	W0
 	MOV	W0, _indice_gps
-;Digitalizador.c,1136 :: 		banTIGPS = 0;
+;Digitalizador.c,1129 :: 		banTIGPS = 0;
 	MOV	#lo_addr(_banTIGPS), W1
 	CLR	W0
 	MOV.B	W0, [W1]
-;Digitalizador.c,1138 :: 		banTCGPS = 0;
+;Digitalizador.c,1131 :: 		banTCGPS = 0;
 	MOV	#lo_addr(_banTCGPS), W1
 	CLR	W0
 	MOV.B	W0, [W1]
-;Digitalizador.c,1132 :: 		if ((indice_gps > 5) && (tramaGPS[1] != 0x47) && (tramaGPS[2] != 0x50)  && (tramaGPS[3] != 0x52)  && (tramaGPS[4] != 0x4D)  && (tramaGPS[5] != 0x43)) {
+;Digitalizador.c,1125 :: 		if ((indice_gps > 5) && (tramaGPS[1] != 0x47) && (tramaGPS[2] != 0x50)  && (tramaGPS[3] != 0x52)  && (tramaGPS[4] != 0x4D)  && (tramaGPS[5] != 0x43)) {
 L__interruptU1RX166:
 L__interruptU1RX165:
 L__interruptU1RX164:
 L__interruptU1RX163:
 L__interruptU1RX162:
 L__interruptU1RX161:
-;Digitalizador.c,1141 :: 		} else {
+;Digitalizador.c,1134 :: 		} else {
 	GOTO	L_interruptU1RX112
 L_interruptU1RX107:
-;Digitalizador.c,1142 :: 		tramaGPS[indice_gps] = byteGPS;
+;Digitalizador.c,1135 :: 		tramaGPS[indice_gps] = byteGPS;
 ; byteGPS start address is: 4 (W2)
 	MOV	#lo_addr(_tramaGPS), W1
 	MOV	#lo_addr(_indice_gps), W0
 	ADD	W1, [W0], W0
 	MOV.B	W2, [W0]
 ; byteGPS end address is: 4 (W2)
-;Digitalizador.c,1145 :: 		banTIGPS = 2;
+;Digitalizador.c,1138 :: 		banTIGPS = 2;
 	MOV	#lo_addr(_banTIGPS), W1
 	MOV.B	#2, W0
 	MOV.B	W0, [W1]
-;Digitalizador.c,1147 :: 		banTCGPS = 1;
+;Digitalizador.c,1140 :: 		banTCGPS = 1;
 	MOV	#lo_addr(_banTCGPS), W1
 	MOV.B	#1, W0
 	MOV.B	W0, [W1]
-;Digitalizador.c,1148 :: 		}
+;Digitalizador.c,1141 :: 		}
 L_interruptU1RX112:
-;Digitalizador.c,1149 :: 		}
+;Digitalizador.c,1142 :: 		}
 L_interruptU1RX106:
-;Digitalizador.c,1153 :: 		if (banTCGPS == 1) {
+;Digitalizador.c,1146 :: 		if (banTCGPS == 1) {
 	MOV	#lo_addr(_banTCGPS), W0
 	MOV.B	[W0], W0
 	CP.B	W0, #1
 	BRA Z	L__interruptU1RX252
 	GOTO	L_interruptU1RX113
 L__interruptU1RX252:
-;Digitalizador.c,1156 :: 		if (tramaGPS[18] == 0x41) {
+;Digitalizador.c,1149 :: 		if (tramaGPS[18] == 0x41) {
 	MOV	#lo_addr(_tramaGPS+18), W0
 	MOV.B	[W0], W1
 	MOV.B	#65, W0
@@ -2409,7 +2405,7 @@ L__interruptU1RX252:
 	BRA Z	L__interruptU1RX253
 	GOTO	L_interruptU1RX114
 L__interruptU1RX253:
-;Digitalizador.c,1161 :: 		for (indiceU1RX_1 = 0; indiceU1RX_1 < 6; indiceU1RX_1++){
+;Digitalizador.c,1154 :: 		for (indiceU1RX_1 = 0; indiceU1RX_1 < 6; indiceU1RX_1++){
 ; indiceU1RX_1 start address is: 6 (W3)
 	CLR	W3
 ; indiceU1RX_1 end address is: 6 (W3)
@@ -2419,7 +2415,7 @@ L_interruptU1RX115:
 	BRA LTU	L__interruptU1RX254
 	GOTO	L_interruptU1RX116
 L__interruptU1RX254:
-;Digitalizador.c,1163 :: 		datosGPS[indiceU1RX_1] = tramaGPS[7+indiceU1RX_1];
+;Digitalizador.c,1156 :: 		datosGPS[indiceU1RX_1] = tramaGPS[7+indiceU1RX_1];
 	ZE	W3, W1
 	MOV	#lo_addr(_datosGPS), W0
 	ADD	W0, W1, W2
@@ -2428,13 +2424,13 @@ L__interruptU1RX254:
 	MOV	#lo_addr(_tramaGPS), W0
 	ADD	W0, W1, W0
 	MOV.B	[W0], [W2]
-;Digitalizador.c,1161 :: 		for (indiceU1RX_1 = 0; indiceU1RX_1 < 6; indiceU1RX_1++){
+;Digitalizador.c,1154 :: 		for (indiceU1RX_1 = 0; indiceU1RX_1 < 6; indiceU1RX_1++){
 	INC.B	W3
-;Digitalizador.c,1164 :: 		}
+;Digitalizador.c,1157 :: 		}
 ; indiceU1RX_1 end address is: 6 (W3)
 	GOTO	L_interruptU1RX115
 L_interruptU1RX116:
-;Digitalizador.c,1166 :: 		for (indiceU1RX_1 = 50; indiceU1RX_1 < 60; indiceU1RX_1++){
+;Digitalizador.c,1159 :: 		for (indiceU1RX_1 = 50; indiceU1RX_1 < 60; indiceU1RX_1++){
 ; indiceU1RX_1 start address is: 6 (W3)
 	MOV.B	#50, W3
 ; indiceU1RX_1 end address is: 6 (W3)
@@ -2445,7 +2441,7 @@ L_interruptU1RX118:
 	BRA LTU	L__interruptU1RX255
 	GOTO	L_interruptU1RX119
 L__interruptU1RX255:
-;Digitalizador.c,1169 :: 		if (tramaGPS[indiceU1RX_1] == 0x2C){
+;Digitalizador.c,1162 :: 		if (tramaGPS[indiceU1RX_1] == 0x2C){
 	ZE	W3, W1
 	MOV	#lo_addr(_tramaGPS), W0
 	ADD	W0, W1, W0
@@ -2455,7 +2451,7 @@ L__interruptU1RX255:
 	BRA Z	L__interruptU1RX256
 	GOTO	L__interruptU1RX167
 L__interruptU1RX256:
-;Digitalizador.c,1171 :: 		for (indiceU1RX_2 = 0; indiceU1RX_2 < 6; indiceU1RX_2++){
+;Digitalizador.c,1164 :: 		for (indiceU1RX_2 = 0; indiceU1RX_2 < 6; indiceU1RX_2++){
 	CLR	W0
 	MOV.B	W0, [W14+0]
 ; indiceU1RX_1 end address is: 6 (W3)
@@ -2466,7 +2462,7 @@ L_interruptU1RX122:
 	BRA LTU	L__interruptU1RX257
 	GOTO	L_interruptU1RX123
 L__interruptU1RX257:
-;Digitalizador.c,1172 :: 		datosGPS[6 + indiceU1RX_2] = tramaGPS[indiceU1RX_1 + indiceU1RX_2 + 1];
+;Digitalizador.c,1165 :: 		datosGPS[6 + indiceU1RX_2] = tramaGPS[indiceU1RX_1 + indiceU1RX_2 + 1];
 	ADD	W14, #0, W0
 	ZE	[W0], W0
 	ADD	W0, #6, W1
@@ -2480,75 +2476,75 @@ L__interruptU1RX257:
 	MOV	#lo_addr(_tramaGPS), W0
 	ADD	W0, W1, W0
 	MOV.B	[W0], [W2]
-;Digitalizador.c,1171 :: 		for (indiceU1RX_2 = 0; indiceU1RX_2 < 6; indiceU1RX_2++){
+;Digitalizador.c,1164 :: 		for (indiceU1RX_2 = 0; indiceU1RX_2 < 6; indiceU1RX_2++){
 	MOV.B	#1, W1
 	ADD	W14, #0, W0
 	ADD.B	W1, [W0], [W0]
-;Digitalizador.c,1173 :: 		}
+;Digitalizador.c,1166 :: 		}
 	GOTO	L_interruptU1RX122
 L_interruptU1RX123:
-;Digitalizador.c,1174 :: 		}
+;Digitalizador.c,1167 :: 		}
 	MOV.B	W3, W0
 	GOTO	L_interruptU1RX121
 ; indiceU1RX_1 end address is: 6 (W3)
 L__interruptU1RX167:
-;Digitalizador.c,1169 :: 		if (tramaGPS[indiceU1RX_1] == 0x2C){
+;Digitalizador.c,1162 :: 		if (tramaGPS[indiceU1RX_1] == 0x2C){
 	MOV.B	W3, W0
-;Digitalizador.c,1174 :: 		}
+;Digitalizador.c,1167 :: 		}
 L_interruptU1RX121:
-;Digitalizador.c,1166 :: 		for (indiceU1RX_1 = 50; indiceU1RX_1 < 60; indiceU1RX_1++){
+;Digitalizador.c,1159 :: 		for (indiceU1RX_1 = 50; indiceU1RX_1 < 60; indiceU1RX_1++){
 ; indiceU1RX_1 start address is: 0 (W0)
 ; indiceU1RX_1 start address is: 6 (W3)
 	ADD.B	W0, #1, W3
 ; indiceU1RX_1 end address is: 0 (W0)
-;Digitalizador.c,1175 :: 		}
+;Digitalizador.c,1168 :: 		}
 ; indiceU1RX_1 end address is: 6 (W3)
 	GOTO	L_interruptU1RX118
 L_interruptU1RX119:
-;Digitalizador.c,1178 :: 		horaLongGPS = RecuperarHoraGPS(datosGPS);
+;Digitalizador.c,1171 :: 		horaLongGPS = RecuperarHoraGPS(datosGPS);
 	MOV	#lo_addr(_datosGPS), W10
 	CALL	_RecuperarHoraGPS
 	MOV	W0, _horaLongGPS
 	MOV	W1, _horaLongGPS+2
-;Digitalizador.c,1179 :: 		fechaLongGPS = RecuperarFechaGPS(datosGPS);
+;Digitalizador.c,1172 :: 		fechaLongGPS = RecuperarFechaGPS(datosGPS);
 	MOV	#lo_addr(_datosGPS), W10
 	CALL	_RecuperarFechaGPS
 	MOV	W0, _fechaLongGPS
 	MOV	W1, _fechaLongGPS+2
-;Digitalizador.c,1183 :: 		if (isComuGPS == false) {
+;Digitalizador.c,1176 :: 		if (isComuGPS == false) {
 	MOV	#lo_addr(_isComuGPS), W0
 	MOV.B	[W0], W0
 	CP.B	W0, #0
 	BRA Z	L__interruptU1RX258
 	GOTO	L_interruptU1RX125
 L__interruptU1RX258:
-;Digitalizador.c,1184 :: 		isComuGPS = true;
+;Digitalizador.c,1177 :: 		isComuGPS = true;
 	MOV	#lo_addr(_isComuGPS), W1
 	MOV.B	#1, W0
 	MOV.B	W0, [W1]
-;Digitalizador.c,1189 :: 		isRecTiempoGPS = true;
+;Digitalizador.c,1182 :: 		isRecTiempoGPS = true;
 	MOV	#lo_addr(_isRecTiempoGPS), W1
 	MOV.B	#1, W0
 	MOV.B	W0, [W1]
-;Digitalizador.c,1207 :: 		horaLongRTC = horaLongGPS;
+;Digitalizador.c,1200 :: 		horaLongRTC = horaLongGPS;
 	MOV	_horaLongGPS, W0
 	MOV	_horaLongGPS+2, W1
 	MOV	W0, _horaLongRTC
 	MOV	W1, _horaLongRTC+2
-;Digitalizador.c,1208 :: 		fechaLongRTC = fechaLongGPS;
+;Digitalizador.c,1201 :: 		fechaLongRTC = fechaLongGPS;
 	MOV	_fechaLongGPS, W0
 	MOV	_fechaLongGPS+2, W1
 	MOV	W0, _fechaLongRTC
 	MOV	W1, _fechaLongRTC+2
-;Digitalizador.c,1209 :: 		isActualizarRTC = true;
+;Digitalizador.c,1202 :: 		isActualizarRTC = true;
 	MOV	#lo_addr(_isActualizarRTC), W1
 	MOV.B	#1, W0
 	MOV.B	W0, [W1]
-;Digitalizador.c,1212 :: 		U1RXIE_bit = 0;
+;Digitalizador.c,1205 :: 		U1RXIE_bit = 0;
 	BCLR	U1RXIE_bit, BitPos(U1RXIE_bit+0)
-;Digitalizador.c,1213 :: 		}
+;Digitalizador.c,1206 :: 		}
 L_interruptU1RX125:
-;Digitalizador.c,1217 :: 		if ((horaLongGPS % 3600) == 0) {
+;Digitalizador.c,1210 :: 		if ((horaLongGPS % 3600) == 0) {
 	MOV	#3600, W2
 	MOV	#0, W3
 	MOV	_horaLongGPS, W0
@@ -2560,46 +2556,46 @@ L_interruptU1RX125:
 	BRA Z	L__interruptU1RX259
 	GOTO	L_interruptU1RX126
 L__interruptU1RX259:
-;Digitalizador.c,1218 :: 		LED = ~LED;
-	BTG	LATB0_bit, BitPos(LATB0_bit+0)
-;Digitalizador.c,1223 :: 		isRecTiempoGPS = true;
+;Digitalizador.c,1211 :: 		LED = ~LED;
+	BTG	LATB12_bit, BitPos(LATB12_bit+0)
+;Digitalizador.c,1216 :: 		isRecTiempoGPS = true;
 	MOV	#lo_addr(_isRecTiempoGPS), W1
 	MOV.B	#1, W0
 	MOV.B	W0, [W1]
-;Digitalizador.c,1234 :: 		horaLongRTC = horaLongGPS;
+;Digitalizador.c,1227 :: 		horaLongRTC = horaLongGPS;
 	MOV	_horaLongGPS, W0
 	MOV	_horaLongGPS+2, W1
 	MOV	W0, _horaLongRTC
 	MOV	W1, _horaLongRTC+2
-;Digitalizador.c,1235 :: 		fechaLongRTC = fechaLongGPS;
+;Digitalizador.c,1228 :: 		fechaLongRTC = fechaLongGPS;
 	MOV	_fechaLongGPS, W0
 	MOV	_fechaLongGPS+2, W1
 	MOV	W0, _fechaLongRTC
 	MOV	W1, _fechaLongRTC+2
-;Digitalizador.c,1236 :: 		isActualizarRTC = true;
+;Digitalizador.c,1229 :: 		isActualizarRTC = true;
 	MOV	#lo_addr(_isActualizarRTC), W1
 	MOV.B	#1, W0
 	MOV.B	W0, [W1]
-;Digitalizador.c,1239 :: 		U1RXIE_bit = 0;
+;Digitalizador.c,1232 :: 		U1RXIE_bit = 0;
 	BCLR	U1RXIE_bit, BitPos(U1RXIE_bit+0)
-;Digitalizador.c,1240 :: 		}
+;Digitalizador.c,1233 :: 		}
 L_interruptU1RX126:
-;Digitalizador.c,1241 :: 		}
+;Digitalizador.c,1234 :: 		}
 L_interruptU1RX114:
-;Digitalizador.c,1244 :: 		banTIGPS = 0;
+;Digitalizador.c,1237 :: 		banTIGPS = 0;
 	MOV	#lo_addr(_banTIGPS), W1
 	CLR	W0
 	MOV.B	W0, [W1]
-;Digitalizador.c,1245 :: 		banTCGPS = 0;
+;Digitalizador.c,1238 :: 		banTCGPS = 0;
 	MOV	#lo_addr(_banTCGPS), W1
 	CLR	W0
 	MOV.B	W0, [W1]
-;Digitalizador.c,1246 :: 		indice_gps = 0;
+;Digitalizador.c,1239 :: 		indice_gps = 0;
 	CLR	W0
 	MOV	W0, _indice_gps
-;Digitalizador.c,1247 :: 		}
+;Digitalizador.c,1240 :: 		}
 L_interruptU1RX113:
-;Digitalizador.c,1248 :: 		}
+;Digitalizador.c,1241 :: 		}
 L_end_interruptU1RX:
 	POP	W10
 	MOV	#26, W0

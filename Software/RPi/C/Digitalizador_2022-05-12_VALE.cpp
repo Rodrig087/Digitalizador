@@ -146,7 +146,7 @@ unsigned char contadorTimeOutGPS = 0;
 // Vector para almacenar los datos recibidos por SPI y que se van a guardar en el archivo de texto
 // Se guardan en el archivo cada segundo, entonces el total de datos es fsample*numBytesPorMuestra + numBytesTiempoToRec
 //const unsigned int totalDatosPorMin = 60*(fsample*numBytesPorMuestra) + numBytesFechaMasHoraMSB + numBytesHoraToRec;
-const unsigned int totalDatosPorMin = 60*(fsample*numBytesPorMuestra);
+const unsigned int totalDatosPorMin = 60*(fsample*numBytesPorMuestra); //60*(100*5)=30000
 
 // Declara el vector para recibir los datos con memoria dinámica, en el caso de que no se conozca la dimension
 // Asi ptrVectorDatos apunta a la direccion inicial del vector
@@ -461,6 +461,8 @@ void ObtenerOperacion () {
 // Metodo para recibir los bytes de un muestreo
 //*************************************************************************************************
 void RecibirBytesMuestra (bool incluyeTiempo) {
+	
+	
 	// Indice for para este metodo
 	unsigned int indiceForRBM;
     // Variable para almacenar el dato recibido por el SPI
@@ -554,7 +556,8 @@ void RecibirBytesMuestra (bool incluyeTiempo) {
 
     // Si se ha recibido tambien el tiempo
     if (incluyeTiempo == true) {
-        // Si el contador de datos del vector para guardar en el archivo de texto es
+        		
+		// Si el contador de datos del vector para guardar en el archivo de texto es
         // diferente al total de datos por minuto, significa que hubo algun error durante ese minut0
         if (contadorDatosToSave != totalDatosPorMin) {
             cout << "Numero de datos por minuto diferente " << to_string(contadorDatosToSave) << endl;
@@ -627,7 +630,7 @@ void RecibirBytesMuestra (bool incluyeTiempo) {
     // Analiza un posible error, si no se recibe el tiempo y ya se ha superado el numero de datos
     } else {
 //        cout << "NumDatos " << contadorDatos << endl;
-        if (contadorDatosToSave > (totalDatosPorMin - numMuestrasEnvio)) {
+		if (contadorDatosToSave > (totalDatosPorMin - numMuestrasEnvio)) {
             cout << "Se ha superado el numero de datos sin tiempo " << to_string(contadorDatosToSave) << endl;
             cout << "Fecha Long " << to_string(fechaLongDSPIC) << " Hora Long " << to_string(horaLongDSPIC) << endl;
 
@@ -670,7 +673,9 @@ void GuardarDatosEnArchivo (unsigned char *vectorDatosGuardar, unsigned int numD
     // Tiempo de inicio del envio
 //    auto start = chrono::high_resolution_clock::now();
     // Variable que almacena los datos que se han guardado
-    unsigned int datosGuardadosFwrite;
+    
+	cout << "Guardando... " << endl;
+	unsigned int datosGuardadosFwrite;
     // Vector para almacenar YY, MM, DD
 //    unsigned char tiempoLocal[3];
 

@@ -20,7 +20,7 @@ warning: 910	1505	Suspicious pointer conversion	Digitalizador.c
 hint: 0	1004	interrupt handler (ExternalInterrupt0_GPS at 0x0014)	Digitalizador.c
 hint: 0	1004	interrupt handler (ExternalInterrupt2_RTC at 0x0042)	Digitalizador.c
 hint: 0	1004	interrupt handler (interruptU1RX at 0x0026)	Digitalizador.c
-diagnostics: 1248	123	Compiled Successfully	Digitalizador.c
+diagnostics: 1241	123	Compiled Successfully	Digitalizador.c
 warning: 252	1519	Logical expression is always: 'False'	Digitalizador.c
 hint: 75	1164	Variable 'fechaGPS' has been eliminated by optimizer	Digitalizador.c
 hint: 114	1164	Variable 'horaGPS' has been eliminated by optimizer	Digitalizador.c
@@ -32,11 +32,11 @@ hint: 151	1164	Variable 'anio' has been eliminated by optimizer	Digitalizador.c
 hint: 152	1164	Variable 'fechaRTC' has been eliminated by optimizer	Digitalizador.c
 hint: 291	1164	Variable 'valDummyRec' has been eliminated by optimizer	Digitalizador.c
 hint: 509	1164	Variable 'valDummyRec' has been eliminated by optimizer	Digitalizador.c
-diagnostics: 0	127	All files Compiled in 110 ms	 
+diagnostics: 0	127	All files Compiled in 109 ms	 
 hint: 0	1144	Used RX (bytes): 32 (100%)   Free RX (bytes): 0 (0%)	Used RX (bytes): 32 (100%)   Free RX (bytes): 0 (0%)
 hint: 0	1144	Static RAM (bytes): 509   Dynamic RAM (bytes): 1538	Static RAM (bytes): 509   Dynamic RAM (bytes): 1538
-hint: 0	1144	Used ROM (bytes): 4118 (25%)  Free ROM (bytes): 12266 (75%)	Used ROM (bytes): 4118 (25%)  Free ROM (bytes): 12266 (75%)
+hint: 0	1144	Used ROM (bytes): 4314 (26%)  Free ROM (bytes): 12070 (74%)	Used ROM (bytes): 4314 (26%)  Free ROM (bytes): 12070 (74%)
 diagnostics: 0	125	Project Linked Successfully	Digitalizador.mcpds
-diagnostics: 0	128	Linked in 46 ms	 
+diagnostics: 0	128	Linked in 31 ms	 
 diagnostics: 0	129	Project 'Digitalizador.mcpds' completed: 187 ms	 
-diagnostics: 0	103	Finished successfully: 10 jun. 2022, 19:45:39	Digitalizador.mcpds
+diagnostics: 0	103	Finished successfully: 13 jun. 2022, 18:27:33	Digitalizador.mcpds

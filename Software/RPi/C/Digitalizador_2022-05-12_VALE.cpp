@@ -132,8 +132,6 @@ unsigned int contadorDatosToSave = 0;
 // Fin Declaracion de constantes
 //*************************************************************************************************
 
-
-
 //*************************************************************************************************
 // Declaracion de variables
 //*************************************************************************************************
@@ -146,7 +144,7 @@ unsigned char contadorTimeOutGPS = 0;
 // Vector para almacenar los datos recibidos por SPI y que se van a guardar en el archivo de texto
 // Se guardan en el archivo cada segundo, entonces el total de datos es fsample*numBytesPorMuestra + numBytesTiempoToRec
 //const unsigned int totalDatosPorMin = 60*(fsample*numBytesPorMuestra) + numBytesFechaMasHoraMSB + numBytesHoraToRec;
-const unsigned int totalDatosPorMin = 60*(fsample*numBytesPorMuestra); //60*(100*5)=30000
+const unsigned int totalDatosPorMin = 60 * (fsample * numBytesPorMuestra); //60*(100*5)=30000
 
 // Declara el vector para recibir los datos con memoria dinámica, en el caso de que no se conozca la dimension
 // Asi ptrVectorDatos apunta a la direccion inicial del vector
@@ -161,7 +159,10 @@ unsigned char vectorBytesTimeDSPIC[8];
 unsigned char vectorTimeDSPIC[6];
 
 // Objeto tipo File para el archivo donde se guardan los datos
-FILE * objFile;
+FILE *objFile;
+// Objeto tipo File para el archivo donde se guardan las lecturas instantaneas del canal
+FILE *fTmpCanal;
+
 // String con el path donde se van a crear los archivos, tambien la extension y el formato del nombre de archivo
 string path = "/home/rsa/Resultados/RegistroContinuo/", extFile = ".dat", nombreArchivo = "YYMMDDhhmmss";
 // Declara el ptrArchivoCompleto con memoria dinamica, este contendra el path + nombreArchivo + extFile
@@ -175,8 +176,6 @@ unsigned long fechaLongDSPIC, horaLongDSPIC, fechaAnteriorComp = 0;
 // Fin Declaracion de variables
 //*************************************************************************************************
 
-
-
 //*************************************************************************************************
 // Declaracion de funciones
 //*************************************************************************************************
@@ -184,77 +183,84 @@ int Setup();
 void ResetearDSPIC();
 void ObtenerOperacion();
 void RecibirBytesMuestra(bool incluyeTiempo);
-void GuardarDatosEnArchivo (unsigned char *vectorDatosGuardar, unsigned int numDatosGuardar);
+void GuardarDatosEnArchivo(unsigned char *vectorDatosGuardar, unsigned int numDatosGuardar);
+void GuardarDatosCanal(unsigned int valCH1, unsigned int valCH2, unsigned int valCH3);
 void IniciarMuestreo();
-void EnviarTiempoLocal ();
-void PasarTiempoToVector (unsigned long longHora, unsigned long longFecha, unsigned char *tramaTiempoSistema);
-string PasarHoraLongToString (unsigned long longHora);
+void EnviarTiempoLocal();
+void PasarTiempoToVector(unsigned long longHora, unsigned long longFecha, unsigned char *tramaTiempoSistema);
+string PasarHoraLongToString(unsigned long longHora);
 bool ObtenerTiempoDSPIC();
 //*************************************************************************************************
 // Fin Declaracion de funciones
 //*************************************************************************************************
 
-
-
 //*************************************************************************************************
 // Metodo principal
 //*************************************************************************************************
-int main (void) {
-	int resultConf;
-	bool resultTimeDSPIC = false;
+int main(void)
+{
+    int resultConf;
+    bool resultTimeDSPIC = false;
     unsigned short dummyRec;
 
-	cout << "Inicio Programa" << endl;
+    cout << "Inicio Programa" << endl;
 
-	// Llama al metodo para configurar la libreria wiringPi, la BCM2835 y el SPI
-	// Si devuelve 1 significa que existio algun error
-	resultConf = Setup();
-	if (resultConf == 1) {
-		return 1;
-	}
-	// Retardo para establecer las configuraciones y esperar que el dsPIC tambien se configure
-	delay(10000);
+    // Llama al metodo para configurar la libreria wiringPi, la BCM2835 y el SPI
+    // Si devuelve 1 significa que existio algun error
+    resultConf = Setup();
+    if (resultConf == 1)
+    {
+        return 1;
+    }
+    // Retardo para establecer las configuraciones y esperar que el dsPIC tambien se configure
+    delay(10000);
 
     // En el metodo Setup ya se resetea el dsPIC y debe responder
     // pero en el caso de que aun no este conectado, lo resetea de nuevo
-    while (is_dsPIC_Connected == false) {
+    while (is_dsPIC_Connected == false)
+    {
         cout << "El dsPIC esta desconectado, reiniciando..." << endl;
         ResetearDSPIC();
         delay(10000);
     }
 
     // Tiempo de inicio del envio
-//    auto start = chrono::high_resolution_clock::now();
+    //    auto start = chrono::high_resolution_clock::now();
 
     // Una vez que se ha conectado y configurado el dsPIC
     // Envia el tiempo actual de la RPi. Esto es util en el caso de que no se conecte el GPS
-    if (is_GPS_Connected == false) {
+    if (is_GPS_Connected == false)
+    {
         EnviarTiempoLocal();
         delay(1000);
     }
 
     // Obtiene el tiempo que ha pasado desde el inicio del metodo
-//    auto elapsed = chrono::high_resolution_clock::now() - start;
-//    long long microseconds = chrono::duration_cast < chrono::microseconds > (elapsed).count();
-//    cout << "Tiempo en us: " << to_string(microseconds) << endl;
+    //    auto elapsed = chrono::high_resolution_clock::now() - start;
+    //    long long microseconds = chrono::duration_cast < chrono::microseconds > (elapsed).count();
+    //    cout << "Tiempo en us: " << to_string(microseconds) << endl;
 
     // Espera un tiempo para que se conecte el GPS (30 segundos aproximadamente), si en este
     // tiempo no se conecta el GPS, igual comienza la adquisicion aunque sera con el RTC
-    if (is_GPS_Connected == false) {
+    if (is_GPS_Connected == false)
+    {
         cout << "Esperando conexion de GPS..." << endl;
     }
-    while (is_GPS_Connected == false) {
+    while (is_GPS_Connected == false)
+    {
         delay(1000);
-        contadorTimeOutGPS ++;
+        contadorTimeOutGPS++;
         // Si el contador supera el time out, termina el break para enviar los parametros de comienzo de muestreo
-        if (contadorTimeOutGPS >= TIME_OUT_GPS) {
+        if (contadorTimeOutGPS >= TIME_OUT_GPS)
+        {
             contadorTimeOutGPS = 0;
             cout << "El GPS no se ha conectado" << endl;
             break;
         }
     }
 
-    while (resultTimeDSPIC == false) {
+    while (resultTimeDSPIC == false)
+    {
         delay(1000);
         // Solicita el tiempo al dsPIC, en caso de que el GPS no se ha conectado seria el enviado por la RPi
         // y controlado por el RTC. Caso contrario el del GPS
@@ -263,40 +269,43 @@ int main (void) {
         resultTimeDSPIC = ObtenerTiempoDSPIC();
     }
 
+    //Prueba
+    //GuardarDatosCanal(333, 666, 999);
+
     // Una vez recibido el tiempo, llama al metodo para enviar los comandos de inicio de muestreo
     IniciarMuestreo();
 
-
-	// Bucle
-	while (1) {
+    // Bucle
+    while (1)
+    {
         delay(1000);
-	}
+    }
 
-	// Finaliza el SPI y la libreria BCM2835
-	bcm2835_spi_end();
-	bcm2835_close();
+    // Finaliza el SPI y la libreria BCM2835
+    bcm2835_spi_end();
+    bcm2835_close();
 
-	return 0;
+    return 0;
 }
 //*************************************************************************************************
 // Fin Metodo principal
 //*************************************************************************************************
 
-
-
 //*************************************************************************************************
 // Metodo para realizar las configuracion de variables, pines de entrada y salida, interrupciones,
 // y comunicacion SPI
 //*************************************************************************************************
-int Setup () {
+int Setup()
+{
     unsigned short dummyVal;
 
-	// Inicio de la libreria wiringPi
-	if (wiringPiSetup() < 0) {
-		cout << "Error en la libreria WiringPi" << endl;
-		return 1;
-	}
-	cout << "Libreria wiringPi iniciada correctamente" << endl;
+    // Inicio de la libreria wiringPi
+    if (wiringPiSetup() < 0)
+    {
+        cout << "Error en la libreria WiringPi" << endl;
+        return 1;
+    }
+    cout << "Libreria wiringPi iniciada correctamente" << endl;
 
     // Configuracion de los pines de entrada y salida
     // Pin del LED de prueba como salida
@@ -313,35 +322,36 @@ int Setup () {
     // Llama al metodo para resetear el dsPIC
     ResetearDSPIC();
 
-
     // Pin de interrupcion del PIC como entrada
     pinMode(PIN_INT_PIC, INPUT);
     // Configura la interrupcion en el flanco ascendente y llama a la funcion ObtenerOperacion
     wiringPiISR(PIN_INT_PIC, INT_EDGE_RISING, ObtenerOperacion);
 
-	// Reinicia el modulo SPI
-	system("sudo rmmod  spi_bcm2835");
-	bcm2835_delayMicroseconds(500);
-	system("sudo modprobe spi_bcm2835");
+    // Reinicia el modulo SPI
+    system("sudo rmmod  spi_bcm2835");
+    bcm2835_delayMicroseconds(500);
+    system("sudo modprobe spi_bcm2835");
 
     // Inicia la libreria bcm2835 y el SPI
-	if (!bcm2835_init()){
-		cout << ("bcm2835_init fallo. Ejecuto el programa como root?\n") << endl;
-		return 1;
+    if (!bcm2835_init())
+    {
+        cout << ("bcm2835_init fallo. Ejecuto el programa como root?\n") << endl;
+        return 1;
     }
-    if (!bcm2835_spi_begin()){
-		cout << ("bcm2835_spi_begin fallo. Ejecuto el programa como root?\n") << endl;
-		return 1;
+    if (!bcm2835_spi_begin())
+    {
+        cout << ("bcm2835_spi_begin fallo. Ejecuto el programa como root?\n") << endl;
+        return 1;
     }
-	cout << "Libreria BCM2835 y SPI iniciados correctamente" << endl;
+    cout << "Libreria BCM2835 y SPI iniciados correctamente" << endl;
 
-	// Configuracion de parametros del SPI
+    // Configuracion de parametros del SPI
     bcm2835_spi_setBitOrder(BCM2835_SPI_BIT_ORDER_MSBFIRST);
     bcm2835_spi_setDataMode(BCM2835_SPI_MODE3);
-	// Clock divider RPi 2
-	//bcm2835_spi_setClockDivider(BCM2835_SPI_CLOCK_DIVIDER_32);
-	// Clock divider RPi 3
-	bcm2835_spi_setClockDivider(BCM2835_SPI_CLOCK_DIVIDER_64);
+    // Clock divider RPi 2
+    //bcm2835_spi_setClockDivider(BCM2835_SPI_CLOCK_DIVIDER_32);
+    // Clock divider RPi 3
+    bcm2835_spi_setClockDivider(BCM2835_SPI_CLOCK_DIVIDER_64);
     bcm2835_spi_set_speed_hz(FREQ_SPI);
     bcm2835_spi_chipSelect(BCM2835_SPI_CS0);
     bcm2835_spi_setChipSelectPolarity(BCM2835_SPI_CS0, LOW);
@@ -349,17 +359,19 @@ int Setup () {
     // Asigna un bloque de memoria a los vectores
     // Para el vector que recibe los datos por el SPI
     // Dimension en funcion del numero de bytes que se pueden recibir en un muestreo + los 3 bytes de la hora
-//    ptrVectorDatosToRec = new (nothrow) unsigned char [numMuestrasEnvio + numBytesHoraToRec];
-    ptrVectorDatosToRec = new (nothrow) unsigned char [numMuestrasEnvio];
+    //    ptrVectorDatosToRec = new (nothrow) unsigned char [numMuestrasEnvio + numBytesHoraToRec];
+    ptrVectorDatosToRec = new (nothrow) unsigned char[numMuestrasEnvio];
     // Nothrow permite determinar si se ha asignado correctamente la memoria o no
-    if (ptrVectorDatosToRec == nullptr) {
+    if (ptrVectorDatosToRec == nullptr)
+    {
         cout << "Error en asignacion de memoria ptrVectorDatosToRec " << endl;
     }
 
     // Para el vector que almacena los datos recibidos y guarda en el archivo de texto cada minuto
-    ptrVectorDatosToSave = new (nothrow) unsigned char [totalDatosPorMin];
+    ptrVectorDatosToSave = new (nothrow) unsigned char[totalDatosPorMin];
     // Nothrow permite determinar si se ha asignado correctamente la memoria o no
-    if (ptrVectorDatosToSave == nullptr) {
+    if (ptrVectorDatosToSave == nullptr)
+    {
         cout << "Error en asignacion de memoria ptrVectorDatosToSave " << endl;
     }
 
@@ -367,13 +379,14 @@ int Setup () {
     cout << "Configuracion Completa" << endl;
 
     // Devuelve 0, que significa todo Ok
-	return 0;
+    return 0;
 }
 //*************************************************************************************************
 // Fin Metodo de COnfiguraciones
 //*************************************************************************************************
 
-void ResetearDSPIC () {
+void ResetearDSPIC()
+{
     // Genera un pulso para resetear el dsPIC
     digitalWrite(PIN_MCLR, HIGH);
     delay(100);
@@ -382,89 +395,98 @@ void ResetearDSPIC () {
     digitalWrite(PIN_MCLR, HIGH);
 }
 
-
 //*************************************************************************************************
 // Metodo para obtener la operacion que envia el dsPIC, este metodo se llama con la interrupcion del
- // PIN_INT_PIC
+// PIN_INT_PIC
 //*************************************************************************************************
-void ObtenerOperacion () {
+void ObtenerOperacion()
+{
     unsigned short byteRecSPI;
 
     // Tiempo de inicio del envio
-//    auto start = chrono::high_resolution_clock::now();
+    //    auto start = chrono::high_resolution_clock::now();
 
-//    cout << "Solicitud dsPIC " << endl;
+    //    cout << "Solicitud dsPIC " << endl;
 
     // Debido a que en el dsPIC se espera 20us con el pin en alto, aqui tambien se hace un delay
-//    delayMicroseconds(15);
+    //    delayMicroseconds(15);
     delayMicroseconds(30);
 
     // Cambia el estado del LED
     digitalWrite(PIN_LED_2, !digitalRead(PIN_LED_2));
 
     // Envia el byte de inicio de obtener operacion
-	bcm2835_spi_transfer(INI_OBT_OPE);
-	bcm2835_delayMicroseconds(TIEMPO_SPI);
-	// Recibe la operacion que desea realizar el micro
-	byteRecSPI = bcm2835_spi_transfer(DUMMY_BYTE);
-	bcm2835_delayMicroseconds(TIEMPO_SPI);
-	// Envia el byte de fin de operacion
-	bcm2835_spi_transfer(FIN_OBT_OPE);
+    bcm2835_spi_transfer(INI_OBT_OPE);
+    bcm2835_delayMicroseconds(TIEMPO_SPI);
+    // Recibe la operacion que desea realizar el micro
+    byteRecSPI = bcm2835_spi_transfer(DUMMY_BYTE);
+    bcm2835_delayMicroseconds(TIEMPO_SPI);
+    // Envia el byte de fin de operacion
+    bcm2835_spi_transfer(FIN_OBT_OPE);
     bcm2835_delayMicroseconds(TIEMPO_SPI);
 
-	// Aqui se selecciona el tipo de operacion que se va a ejecutar
+    // Aqui se selecciona el tipo de operacion que se va a ejecutar
     // Si se ha recibido que el dsPIC se ha conectado y configurado
-    if (byteRecSPI == DSPIC_CONEC) {
+    if (byteRecSPI == DSPIC_CONEC)
+    {
         cout << "Recibido dsPIC_CONEC " << DSPIC_CONEC << endl;
         // Actualiza el estado de la bandera dsPIC
         is_dsPIC_Connected = true;
-    // Si se ha recibido GPS ok
-    } else if (byteRecSPI == GPS_OK) {
+        // Si se ha recibido GPS ok
+    }
+    else if (byteRecSPI == GPS_OK)
+    {
         cout << "Recibido GPS_OK " << GPS_OK << endl;
         // Actualiza el estado de la bandera del GPS
         is_GPS_Connected = true;
-    // Si se ha recibido enviar tiempo del sistema desde el dsPIC
-    } else if (byteRecSPI == ENV_TIME_SIS) {
+        // Si se ha recibido enviar tiempo del sistema desde el dsPIC
+    }
+    else if (byteRecSPI == ENV_TIME_SIS)
+    {
         cout << "Recibido ENV_TIME_SIS " << ENV_TIME_SIS << endl;
         // Llama al metodo para obtener el tiempo del dsPIC
         ObtenerTiempoDSPIC();
-    // Si se ha recibido el envio de los bytes de varios muestreos desde el dsPIC
-    } else if (byteRecSPI == ENV_MUESTRAS) {
-//        cout << "Recibido ENV_MUESTRAS " << ENV_MUESTRAS << endl;
+        // Si se ha recibido el envio de los bytes de varios muestreos desde el dsPIC
+    }
+    else if (byteRecSPI == ENV_MUESTRAS)
+    {
+        //        cout << "Recibido ENV_MUESTRAS " << ENV_MUESTRAS << endl;
         // Llama al metodo para obtener los bytes
         // Se envia false que indica que no incluye tiempo
         RecibirBytesMuestra(false);
-    // Si se ha recibido el envio de los bytes de varios muestreos junto con el tiempo desde el dsPIC
-    } else if (byteRecSPI == ENV_MUESTRAS_TIME) {
-//        cout << "Recibido ENV_MUESTRAS_TIME " << ENV_MUESTRAS_TIME << endl;
+        // Si se ha recibido el envio de los bytes de varios muestreos junto con el tiempo desde el dsPIC
+    }
+    else if (byteRecSPI == ENV_MUESTRAS_TIME)
+    {
+        //        cout << "Recibido ENV_MUESTRAS_TIME " << ENV_MUESTRAS_TIME << endl;
         // Llama al metodo para obtener los bytes de los muestreos y del tiempo
         // Se envia true que significa que incluye el tiempo
         RecibirBytesMuestra(true);
-    } else {
+    }
+    else
+    {
         cout << "Otra operacion recibida " << byteRecSPI << endl;
     }
 
     // Obtiene el tiempo que ha pasado desde el inicio del metodo
-//    auto elapsed = chrono::high_resolution_clock::now() - start;
-//    long long microseconds = chrono::duration_cast < chrono::microseconds > (elapsed).count();
-//    if (microseconds > 1000) {
-//        cout << "Tiempo de envio en us: " << to_string(microseconds) << endl;
-//    }
+    //    auto elapsed = chrono::high_resolution_clock::now() - start;
+    //    long long microseconds = chrono::duration_cast < chrono::microseconds > (elapsed).count();
+    //    if (microseconds > 1000) {
+    //        cout << "Tiempo de envio en us: " << to_string(microseconds) << endl;
+    //    }
 }
 //*************************************************************************************************
 // Fin Metodo Obtener Operacion
 //*************************************************************************************************
 
-
-
 //*************************************************************************************************
 // Metodo para recibir los bytes de un muestreo
 //*************************************************************************************************
-void RecibirBytesMuestra (bool incluyeTiempo) {
-	
-	
-	// Indice for para este metodo
-	unsigned int indiceForRBM;
+void RecibirBytesMuestra(bool incluyeTiempo)
+{
+
+    // Indice for para este metodo
+    unsigned int indiceForRBM;
     // Variable para almacenar el dato recibido por el SPI
     unsigned char dataRecSPI;
     // Variable que indica cuantos bytes se deben recibir
@@ -476,7 +498,7 @@ void RecibirBytesMuestra (bool incluyeTiempo) {
     unsigned char vectorDatosHoraToRec[6];
     // Contador para recibir los bytes, siempre se resetea al valor de numBytesHoraToRec porque en las
     // primeras posiciones se guarda el tiempo (siempre que exista tiempo)
-//    unsigned int contadorDatosToRec = numBytesHoraToRec;
+    //    unsigned int contadorDatosToRec = numBytesHoraToRec;
     unsigned int contadorDatosToRec = 0;
 
     // Variables para obtener los valores del primer muestreo y comprobar si son logicos
@@ -484,57 +506,64 @@ void RecibirBytesMuestra (bool incluyeTiempo) {
     unsigned int valCH1, valCH2, valCH3;
 
     // Variables unicamente para comparacion
-//    static unsigned long horaAnteriorComp = 0,
+    //    static unsigned long horaAnteriorComp = 0,
     static unsigned long horaAnteriorComp = 0;
 
     // Cambia el estado del LED
     digitalWrite(PIN_LED, !digitalRead(PIN_LED));
 
     // Dependiendo si se desea o no recibir el tiempo, se define el numero de bytes a recibir
-    if (incluyeTiempo == true) {
+    if (incluyeTiempo == true)
+    {
         numDatosToRec = numMuestrasEnvio + numBytesHoraToRec;
-    } else {
+    }
+    else
+    {
         numDatosToRec = numMuestrasEnvio;
     }
 
-	// Envia el delimitador de inicio de trama para recibir los bytes de un muestreo del dsPIC
-	bcm2835_spi_transfer(INI_REC_MUES);
+    // Envia el delimitador de inicio de trama para recibir los bytes de un muestreo del dsPIC
+    bcm2835_spi_transfer(INI_REC_MUES);
     bcm2835_delayMicroseconds(TIEMPO_SPI);
 
     // Guarda los bytes de la hora y fecha tipo long devuelta por el dsPIC
-	for (indiceForRBM = 0; indiceForRBM < numDatosToRec; indiceForRBM++) {
+    for (indiceForRBM = 0; indiceForRBM < numDatosToRec; indiceForRBM++)
+    {
         dataRecSPI = bcm2835_spi_transfer(DUMMY_BYTE);
         bcm2835_delayMicroseconds(TIEMPO_SPI);
 
         // Si el indice es menor que el numMuestrasEnvio, significa que es dato
-        if (indiceForRBM < numMuestrasEnvio) {
+        if (indiceForRBM < numMuestrasEnvio)
+        {
             ptrVectorDatosToRec[contadorDatosToRec] = dataRecSPI;
-            contadorDatosToRec ++;
-        // Caso contrario significa dato de tiempo, esto implica que se termino de recibir los datos del segundo en cuestion
-        } else {
-//            ptrVectorDatosToRec[indiceDatosTime] = dataRecSPI;
+            contadorDatosToRec++;
+            // Caso contrario significa dato de tiempo, esto implica que se termino de recibir los datos del segundo en cuestion
+        }
+        else
+        {
+            //            ptrVectorDatosToRec[indiceDatosTime] = dataRecSPI;
             vectorDatosHoraToRec[indiceDatosTime] = dataRecSPI;
-            indiceDatosTime ++;
+            indiceDatosTime++;
         }
     }
 
     // Envia el delimitador de final de trama para recibir los bytes de un muestreo del dsPIC
-	bcm2835_spi_transfer(FIN_REC_MUES);
+    bcm2835_spi_transfer(FIN_REC_MUES);
     bcm2835_delayMicroseconds(TIEMPO_SPI);
 
-//    if (contadorDatos >= (totalDatosPorSec - numBytesTiempo)) {
-//        GuardarDatosEnArchivo(ptrVectorDatos, contadorDatos);
-//        contadorDatos = 0;
-//    }
+    //    if (contadorDatos >= (totalDatosPorSec - numBytesTiempo)) {
+    //        GuardarDatosEnArchivo(ptrVectorDatos, contadorDatos);
+    //        contadorDatos = 0;
+    //    }
 
     // Obtiene los valores de ganancia y de los 3 canales del primer muestreo. Comienza en
     // el indice indiceInicioVectorDatos + numBytesTiempoToRec porque los primeros valores son del tiempo
-//    unsigned char indiceValores = numBytesHoraToRec;
+    //    unsigned char indiceValores = numBytesHoraToRec;
     unsigned char indiceValores = 0;
-//    ganancia = ptrVectorDatos[indiceValores];
-//    valCH1 = (ptrVectorDatos[indiceValores + 1] << 8) | ptrVectorDatos[indiceValores + 2];
-//    valCH2 = (ptrVectorDatos[indiceValores + 3] << 8) | ptrVectorDatos[indiceValores + 4];
-//    valCH3 = (ptrVectorDatos[indiceValores + 5] << 8) | ptrVectorDatos[indiceValores + 6];
+    //    ganancia = ptrVectorDatos[indiceValores];
+    //    valCH1 = (ptrVectorDatos[indiceValores + 1] << 8) | ptrVectorDatos[indiceValores + 2];
+    //    valCH2 = (ptrVectorDatos[indiceValores + 3] << 8) | ptrVectorDatos[indiceValores + 4];
+    //    valCH3 = (ptrVectorDatos[indiceValores + 5] << 8) | ptrVectorDatos[indiceValores + 6];
 
     // La ganancia corresponde a los 4 bits MSB del primer valor, entonces se elimina los 4 bits LSB
     ganancia = ptrVectorDatosToRec[indiceValores] >> 4;
@@ -544,22 +573,29 @@ void RecibirBytesMuestra (bool incluyeTiempo) {
     valCH2 = ((ptrVectorDatosToRec[indiceValores + 2] >> 4) << 8) | ptrVectorDatosToRec[indiceValores + 3];
     // EL canal 3 esta dividido: los 4 bits MSB en el tercer dato (parte LSB) y los 8 bits LSB en el quinto dato
     valCH3 = ((ptrVectorDatosToRec[indiceValores + 2] & 0X0F) << 8) | ptrVectorDatosToRec[indiceValores + 4];
-//    cout << "Gan " << to_string(ganancia) << " CH1 " << to_string(valCH1) << " CH2 " << to_string(valCH2) << " CH3 " << to_string(valCH3) << endl;
-
+    //    cout << "Gan " << to_string(ganancia) << " CH1 " << to_string(valCH1) << " CH2 " << to_string(valCH2) << " CH3 " << to_string(valCH3) << endl;
 
     // Comprueba que los valores sean logicos, la ganancia no puede ser mas de 15 y los datos no pueden ser mas de 4095
     // Si no es asi, significa falla en la comunicacion
-    if (ganancia > 15 || valCH1 > 4095 || valCH2 > 4095 || valCH3 > 4095) {
+    if (ganancia > 15 || valCH1 > 4095 || valCH2 > 4095 || valCH3 > 4095)
+    {
         cout << "Error datos " << endl;
         cout << "Gan " << to_string(ganancia) << " CH1 " << to_string(valCH1) << " CH2 " << to_string(valCH2) << " CH3 " << to_string(valCH3) << endl;
     }
+    else
+   
+    //Guarda los las lecturas de los canales en un arcivo de texto:
+    GuardarDatosCanal(valCH1, valCH2, valCH3);
+    
 
     // Si se ha recibido tambien el tiempo
-    if (incluyeTiempo == true) {
-        		
-		// Si el contador de datos del vector para guardar en el archivo de texto es
+    if (incluyeTiempo == true)
+    {
+
+        // Si el contador de datos del vector para guardar en el archivo de texto es
         // diferente al total de datos por minuto, significa que hubo algun error durante ese minut0
-        if (contadorDatosToSave != totalDatosPorMin) {
+        if (contadorDatosToSave != totalDatosPorMin)
+        {
             cout << "Numero de datos por minuto diferente " << to_string(contadorDatosToSave) << endl;
             unsigned long horaLongDSPIC_aux = (vectorDatosHoraToRec[0] << 16) | (vectorDatosHoraToRec[1] << 8) | vectorDatosHoraToRec[2];
             unsigned long fechaLongDSPIC_aux = (vectorDatosHoraToRec[3] << 16) | (vectorDatosHoraToRec[4] << 8) | vectorDatosHoraToRec[5];
@@ -574,20 +610,21 @@ void RecibirBytesMuestra (bool incluyeTiempo) {
         // Luego, se guardan los datos en el archivo
         GuardarDatosEnArchivo(ptrVectorDatosToSave, contadorDatosToSave);
         // Luego resetea el contador
-//        contadorDatosToSave = numBytesFechaMasHoraMSB + numBytesHoraToRec;
+        //        contadorDatosToSave = numBytesFechaMasHoraMSB + numBytesHoraToRec;
         contadorDatosToSave = 0;
 
         // LA HORA TIENE QUE ACTUALIZARSE AQUI Y NO ANTES POR LA CREACION DE LOS ARCHIVOS, de no hay desfase de un minuto
         // Pasa los 4 bytes de la hora a una sola variable tipo long, se desplazan los bytes a las posiciones
         // respectivas, primero va el byte MSB (desplazado 32 bits). Como el MSB siempre es 0 no se considera
-//        horaLongDSPIC = (ptrVectorDatosToRec[5] << 16) | (ptrVectorDatosToRec[6] << 8) | ptrVectorDatosToRec[7];
-//        horaLongDSPIC = (ptrVectorDatosToRec[0] << 16) | (ptrVectorDatosToRec[1] << 8) | ptrVectorDatosToRec[2];
+        //        horaLongDSPIC = (ptrVectorDatosToRec[5] << 16) | (ptrVectorDatosToRec[6] << 8) | ptrVectorDatosToRec[7];
+        //        horaLongDSPIC = (ptrVectorDatosToRec[0] << 16) | (ptrVectorDatosToRec[1] << 8) | ptrVectorDatosToRec[2];
         horaLongDSPIC = (vectorDatosHoraToRec[0] << 16) | (vectorDatosHoraToRec[1] << 8) | vectorDatosHoraToRec[2];
         fechaLongDSPIC = (vectorDatosHoraToRec[3] << 16) | (vectorDatosHoraToRec[4] << 8) | vectorDatosHoraToRec[5];
         cout << "Fecha Long " << to_string(fechaLongDSPIC) << " Hora Long " << to_string(horaLongDSPIC) << endl;
 
         // Analiza si hubo cambio de dia, con un margen de 4 minutos
-        if (fechaAnteriorComp != fechaLongDSPIC) {
+        if (fechaAnteriorComp != fechaLongDSPIC)
+        {
             // Actualiza la fecha anterior
             fechaAnteriorComp = fechaLongDSPIC;
             // En este caso significa que hay que crear un nuevo archivo de texto
@@ -595,12 +632,15 @@ void RecibirBytesMuestra (bool incluyeTiempo) {
         }
 
         // Si la hora es diferente con la que se tiene anteriormente significa que hubo un error
-        if ((horaAnteriorComp + 60) != horaLongDSPIC) {
+        if ((horaAnteriorComp + 60) != horaLongDSPIC)
+        {
             cout << "Fecha Long " << to_string(fechaLongDSPIC) << " Hora DIF Long " << to_string(horaLongDSPIC) << endl;
             // Iguala las horas para comparar en el proximo segundo
             horaAnteriorComp = horaLongDSPIC;
-        // Caso contrario todo ok y aumenta la referencia en 1 minuto
-        } else {
+            // Caso contrario todo ok y aumenta la referencia en 1 minuto
+        }
+        else
+        {
             horaAnteriorComp = horaAnteriorComp + 60;
         }
 
@@ -608,8 +648,9 @@ void RecibirBytesMuestra (bool incluyeTiempo) {
         // significa que hubo error en la recepcion de datos
         // La hora obviamente no puede ser mayor que 86400 y considera que la fecha no
         // puede ser mayor que el 31-dec-2099
-//        if (horaLongDSPIC <= 86400 && fechaLongDSPIC <= 991231) {
-        if (horaLongDSPIC <= 86400) {
+        //        if (horaLongDSPIC <= 86400 && fechaLongDSPIC <= 991231) {
+        if (horaLongDSPIC <= 86400)
+        {
             // Aqui se agregan tanto la fecha como la hora al vector de datos que se guardaran en el archivo
             // El byte MSB tanto de la fecha como de la hora, es 0
             // Primero la fecha
@@ -624,71 +665,79 @@ void RecibirBytesMuestra (bool incluyeTiempo) {
             vectorBytesTimeDSPIC[5] = vectorDatosHoraToRec[0];
             vectorBytesTimeDSPIC[6] = vectorDatosHoraToRec[1];
             vectorBytesTimeDSPIC[7] = vectorDatosHoraToRec[2];
-        } else {
+        }
+        else
+        {
             cout << "Error en Fecha " << fechaLongDSPIC << " y Hora " << horaLongDSPIC << endl;
         }
-    // Analiza un posible error, si no se recibe el tiempo y ya se ha superado el numero de datos
-    } else {
-//        cout << "NumDatos " << contadorDatos << endl;
-		if (contadorDatosToSave > (totalDatosPorMin - numMuestrasEnvio)) {
+        // Analiza un posible error, si no se recibe el tiempo y ya se ha superado el numero de datos
+    }
+    else
+    {
+        //        cout << "NumDatos " << contadorDatos << endl;
+        if (contadorDatosToSave > (totalDatosPorMin - numMuestrasEnvio))
+        {
             cout << "Se ha superado el numero de datos sin tiempo " << to_string(contadorDatosToSave) << endl;
             cout << "Fecha Long " << to_string(fechaLongDSPIC) << " Hora Long " << to_string(horaLongDSPIC) << endl;
 
             // Si toca crear un archivo nuevo y no se recibió el tiempo
             // Envia con el anterior. En este caso debería ser 0 porque ya
             // estariamos terminando el primer minuto de datos
-            if (isCrearNuevoArchivo == true) {
+            if (isCrearNuevoArchivo == true)
+            {
                 // Se guarda el tiempo, que corresponde al minuto anterior. Recordar que siempre
                 // se guarda los datos anteriores porque se van almacenando, estos son 8 bytes
                 // de las dos variables tipo long
-				cout << "Entro" << endl;
+                cout << "Entro" << endl;
                 GuardarDatosEnArchivo(vectorBytesTimeDSPIC, (numBytesFechaMasHoraMSB + numBytesHoraToRec));
             }
 
             GuardarDatosEnArchivo(ptrVectorDatosToSave, contadorDatosToSave);
             // Luego resetea el contador
-//            contadorDatosToSave = numBytesFechaMasHoraMSB + numBytesHoraToRec;
+            //            contadorDatosToSave = numBytesFechaMasHoraMSB + numBytesHoraToRec;
             contadorDatosToSave = 0;
         }
     }
 
     // Al final guarda los valores de las muestras recibidas en el vector para el archivo
-//    for (indiceForRBM = numBytesHoraToRec; indiceForRBM < (numMuestrasEnvio + numBytesHoraToRec); indiceForRBM++) {
-    for (indiceForRBM = 0; indiceForRBM < numMuestrasEnvio; indiceForRBM++) {
+    //    for (indiceForRBM = numBytesHoraToRec; indiceForRBM < (numMuestrasEnvio + numBytesHoraToRec); indiceForRBM++) {
+    for (indiceForRBM = 0; indiceForRBM < numMuestrasEnvio; indiceForRBM++)
+    {
         ptrVectorDatosToSave[contadorDatosToSave] = ptrVectorDatosToRec[indiceForRBM];
         // Incrementa el contador
-        contadorDatosToSave ++;
+        contadorDatosToSave++;
     }
 }
 //*************************************************************************************************
 // Fin Metodo RecibirBytes de un muestreo
 //*************************************************************************************************
 
-
-
 //*************************************************************************************************
 // Metodo para guardar los datos en el archivo, recibe el vector con los datos y el numero de datos
 //*************************************************************************************************
-void GuardarDatosEnArchivo (unsigned char *vectorDatosGuardar, unsigned int numDatosGuardar) {
+void GuardarDatosEnArchivo(unsigned char *vectorDatosGuardar, unsigned int numDatosGuardar)
+{
     // Tiempo de inicio del envio
-//    auto start = chrono::high_resolution_clock::now();
+    //    auto start = chrono::high_resolution_clock::now();
     // Variable que almacena los datos que se han guardado
-    
-	cout << "Guardando... " << endl;
-	unsigned int datosGuardadosFwrite;
-    // Vector para almacenar YY, MM, DD
-//    unsigned char tiempoLocal[3];
 
-//    cout << "Num Datos a Guardar" << to_string(numDatosGuardar) << endl;
+    cout << "Guardando... " << endl;
+    unsigned int datosGuardadosFwrite;
+    // Vector para almacenar YY, MM, DD
+    //    unsigned char tiempoLocal[3];
+
+    //    cout << "Num Datos a Guardar" << to_string(numDatosGuardar) << endl;
 
     // Analiza si hay que crear un nuevo archivo o no
-    if (isCrearNuevoArchivo == true) {
+    if (isCrearNuevoArchivo == true)
+    {
         // Reinicia la bandera
         isCrearNuevoArchivo = false;
 
         // En caso de que ya exista, cierra el archivo anterior
-        if (objFile != NULL) {
-            fclose (objFile);
+        if (objFile != NULL)
+        {
+            fclose(objFile);
         }
 
         // Actualiza la fecha anterior
@@ -698,12 +747,12 @@ void GuardarDatosEnArchivo (unsigned char *vectorDatosGuardar, unsigned int numD
 
         // Aqui se agrega la fecha al vector de datos. A la final la fecha solo sirve como cabecera
         // Guarda desde el MSB al LSB
-/*        ptrVectorDatosToSave[0] = (fechaLongDSPIC >> 24) & (0X000000FF);
+        /*        ptrVectorDatosToSave[0] = (fechaLongDSPIC >> 24) & (0X000000FF);
         ptrVectorDatosToSave[1] = (fechaLongDSPIC >> 16) & (0X000000FF);
         ptrVectorDatosToSave[2] = (fechaLongDSPIC >> 8) & (0X000000FF);
         ptrVectorDatosToSave[3] = (fechaLongDSPIC) & (0X000000FF);
 */
-/*        vectorBytesTimeDSPIC[0] = (fechaLongDSPIC >> 24) & (0X000000FF);
+        /*        vectorBytesTimeDSPIC[0] = (fechaLongDSPIC >> 24) & (0X000000FF);
         vectorBytesTimeDSPIC[1] = (fechaLongDSPIC >> 16) & (0X000000FF);
         vectorBytesTimeDSPIC[2] = (fechaLongDSPIC >> 8) & (0X000000FF);
         vectorBytesTimeDSPIC[3] = (fechaLongDSPIC) & (0X000000FF);
@@ -718,95 +767,135 @@ void GuardarDatosEnArchivo (unsigned char *vectorDatosGuardar, unsigned int numD
         // Abre o crea un archivo binario para guardar los datos muestreados
         // a es append: para agregar datos al archivo sin sobre escribir y en caso de que no haya el archivo lo crea
         // b es de binario. Se pasa el string.c_str() porque requiere una entrada cons char* (C-style string)
-        objFile = fopen (archivoCompleto.c_str(), "ab");
+        objFile = fopen(archivoCompleto.c_str(), "ab");
     }
 
-    if (objFile != NULL) {
+    if (objFile != NULL)
+    {
         // Bucle hasta que se guarden todos los bytes
-        do {
+        do
+        {
             // Guarda el vector de datos, siempre deben ser tipo char (ese es el tamaño configurado)
             datosGuardadosFwrite = fwrite(vectorDatosGuardar, sizeof(char), numDatosGuardar, objFile);
-//            cout << "Datos guardados " << to_string(datosGuardadosFwrite) << endl;
+            //            cout << "Datos guardados " << to_string(datosGuardadosFwrite) << endl;
         } while (datosGuardadosFwrite != numDatosGuardar);
         // Flush
         fflush(objFile);
     }
 
     // Obtiene el tiempo que ha pasado desde el inicio del metodo
-//    auto elapsed = chrono::high_resolution_clock::now() - start;
-//    long long microseconds = chrono::duration_cast < chrono::microseconds > (elapsed).count();
-//    cout << "Tiempo archivo en us: " << to_string(microseconds) << endl << endl;
+    //    auto elapsed = chrono::high_resolution_clock::now() - start;
+    //    long long microseconds = chrono::duration_cast < chrono::microseconds > (elapsed).count();
+    //    cout << "Tiempo archivo en us: " << to_string(microseconds) << endl << endl;
 }
+//*************************************************************************************************
+// Fin Metodo para guardar los datos en el archivo, recibe el vector con los datos y el numero de datos
+//*************************************************************************************************
 
+//*************************************************************************************************
+// Metodo para guardar los datos temporales de los 3 canales
+//*************************************************************************************************
+void GuardarDatosCanal(unsigned int valCH1, unsigned int valCH2, unsigned int valCH3)
+{
 
+    unsigned int vectorDatosCanal[3];
+    unsigned int numDatosGuardados;
+
+    vectorDatosCanal[0] = valCH1;
+    vectorDatosCanal[1] = valCH2;
+    vectorDatosCanal[2] = valCH3;
+
+    fTmpCanal = fopen("/home/rsa/TMP/temporalCanal.txt", "w");
+
+    if (fTmpCanal != NULL)
+    {
+        // Bucle hasta que se guarden todos los bytes
+        do
+        {
+            // Guarda el vector de datos, siempre deben ser tipo char (ese es el tamaño configurado)
+            numDatosGuardados = fwrite(vectorDatosCanal, sizeof(int), 3, fTmpCanal);
+            //            cout << "Datos guardados " << to_string(datosGuardadosFwrite) << endl;
+        } while (numDatosGuardados != 3);
+        // Flush
+        fflush(fTmpCanal);
+    }
+}
+//*************************************************************************************************
+// Fin Metodo para guardar los datos temporales de los 3 canales
+//*************************************************************************************************
 
 //*************************************************************************************************
 // Metodo para indicar al dsPIC que comience el muestreo
 //*************************************************************************************************
-void IniciarMuestreo() {
-	cout << "Iniciando el muestreo..." << endl;
-	// Envia el inicio de la trama para comienzo del muestreo
-	bcm2835_spi_transfer(INI_INIT_MUES);
-	bcm2835_delayMicroseconds(TIEMPO_SPI);
-	// Envia el fin de la trama para comienzo del muestreo
-	bcm2835_spi_transfer(FIN_INIT_MUES);
-	bcm2835_delayMicroseconds(TIEMPO_SPI);
+void IniciarMuestreo()
+{
+    cout << "Iniciando el muestreo..." << endl;
+    // Envia el inicio de la trama para comienzo del muestreo
+    bcm2835_spi_transfer(INI_INIT_MUES);
+    bcm2835_delayMicroseconds(TIEMPO_SPI);
+    // Envia el fin de la trama para comienzo del muestreo
+    bcm2835_spi_transfer(FIN_INIT_MUES);
+    bcm2835_delayMicroseconds(TIEMPO_SPI);
 
-	// Activa la bandera de creacion de nuevo archivo
-	isCrearNuevoArchivo = true;
+    // Activa la bandera de creacion de nuevo archivo
+    isCrearNuevoArchivo = true;
 }
 //*************************************************************************************************
 // Fin Metodo para indicar al dsPIC que comience el muestreo
 //*************************************************************************************************
 
-
-
 //*************************************************************************************************
 // Metodo para obtener el tiempo del dsPIC
 //*************************************************************************************************
-bool ObtenerTiempoDSPIC() {
+bool ObtenerTiempoDSPIC()
+{
     // Variables que se utilizan en el metodo
     unsigned char indiceForOTD, fuenteTiempoDSPIC, dataRecSPI;
     // Puntero para obtener la direccion de las dos variables de tiempo y guardar los bytes recibidos
     unsigned long *punteroLong;
     // Vector para almacenar los bytes de las dos variables long de tiempo
-//    unsigned char vectorBytesTimeDSPIC[8];
+    //    unsigned char vectorBytesTimeDSPIC[8];
     // Valor que se retorna
     bool dataReturn = false;
 
-	cout << endl << "Hora dsPIC: " << endl;
-	// Envia el delimitador de inicio de trama para recibir el tiempo del dsPIC
-	bcm2835_spi_transfer(INI_TIME_FROM_DSPIC);
+    cout << endl
+         << "Hora dsPIC: " << endl;
+    // Envia el delimitador de inicio de trama para recibir el tiempo del dsPIC
+    bcm2835_spi_transfer(INI_TIME_FROM_DSPIC);
     bcm2835_delayMicroseconds(TIEMPO_SPI);
 
-	// Recibe el byte que indica la fuente de tiempo del PIC
-	// 0 es del RTC y 1 es del GPS
-	fuenteTiempoDSPIC = bcm2835_spi_transfer(DUMMY_BYTE);
-	bcm2835_delayMicroseconds(TIEMPO_SPI);
+    // Recibe el byte que indica la fuente de tiempo del PIC
+    // 0 es del RTC y 1 es del GPS
+    fuenteTiempoDSPIC = bcm2835_spi_transfer(DUMMY_BYTE);
+    bcm2835_delayMicroseconds(TIEMPO_SPI);
 
     // Guarda los bytes de la hora y fecha tipo long devuelta por el dsPIC
-	for (indiceForOTD = 0; indiceForOTD < 8; indiceForOTD++) {
+    for (indiceForOTD = 0; indiceForOTD < 8; indiceForOTD++)
+    {
         dataRecSPI = bcm2835_spi_transfer(DUMMY_BYTE);
         vectorBytesTimeDSPIC[indiceForOTD] = dataRecSPI;
         bcm2835_delayMicroseconds(TIEMPO_SPI);
     }
 
     // Envia el delimitador de final de trama para recibir el tiempo del dsPIC
-	bcm2835_spi_transfer(FIN_TIME_FROM_DSPIC);
+    bcm2835_spi_transfer(FIN_TIME_FROM_DSPIC);
     bcm2835_delayMicroseconds(TIEMPO_SPI);
 
-	if (fuenteTiempoDSPIC == FUENTE_TIME_RTC) {
-		dataReturn = true;
-		cout << "RTC " << endl;
-	} else if (fuenteTiempoDSPIC == FUENTE_TIME_GPS) {
-		dataReturn = true;
-		cout << "GPS " << endl;
-	}
+    if (fuenteTiempoDSPIC == FUENTE_TIME_RTC)
+    {
+        dataReturn = true;
+        cout << "RTC " << endl;
+    }
+    else if (fuenteTiempoDSPIC == FUENTE_TIME_GPS)
+    {
+        dataReturn = true;
+        cout << "GPS " << endl;
+    }
 
-	// Pasa los 4 bytes de la fecha a una sola variable tipo long, se desplazan los bytes a las posiciones
-	// respectivas, primero va el byte MSB (desplazado 32 bits)
-	fechaLongDSPIC = (vectorBytesTimeDSPIC[0] << 24) | (vectorBytesTimeDSPIC[1] << 16) | (vectorBytesTimeDSPIC[2] << 8) | vectorBytesTimeDSPIC[3];
-	cout << "Fecha Long " << to_string(fechaLongDSPIC) << endl;
+    // Pasa los 4 bytes de la fecha a una sola variable tipo long, se desplazan los bytes a las posiciones
+    // respectivas, primero va el byte MSB (desplazado 32 bits)
+    fechaLongDSPIC = (vectorBytesTimeDSPIC[0] << 24) | (vectorBytesTimeDSPIC[1] << 16) | (vectorBytesTimeDSPIC[2] << 8) | vectorBytesTimeDSPIC[3];
+    cout << "Fecha Long " << to_string(fechaLongDSPIC) << endl;
     // Lo mismo para la hora
     horaLongDSPIC = (vectorBytesTimeDSPIC[4] << 24) | (vectorBytesTimeDSPIC[5] << 16) | (vectorBytesTimeDSPIC[6] << 8) | vectorBytesTimeDSPIC[7];
     cout << "Hora Long " << to_string(horaLongDSPIC) << endl;
@@ -815,12 +904,12 @@ bool ObtenerTiempoDSPIC() {
     // En el formato AA MM DD hh mm ss y se guarda en el vector
     PasarTiempoToVector(horaLongDSPIC, fechaLongDSPIC, vectorTimeDSPIC);
 
-	// Muestra la fecha en formato YY-MM-DD
-	cout << "Fecha YY-MM-DD " << to_string(vectorTimeDSPIC[0]) << '-' << to_string(vectorTimeDSPIC[1]) << '-' << to_string(vectorTimeDSPIC[2]) << endl;
-	// Muestra la hora en formato hh:mm:ss
-	cout << "Hora hh:mm:ss " << to_string(vectorTimeDSPIC[3]) << ':' << to_string(vectorTimeDSPIC[4]) << ':' << to_string(vectorTimeDSPIC[5]) << endl;
+    // Muestra la fecha en formato YY-MM-DD
+    cout << "Fecha YY-MM-DD " << to_string(vectorTimeDSPIC[0]) << '-' << to_string(vectorTimeDSPIC[1]) << '-' << to_string(vectorTimeDSPIC[2]) << endl;
+    // Muestra la hora en formato hh:mm:ss
+    cout << "Hora hh:mm:ss " << to_string(vectorTimeDSPIC[3]) << ':' << to_string(vectorTimeDSPIC[4]) << ':' << to_string(vectorTimeDSPIC[5]) << endl;
 
-/*
+    /*
     // Aqui se agrega la fecha al vector de datos. Esto ocurre la primera vez, justo cuando comienza el muestreo
     ptrVectorDatosToSave[0] = (fechaLongDSPIC >> 24) & (0X000000FF);
     ptrVectorDatosToSave[1] = (fechaLongDSPIC >> 16) & (0X000000FF);
@@ -840,27 +929,26 @@ bool ObtenerTiempoDSPIC() {
 // Fin Metodo para obtener el tiempo del dsPIC
 //*************************************************************************************************
 
-
-
 //******************************************************************************
 // Funcion para pasar la hora y la fecha en tipo long a un vector con los indices
 // AA MM DD hh mm ss
 // Recibe la hora y la fecha en una sola variable tipo long y tambien recibe el
 // vector en el que se va a pasar la fecha y hora en 6 posiciones
 //******************************************************************************
-void PasarTiempoToVector (unsigned long longHora, unsigned long longFecha, unsigned char *tramaTiempoSistema) {
+void PasarTiempoToVector(unsigned long longHora, unsigned long longFecha, unsigned char *tramaTiempoSistema)
+{
     // Variables para almacenar los 6 valores de tiempo
     unsigned char anio, mes, dia, hora, minuto, segundo;
 
     // Obtiene las horas, minutos y segundos
     hora = longHora / 3600;
-    minuto = (longHora%3600) / 60;
-    segundo = (longHora%3600) % 60;
+    minuto = (longHora % 3600) / 60;
+    segundo = (longHora % 3600) % 60;
 
     // Obtiene el año, mes y dia
     anio = longFecha / 10000;
-    mes = (longFecha%10000) / 100;
-    dia = (longFecha%10000) % 100;
+    mes = (longFecha % 10000) / 100;
+    dia = (longFecha % 10000) % 100;
 
     // Guarda en el vector los datos de tiempo
     tramaTiempoSistema[0] = anio;
@@ -874,13 +962,12 @@ void PasarTiempoToVector (unsigned long longHora, unsigned long longFecha, unsig
 //******************** Fin Metodo PasarTiempoToVector **************************
 //******************************************************************************
 
-
-
 //******************************************************************************
 // Funcion para pasar la hora tipo long a una variable tipo string en el formato
 // "hhmmss". Recibe una variable long con la hora en segundos y devuelve un string
 //******************************************************************************
-string PasarHoraLongToString (unsigned long longHora) {
+string PasarHoraLongToString(unsigned long longHora)
+{
     // Variables para almacenar los 3 valores de tiempo
     unsigned char hora, minuto, segundo;
     // Variable tipo string para almacenar la hora en formato hhmmss
@@ -888,27 +975,36 @@ string PasarHoraLongToString (unsigned long longHora) {
 
     // Obtiene las horas, minutos y segundos
     hora = char(longHora / 3600);
-    minuto = char((longHora%3600) / 60);
-    segundo = char((longHora%3600) % 60);
+    minuto = char((longHora % 3600) / 60);
+    segundo = char((longHora % 3600) % 60);
 
     // Analiza si los valores de hora, minuto y segundo tienen solo unidades
     // En ese caso hay que añadir un 0 a la izquierda para mantener el formato de hhmmss
     // Pasa a string la hora. Si las horas son menores a 10 hay que agregar un 0 a la izquierda
-    if (hora >= 10) {
+    if (hora >= 10)
+    {
         horaStr = to_string(hora);
-    } else {
+    }
+    else
+    {
         horaStr = string(1, '0').append(to_string(hora));
     }
     // De la misma manera para los minutos
-    if (minuto >= 10) {
+    if (minuto >= 10)
+    {
         horaStr = horaStr + to_string(minuto);
-    } else {
+    }
+    else
+    {
         horaStr = horaStr + string(1, '0').append(to_string(minuto));
     }
     // Por ultimo los segundos
-    if (segundo >= 10) {
+    if (segundo >= 10)
+    {
         horaStr = horaStr + to_string(segundo);
-    } else {
+    }
+    else
+    {
         horaStr = horaStr + string(1, '0').append(to_string(segundo));
     }
 
@@ -918,12 +1014,11 @@ string PasarHoraLongToString (unsigned long longHora) {
 //******************** Fin Metodo PasarHoraLongToString **************************
 //******************************************************************************
 
-
-
 //*************************************************************************************************
 // Metodo para obtener el tiempo actual de la RPi y enviarlo al micro
 //*************************************************************************************************
-void EnviarTiempoLocal () {
+void EnviarTiempoLocal()
+{
     // Vector para almacenar los datos de tiempo YY MM DD hh mm ss
     unsigned char tiempoLocal[6];
     unsigned short indiceFor;
@@ -932,30 +1027,31 @@ void EnviarTiempoLocal () {
     // Vector para almacenar los bytes de las dos variables tipo long
     unsigned char vectoBytesTime[8];
 
-	// Obtiene la hora y la fecha del sistema
-	cout << endl << "Envio de Hora local: " << endl;
-	time_t t;
-	struct tm *tm;
-	t = time(NULL);
-	tm = localtime(&t);
-	tiempoLocal[0] = tm -> tm_year - 100;									// Anio (contado desde 1900)
-	tiempoLocal[1] = tm -> tm_mon + 1;										// Mes desde Enero (0-11)
-	tiempoLocal[2] = tm -> tm_mday;											// Dia del mes (0-31)
-	tiempoLocal[3] = tm -> tm_hour;											// Hora
-	tiempoLocal[4] = tm -> tm_min;											// Minuto
-	tiempoLocal[5] = tm -> tm_sec;											// Segundo
+    // Obtiene la hora y la fecha del sistema
+    cout << endl
+         << "Envio de Hora local: " << endl;
+    time_t t;
+    struct tm *tm;
+    t = time(NULL);
+    tm = localtime(&t);
+    tiempoLocal[0] = tm->tm_year - 100; // Anio (contado desde 1900)
+    tiempoLocal[1] = tm->tm_mon + 1;    // Mes desde Enero (0-11)
+    tiempoLocal[2] = tm->tm_mday;       // Dia del mes (0-31)
+    tiempoLocal[3] = tm->tm_hour;       // Hora
+    tiempoLocal[4] = tm->tm_min;        // Minuto
+    tiempoLocal[5] = tm->tm_sec;        // Segundo
 
-	// Muestra la fecha en formato YY-MM-DD
-	cout << "Fecha YY-MM-DD " << to_string(tiempoLocal[0]) << '-' << to_string(tiempoLocal[1]) << '-' << to_string(tiempoLocal[2]) << endl;
-	// Muestra la hora en formato hh:mm:ss
-	cout << "Hora hh:mm:ss " << to_string(tiempoLocal[3]) << ':' << to_string(tiempoLocal[4]) << ':' << to_string(tiempoLocal[5]) << endl;
+    // Muestra la fecha en formato YY-MM-DD
+    cout << "Fecha YY-MM-DD " << to_string(tiempoLocal[0]) << '-' << to_string(tiempoLocal[1]) << '-' << to_string(tiempoLocal[2]) << endl;
+    // Muestra la hora en formato hh:mm:ss
+    cout << "Hora hh:mm:ss " << to_string(tiempoLocal[3]) << ':' << to_string(tiempoLocal[4]) << ':' << to_string(tiempoLocal[5]) << endl;
 
-	// Pasa el tiempo a dos variables tipo long de fecha y hora en segundos
+    // Pasa el tiempo a dos variables tipo long de fecha y hora en segundos
     // Calcula el segundo actual = hh*3600 + mm*60 + ss
-    horaLong = (tiempoLocal[3]*3600) + (tiempoLocal[4]*60) + (tiempoLocal[5]);
+    horaLong = (tiempoLocal[3] * 3600) + (tiempoLocal[4] * 60) + (tiempoLocal[5]);
     cout << "Hora Long " << horaLong << endl;
     // Calcula la fecha actual completa = 10000*AA + 100*MM + DD
-    fechaLong = (tiempoLocal[0]*10000) + (tiempoLocal[1]*100) + (tiempoLocal[2]);
+    fechaLong = (tiempoLocal[0] * 10000) + (tiempoLocal[1] * 100) + (tiempoLocal[2]);
     cout << "Fecha Long " << fechaLong << endl;
 
     // Obtiene los bytes de cada variable y los almacena en el vector
@@ -977,7 +1073,8 @@ void EnviarTiempoLocal () {
     bcm2835_spi_transfer(INI_TIME_FROM_RPI);
     bcm2835_delayMicroseconds(TIEMPO_SPI);
     // Envia los 8 bytes del vector de tiempo al dsPIC
-	for (indiceFor = 0; indiceFor < 8; indiceFor++) {
+    for (indiceFor = 0; indiceFor < 8; indiceFor++)
+    {
         bcm2835_spi_transfer(vectoBytesTime[indiceFor]);
         bcm2835_delayMicroseconds(TIEMPO_SPI);
     }
@@ -987,7 +1084,7 @@ void EnviarTiempoLocal () {
 
     // Obtiene el tiempo que ha pasado desde el inicio del metodo
     auto elapsed = chrono::high_resolution_clock::now() - start;
-    long long microseconds = chrono::duration_cast < chrono::microseconds > (elapsed).count();
+    long long microseconds = chrono::duration_cast<chrono::microseconds>(elapsed).count();
     cout << "Tiempo de envio en us: " << to_string(microseconds) << endl;
 }
 //*************************************************************************************************

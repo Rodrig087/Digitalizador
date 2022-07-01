@@ -25,7 +25,7 @@ ys = [0] * x_len
 ax.set_ylim(y_range)
 
 # Create a blank line. We will update the line in animate
-line, = ax.plot(xs, ys)
+line1, = ax.plot(xs, ys)
 
 #********************************************************************************
 #Metodo para leer el archivo de texto y extraer los valores de los 3 ejes:
@@ -71,9 +71,9 @@ def animate(i, ys):
     ys = ys[-x_len:]
 
     # Update line with new Y values
-    line.set_ydata(ys)
+    line1.set_ydata(ys)
 
-    return line,
+    return line1,
 #********************************************************************************
 
 #********************************************************************************

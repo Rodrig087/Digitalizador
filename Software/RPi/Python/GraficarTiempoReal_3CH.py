@@ -23,14 +23,30 @@ ax1 = fig.add_subplot(3, 1, 1)
 ax2 = fig.add_subplot(3, 1, 2)
 ax3 = fig.add_subplot(3, 1, 3)
 
+#Establece los limistes del eje X
 xs = list(range(0, 120))
 ys1 = [0] * x_len
 ys2 = [0] * x_len
 ys3 = [0] * x_len
 
+#Establece los limites del eje Y
 ax1.set_ylim(y_range)
 ax2.set_ylim(y_range)
 ax3.set_ylim(y_range)
+
+#Establece las marcas del eje X
+plt.setp(ax1.get_xticklabels(), visible=False)     #Borrar las marcar del plot x1
+plt.setp(ax2.get_xticklabels(), visible=False)
+ax3.set_xticks([0,60,120])     #Selecciona las marcas de los puntos extremos y mitad del eje X
+ax3.set_xticklabels([-60,-30,0], fontsize=12)     #Remplaza las marcas seleccionadas por los valores 0, 30 y 60
+
+#Establece las etiquetas del eje Y
+ax1.set_ylabel('CH1')
+ax2.set_ylabel('CH2')
+ax3.set_ylabel('CH3')
+
+#Establece la etiqueta del eje X
+ax3.set_xlabel('Tiempo [seg]')
 
 # Create a blank line. We will update the line in animate
 line1, = ax1.plot(xs, ys1)

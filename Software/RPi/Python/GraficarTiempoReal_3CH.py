@@ -5,7 +5,6 @@ import matplotlib.pyplot as plt
 import matplotlib.animation as animation
 
 
-
 filepath = "/home/rsa/TMP/temporalCanal.txt"
 
 #Variables globales
@@ -18,6 +17,7 @@ x_len = 120         # Number of points to display
 y_range = [0, 4095]  # Range of possible Y values to display
 
 # Crea la figura y los subplots
+plt.style.use('dark_background')
 fig = plt.figure()
 ax1 = fig.add_subplot(3, 1, 1)
 ax2 = fig.add_subplot(3, 1, 2)
@@ -34,24 +34,35 @@ ax1.set_ylim(y_range)
 ax2.set_ylim(y_range)
 ax3.set_ylim(y_range)
 
-#Establece las marcas del eje X
-plt.setp(ax1.get_xticklabels(), visible=False)     #Borrar las marcar del plot x1
-plt.setp(ax2.get_xticklabels(), visible=False)
-ax3.set_xticks([0,60,120])     #Selecciona las marcas de los puntos extremos y mitad del eje X
-ax3.set_xticklabels([-60,-30,0], fontsize=12)     #Remplaza las marcas seleccionadas por los valores 0, 30 y 60
+#Establece los colores de fondo de los subplots
+ax1.set_facecolor('#181c1fff')
+ax2.set_facecolor('#181c1fff')
+ax3.set_facecolor('#181c1fff')
 
-#Establece las etiquetas del eje Y
+#Establece el estilo del grid
+ax1.grid(linestyle='-',linewidth=0.2)
+ax2.grid(linestyle='-',linewidth=0.2)
+ax3.grid(linestyle='-',linewidth=0.2)
+
+#Establece las marcas del eje X
+plt.setp(ax1.get_xticklabels(), visible=False)     #Borra las marcar del plot x1
+plt.setp(ax2.get_xticklabels(), visible=False)     #Borra las marcar del plot x2
+ax3.set_xticks([0,20,40,60,80,100,120])     #Selecciona las marcas de los puntos extremos y mitad del eje X
+ax3.set_xticklabels([-60,'','',-30,'','',0])     #Remplaza las marcas seleccionadas por los valores 0, 30 y 60
+ax1.tick_params(labelsize=9,labelcolor='gray')
+ax2.tick_params(labelsize=9,labelcolor='gray')
+ax3.tick_params(labelsize=9,labelcolor='gray')
+
+#Establece las etiquetas de los ejes X y Y
 ax1.set_ylabel('CH1')
 ax2.set_ylabel('CH2')
 ax3.set_ylabel('CH3')
-
-#Establece la etiqueta del eje X
 ax3.set_xlabel('Tiempo [seg]')
 
 # Create a blank line. We will update the line in animate
-line1, = ax1.plot(xs, ys1)
-line2, = ax2.plot(xs, ys2)
-line3, = ax3.plot(xs, ys3)
+line1, = ax1.plot(xs, ys1, color='#5bd15eff')
+line2, = ax2.plot(xs, ys2, color='#5bd15eff')
+line3, = ax3.plot(xs, ys3, color='#5bd15eff')
 
 #patches = [line1, line2, line3]
 

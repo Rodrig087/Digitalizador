@@ -1,9 +1,15 @@
+import os 
 from watchdog.observers import Observer
 from watchdog.events import FileSystemEventHandler
 import struct
+#os.environ['MPLCONFIGDIR'] = "/home/rsa/.config/matplotlib"
+#os.environ['MPLCONFIGDIR'] = "/home/rsa/.cache/matplotlib"
+import matplotlib
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
 
+#print (matplotlib.rcParams['backend']) #Muestra en backend utilizado: QtAgg
+#matplotlib.use('QtAgg') #Forza a ultizar el backend QtAgg
 
 filepath = "/home/rsa/TMP/temporalCanal.txt"
 
@@ -17,8 +23,11 @@ x_len = 120         # Number of points to display
 y_range = [0, 4095]  # Range of possible Y values to display
 
 # Crea la figura y los subplots
-plt.style.use('dark_background')
+plt.style.use('dark_background') #Utiliza el modo oscuro
+plt.rcParams['toolbar'] = 'None' #Oculta la barra de tareas
 fig = plt.figure()
+plt.get_current_fig_manager().full_screen_toggle() #Fullscreen mode
+
 ax1 = fig.add_subplot(3, 1, 1)
 ax2 = fig.add_subplot(3, 1, 2)
 ax3 = fig.add_subplot(3, 1, 3)

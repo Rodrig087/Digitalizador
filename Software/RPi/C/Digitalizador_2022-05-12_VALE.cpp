@@ -819,6 +819,9 @@ void GuardarDatosCanal(unsigned int valCH1, unsigned int valCH2, unsigned int va
         // Flush
         fflush(fTmpCanal);
     }
+
+    fclose(fTmpCanal);
+
 }
 //*************************************************************************************************
 // Fin Metodo para guardar los datos temporales de los 3 canales

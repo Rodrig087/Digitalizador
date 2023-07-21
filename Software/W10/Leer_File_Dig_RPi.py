@@ -30,8 +30,19 @@ tiempoInicio = int(round(time.time()*1000000))
 root = tkinter.Tk()
 root.withdraw() # Use to hide tkinter window
 
+# Definir los tipos de archivo y sus extensiones correspondientes
+tipos_archivo = (
+    ("Archivos binarios", "*.dat"),
+    ("Archivos de texto", "*.txt"),
+    ("Todos los archivos", "*.*")
+)
+
+# Establecer atributos de la ventana de selección de archivos
+root.attributes('-topmost', True)
+root.attributes('-topmost', False)
+
 currdir = os.getcwd()
-filepath = filedialog.askopenfilename(parent = root, initialdir = currdir, title = 'Please select a file')
+filepath = filedialog.askopenfilename(parent = root, initialdir = currdir, title = 'Please select a file', filetypes=tipos_archivo)
 
 # Realiza la lectura si se ha seleccionado un archivo
 if filepath:

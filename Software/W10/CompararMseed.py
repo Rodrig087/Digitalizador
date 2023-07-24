@@ -6,6 +6,8 @@ import matplotlib.pyplot as plt
 from matplotlib.ticker import FuncFormatter
 import datetime
 from scipy.interpolate import interp1d
+import numpy as np
+
 
 #------------------------------------------------------------------------------
 # Funciones
@@ -27,77 +29,74 @@ def abrir_archivo_mseed():
     return st
 
 
-def obtener_fecha_hora_desde_metadatos(stream):
+def obtener_metadatos(stream):
     # Verifica que el Stream tenga al menos una traza
     if len(stream) == 0:
         raise ValueError("El Stream está vacío. No se pueden obtener los metadatos.")
 
     # Obtén el tiempo de inicio de la primera traza en el Stream
     tiempo_inicio = stream[0].stats.starttime
+    tiempo_fin = stream[0].stats.endtime
 
     # Extrae la fecha y la hora del tiempo de inicio
     fecha = tiempo_inicio.datetime.date()
-    hora = tiempo_inicio.datetime.time()
+    hora_inicio = tiempo_inicio.datetime.time()
+    hora_fin = tiempo_fin.datetime.time()
     
     # Obtiene el valor de npts de la primera traza
     npts = stream[0].stats.npts
+    
+    # Obtiene el nombre de la estación
+    station = stream[0].stats.station
 
-    return fecha, hora, npts
+    return fecha, hora_inicio, hora_fin, npts, station
 
 
 def format_fn(value, tick_number, horainicio):
     segundos = int(value)
     milisegundos = int((value - segundos) * 1000)
-    #tiempo = horainicio + datetime.timedelta(seconds=segundos, milliseconds=milisegundos)
     tiempo = datetime.datetime.combine(datetime.date.today(), horainicio) + datetime.timedelta(seconds=segundos, milliseconds=milisegundos)
-    return tiempo.strftime("%H:%M:%S:%f")[:-3]
+    tiempo_str = tiempo.strftime("%H:%M:%S.%f")[:-3]
+    return tiempo_str
 
 
-def graficar_trama_mseed(canal, traza1, traza2, horainicio1, horainicio2, npts1, npts2):
-    # Obtiene las trazas individuales del Stream
-    traza1_individual = traza1[canal - 1]
-    traza2_individual = traza2[canal - 1]
-    
-    # Obtiene los valores de tiempo y amplitud de la traza1
-    tiempo1 = traza1_individual.times()
-    amplitud1 = traza1_individual.data
-    
-    # Obtiene los valores de tiempo y amplitud de la traza2
-    tiempo2 = traza2_individual.times()
-    amplitud2 = traza2_individual.data
-    
-    # Trunca la traza más grande para que tenga el mismo número de datos que la traza más pequeña
-    if npts1 < npts2:
-        tiempo2 = tiempo2[:npts1]
-        amplitud2 = amplitud2[:npts1]
-    elif npts1 > npts2:
-        tiempo1 = tiempo1[:npts2]
-        amplitud1 = amplitud1[:npts2]
-    
-    # Crea una figura con dos subplots
-    fig, axs = plt.subplots(2, 1, figsize=(8, 8))
-    
-    # Grafica el canal x de la traza1 en el primer subplot
-    axs[0].plot(tiempo1, amplitud1)  # canal - 1 porque Python usa índices basados en 0
-    axs[0].set_ylabel(f'Canal {canal} - Traza 1')
-    axs[0].grid(True)
-    
-    # Grafica el canal x de la traza2 en el segundo subplot
-    axs[1].plot(tiempo2, amplitud2)  # canal - 1 porque Python usa índices basados en 0
-    axs[1].set_ylabel(f'Canal {canal} - Traza 2')
-    axs[1].set_xlabel('Tiempo (hh:mm:ss:ms)')
-    axs[1].grid(True)
-    
-       
-    # Formatea el eje x para mostrar en formato de horas:minutos:segundos:milisegundos
-    axs[0].xaxis.set_major_formatter(FuncFormatter(lambda value, tick_number: format_fn(value, tick_number, horainicio1)))
-    axs[1].xaxis.set_major_formatter(FuncFormatter(lambda value, tick_number: format_fn(value, tick_number, horainicio2)))
-    
-    # Ajusta el espaciado entre subplots
-    plt.tight_layout()
-    
-    # Muestra la figura
+def graficar_intervalo(canal, traza, hora_inicio, duracion):
+    # Obtiene la traza seleccionada
+    traza_seleccionada = traza[canal - 1]
+
+    # Obtiene los valores de tiempo y amplitud de la traza seleccionada
+    tiempo = traza_seleccionada.times()
+    amplitud = traza_seleccionada.data
+
+    # Convierte hora_inicio a un objeto datetime.time
+    horainicio = datetime.datetime.strptime(str(datetime.timedelta(seconds=hora_inicio)), "%H:%M:%S").time()
+
+    # Calcula el tiempo de inicio y final del intervalo
+    tiempo_inicio = hora_inicio
+    tiempo_final = hora_inicio + duracion
+
+    # Encuentra los índices que corresponden al intervalo de tiempo
+    indice_inicio = int(tiempo.searchsorted(tiempo_inicio))
+    indice_final = int(tiempo.searchsorted(tiempo_final))
+
+    # Extrae el intervalo de tiempo y amplitud para graficar
+    tiempo_intervalo = tiempo[indice_inicio:indice_final]
+    amplitud_intervalo = amplitud[indice_inicio:indice_final]
+
+    # Crea una figura y grafica el intervalo de tiempo y amplitud
+    plt.figure(figsize=(10, 6))
+    plt.plot(tiempo_intervalo, amplitud_intervalo)
+    plt.xlabel('Tiempo (s)')
+    plt.ylabel(f'Canal {canal} - {traza_seleccionada.stats.station}')
+    plt.title(f'Intervalo de {duracion} segundos desde las {hora_inicio} segundos')
+
+    # Formatea el eje x utilizando la función format_fn
+    plt.gca().xaxis.set_major_formatter(FuncFormatter(lambda value, tick_number: format_fn(value, tick_number, horainicio)))
+
+    plt.grid(True)
     plt.show()
+
+
     
 #------------------------------------------------------------------------------
     
@@ -110,19 +109,18 @@ print("Seleccione el primer archivo mseed:")
 traza1 = abrir_archivo_mseed()
 
 # Selecciona y abre el segundo archivo mseed
-print("Seleccione el segundo archivo mseed:")
-traza2 = abrir_archivo_mseed()
+#print("Seleccione el segundo archivo mseed:")
+#traza2 = abrir_archivo_mseed()
 
-# Obtiene la fecha y la hora a partir de los metadatos
-fecha1, hora1, npts1  = obtener_fecha_hora_desde_metadatos(traza1)
-fecha2, hora2, npts2 = obtener_fecha_hora_desde_metadatos(traza2)
-
-print("Tiempo de inicio mseed 1:", fecha1.strftime("%Y-%m-%d") + " " + hora1.strftime("%H:%M:%S"))
-print("Tiempo de inicio mseed 2:", fecha2.strftime("%Y-%m-%d") + " " + hora2.strftime("%H:%M:%S"))
-
-# Calcula el mínimo entre npts1 y npts2
-npts_min = min(npts1, npts2)
 
 canal = 1  # Número de canal a graficar
-graficar_trama_mseed(canal, traza1, traza2, hora1, hora2, npts1, npts2)
+#graficar_trama_mseed(canal, traza1, traza2, 630, 300)
+
+fecha, hora_inicio, hora_fin, npts, station = obtener_metadatos(traza1)
+
+print(fecha)
+print(hora_inicio)
+print(hora_fin)
+
+graficar_intervalo(1, traza1, 18000, 60)
 # -----------------------------------------------------------------------------

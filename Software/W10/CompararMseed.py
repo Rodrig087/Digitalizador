@@ -60,7 +60,47 @@ def format_fn(value, tick_number, horainicio):
     return tiempo_str
 
 
-def graficar_intervalo(canal, traza, hora_inicio, duracion):
+# def graficar_intervalo(canal, traza, hora_inicio, inicio_intervalo, duracion):
+#     # Obtiene la traza seleccionada
+#     traza_seleccionada = traza[canal - 1]
+
+#     # Obtiene los valores de tiempo y amplitud de la traza seleccionada
+#     tiempo = traza_seleccionada.times()
+#     amplitud = traza_seleccionada.data
+
+    
+#     # Convierte inicio_intervalo a segundos
+#     segundos_inicio_intervalo = inicio_intervalo
+
+#     # Calcula el tiempo de inicio y final del intervalo en segundos
+#     tiempo_inicio = segundos_inicio_intervalo
+#     tiempo_final = tiempo_inicio + duracion
+    
+#     print(tiempo_inicio)
+#     print(tiempo_final)
+
+#     # Encuentra los índices que corresponden al intervalo de tiempo
+#     indice_inicio = int(tiempo.searchsorted(tiempo_inicio))
+#     indice_final = int(tiempo.searchsorted(tiempo_final))
+
+#     # Extrae el intervalo de tiempo y amplitud para graficar
+#     tiempo_intervalo = tiempo[indice_inicio:indice_final]
+#     amplitud_intervalo = amplitud[indice_inicio:indice_final]
+
+#     # Crea una figura y grafica el intervalo de tiempo y amplitud
+#     plt.figure(figsize=(10, 6))
+#     plt.plot(tiempo_intervalo, amplitud_intervalo)
+#     plt.xlabel('Tiempo (s)')
+#     plt.ylabel(f'Canal {canal} - {traza_seleccionada.stats.station}')
+#     plt.title(f'Intervalo de {duracion} segundos desde las {hora_inicio.strftime("%H:%M:%S")} segundos')
+
+#     # Formatea el eje x utilizando la función format_fn
+#     plt.gca().xaxis.set_major_formatter(FuncFormatter(lambda value, tick_number: format_fn(value, tick_number, hora_inicio)))
+
+#     plt.grid(True)
+#     plt.show()
+
+def graficar_intervalo(canal, traza, hora_inicio, inicio_intervalo, duracion):
     # Obtiene la traza seleccionada
     traza_seleccionada = traza[canal - 1]
 
@@ -68,16 +108,26 @@ def graficar_intervalo(canal, traza, hora_inicio, duracion):
     tiempo = traza_seleccionada.times()
     amplitud = traza_seleccionada.data
 
-    # Convierte hora_inicio a un objeto datetime.time
-    horainicio = datetime.datetime.strptime(str(datetime.timedelta(seconds=hora_inicio)), "%H:%M:%S").time()
+    # Convierte hora_inicio a segundos
+    segundos_inicio = hora_inicio.hour * 3600 + hora_inicio.minute * 60 + hora_inicio.second
 
-    # Calcula el tiempo de inicio y final del intervalo
-    tiempo_inicio = hora_inicio
-    tiempo_final = hora_inicio + duracion
+    # Convierte inicio_intervalo a segundos
+    segundos_inicio_intervalo = inicio_intervalo
+
+    # Calcula el tiempo de inicio y final del intervalo en segundos
+    tiempo_inicio = segundos_inicio_intervalo - segundos_inicio 
+    tiempo_final = tiempo_inicio + duracion
+    
+    
+    print(tiempo_inicio)
+    print(tiempo_final)
+    
+    #tiempo_inicio = 0
+    #tiempo_final = 60
 
     # Encuentra los índices que corresponden al intervalo de tiempo
-    indice_inicio = int(tiempo.searchsorted(tiempo_inicio))
-    indice_final = int(tiempo.searchsorted(tiempo_final))
+    indice_inicio = int(np.searchsorted(tiempo, tiempo_inicio))
+    indice_final = int(np.searchsorted(tiempo, tiempo_final))
 
     # Extrae el intervalo de tiempo y amplitud para graficar
     tiempo_intervalo = tiempo[indice_inicio:indice_final]
@@ -88,15 +138,13 @@ def graficar_intervalo(canal, traza, hora_inicio, duracion):
     plt.plot(tiempo_intervalo, amplitud_intervalo)
     plt.xlabel('Tiempo (s)')
     plt.ylabel(f'Canal {canal} - {traza_seleccionada.stats.station}')
-    plt.title(f'Intervalo de {duracion} segundos desde las {hora_inicio} segundos')
+    plt.title(f'Intervalo de {duracion} segundos desde las {hora_inicio.strftime("%H:%M:%S")} segundos')
 
     # Formatea el eje x utilizando la función format_fn
-    plt.gca().xaxis.set_major_formatter(FuncFormatter(lambda value, tick_number: format_fn(value, tick_number, horainicio)))
+    plt.gca().xaxis.set_major_formatter(FuncFormatter(lambda value, tick_number: format_fn(value, tick_number, hora_inicio)))
 
     plt.grid(True)
     plt.show()
-
-
     
 #------------------------------------------------------------------------------
     
@@ -122,5 +170,5 @@ print(fecha)
 print(hora_inicio)
 print(hora_fin)
 
-graficar_intervalo(1, traza1, 18000, 60)
+graficar_intervalo(1, traza1, hora_inicio, 6, 60)
 # -----------------------------------------------------------------------------

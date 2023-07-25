@@ -1,11 +1,10 @@
 import tkinter
 from tkinter import filedialog
 import os
-from obspy import UTCDateTime, read, Trace, Stream
+from obspy import read
 import matplotlib.pyplot as plt
 from matplotlib.ticker import FuncFormatter
 import datetime
-from scipy.interpolate import interp1d
 import numpy as np
 
 
@@ -60,90 +59,79 @@ def format_fn(value, tick_number, horainicio):
     return tiempo_str
 
 
-# def graficar_intervalo(canal, traza, hora_inicio, inicio_intervalo, duracion):
-#     # Obtiene la traza seleccionada
-#     traza_seleccionada = traza[canal - 1]
-
-#     # Obtiene los valores de tiempo y amplitud de la traza seleccionada
-#     tiempo = traza_seleccionada.times()
-#     amplitud = traza_seleccionada.data
-
+def graficar_intervalo(canal, traza1, traza2, inicio_intervalo, duracion):
+        
+    # Obtiene los metadatos de las trazas
+    fecha1, hora_inicio1, hora_fin1, npts1, station1 = obtener_metadatos(traza1)
+    fecha2, hora_inicio2, hora_fin2, npts2, station2 = obtener_metadatos(traza2)
     
-#     # Convierte inicio_intervalo a segundos
-#     segundos_inicio_intervalo = inicio_intervalo
+    # Obtiene las trazas individuales del Stream
+    traza1_seleccionada = traza1[canal - 1]
+    traza2_seleccionada = traza2[canal - 1]
 
-#     # Calcula el tiempo de inicio y final del intervalo en segundos
-#     tiempo_inicio = segundos_inicio_intervalo
-#     tiempo_final = tiempo_inicio + duracion
+    # Obtiene los valores de tiempo y amplitud de la traza 1
+    tiempo1 = traza1_seleccionada.times()
+    amplitud1 = traza1_seleccionada.data
     
-#     print(tiempo_inicio)
-#     print(tiempo_final)
-
-#     # Encuentra los índices que corresponden al intervalo de tiempo
-#     indice_inicio = int(tiempo.searchsorted(tiempo_inicio))
-#     indice_final = int(tiempo.searchsorted(tiempo_final))
-
-#     # Extrae el intervalo de tiempo y amplitud para graficar
-#     tiempo_intervalo = tiempo[indice_inicio:indice_final]
-#     amplitud_intervalo = amplitud[indice_inicio:indice_final]
-
-#     # Crea una figura y grafica el intervalo de tiempo y amplitud
-#     plt.figure(figsize=(10, 6))
-#     plt.plot(tiempo_intervalo, amplitud_intervalo)
-#     plt.xlabel('Tiempo (s)')
-#     plt.ylabel(f'Canal {canal} - {traza_seleccionada.stats.station}')
-#     plt.title(f'Intervalo de {duracion} segundos desde las {hora_inicio.strftime("%H:%M:%S")} segundos')
-
-#     # Formatea el eje x utilizando la función format_fn
-#     plt.gca().xaxis.set_major_formatter(FuncFormatter(lambda value, tick_number: format_fn(value, tick_number, hora_inicio)))
-
-#     plt.grid(True)
-#     plt.show()
-
-def graficar_intervalo(canal, traza, hora_inicio, inicio_intervalo, duracion):
-    # Obtiene la traza seleccionada
-    traza_seleccionada = traza[canal - 1]
-
-    # Obtiene los valores de tiempo y amplitud de la traza seleccionada
-    tiempo = traza_seleccionada.times()
-    amplitud = traza_seleccionada.data
+    # Obtiene los valores de tiempo y amplitud de la traza 2
+    tiempo2 = traza2_seleccionada.times()
+    amplitud2 = traza2_seleccionada.data
 
     # Convierte hora_inicio a segundos
-    segundos_inicio = hora_inicio.hour * 3600 + hora_inicio.minute * 60 + hora_inicio.second
+    segundos_inicio_1 = hora_inicio1.hour * 3600 + hora_inicio1.minute * 60 + hora_inicio1.second
+    segundos_inicio_2 = hora_inicio2.hour * 3600 + hora_inicio2.minute * 60 + hora_inicio2.second
 
-    # Convierte inicio_intervalo a segundos
-    segundos_inicio_intervalo = inicio_intervalo
-
-    # Calcula el tiempo de inicio y final del intervalo en segundos
-    tiempo_inicio = segundos_inicio_intervalo - segundos_inicio 
-    tiempo_final = tiempo_inicio + duracion
+    # Calcula el tiempo de inicio y final del intervalo de la trama 1
+    tiempo_inicio_1 = inicio_intervalo - segundos_inicio_1 
+    tiempo_final_1 = tiempo_inicio_1 + duracion
     
+    # Calcula el tiempo de inicio y final del intervalo de la trama 2
+    tiempo_inicio_2 = inicio_intervalo - segundos_inicio_2 
+    tiempo_final_2 = tiempo_inicio_2 + duracion
     
-    print(tiempo_inicio)
-    print(tiempo_final)
+    print(tiempo_inicio_1)
+    print(tiempo_final_1)
+    print(tiempo_inicio_2)
+    print(tiempo_final_2)
     
-    #tiempo_inicio = 0
-    #tiempo_final = 60
+    # Encuentra los índices que corresponden al intervalo de tiempo de la traza 1
+    indice_inicio_1 = int(np.searchsorted(tiempo1, tiempo_inicio_1))
+    indice_final_1 = int(np.searchsorted(tiempo1, tiempo_final_1))
+    
+    # Encuentra los índices que corresponden al intervalo de tiempo de la traza 2
+    indice_inicio_2 = int(np.searchsorted(tiempo2, tiempo_inicio_2))
+    indice_final_2 = int(np.searchsorted(tiempo2, tiempo_final_2))
 
-    # Encuentra los índices que corresponden al intervalo de tiempo
-    indice_inicio = int(np.searchsorted(tiempo, tiempo_inicio))
-    indice_final = int(np.searchsorted(tiempo, tiempo_final))
-
-    # Extrae el intervalo de tiempo y amplitud para graficar
-    tiempo_intervalo = tiempo[indice_inicio:indice_final]
-    amplitud_intervalo = amplitud[indice_inicio:indice_final]
-
-    # Crea una figura y grafica el intervalo de tiempo y amplitud
-    plt.figure(figsize=(10, 6))
-    plt.plot(tiempo_intervalo, amplitud_intervalo)
-    plt.xlabel('Tiempo (s)')
-    plt.ylabel(f'Canal {canal} - {traza_seleccionada.stats.station}')
-    plt.title(f'Intervalo de {duracion} segundos desde las {hora_inicio.strftime("%H:%M:%S")} segundos')
-
-    # Formatea el eje x utilizando la función format_fn
-    plt.gca().xaxis.set_major_formatter(FuncFormatter(lambda value, tick_number: format_fn(value, tick_number, hora_inicio)))
-
-    plt.grid(True)
+    # Extrae el intervalo de tiempo y amplitud para graficar la traza 1
+    tiempo_intervalo_1 = tiempo1[indice_inicio_1:indice_final_1]
+    amplitud_intervalo_1 = amplitud1[indice_inicio_1:indice_final_1]
+    
+    # Extrae el intervalo de tiempo y amplitud para graficar la traza 1
+    tiempo_intervalo_2 = tiempo2[indice_inicio_2:indice_final_2]
+    amplitud_intervalo_2 = amplitud2[indice_inicio_2:indice_final_2]
+    
+    # Crea una figura con dos subplots
+    fig, axs = plt.subplots(2, 1, figsize=(8, 8))
+    
+    # Grafica el canal x de la traza1 en el primer subplot
+    axs[0].plot(tiempo_intervalo_1, amplitud_intervalo_1)
+    axs[0].set_ylabel(f'{station1} - Canal {canal}')
+    axs[0].grid(True)
+    
+    # Grafica el canal x de la traza2 en el segundo subplot
+    axs[1].plot(tiempo_intervalo_2, amplitud_intervalo_2)
+    axs[1].set_ylabel(f'{station2} - Canal {canal}')
+    axs[1].set_xlabel('Tiempo (hh:mm:ss:ms)')
+    axs[1].grid(True)
+    
+    # Formatea el eje x para mostrar en formato de horas:minutos:segundos:milisegundos
+    axs[0].xaxis.set_major_formatter(FuncFormatter(lambda value, tick_number: format_fn(value, tick_number, hora_inicio1)))
+    axs[1].xaxis.set_major_formatter(FuncFormatter(lambda value, tick_number: format_fn(value, tick_number, hora_inicio2)))
+    
+    # Ajusta el espaciado entre subplots
+    plt.tight_layout()
+    
+    # Muestra la figura
     plt.show()
     
 #------------------------------------------------------------------------------
@@ -157,18 +145,10 @@ print("Seleccione el primer archivo mseed:")
 traza1 = abrir_archivo_mseed()
 
 # Selecciona y abre el segundo archivo mseed
-#print("Seleccione el segundo archivo mseed:")
-#traza2 = abrir_archivo_mseed()
+print("Seleccione el segundo archivo mseed:")
+traza2 = abrir_archivo_mseed()
 
 
 canal = 1  # Número de canal a graficar
-#graficar_trama_mseed(canal, traza1, traza2, 630, 300)
-
-fecha, hora_inicio, hora_fin, npts, station = obtener_metadatos(traza1)
-
-print(fecha)
-print(hora_inicio)
-print(hora_fin)
-
-graficar_intervalo(1, traza1, hora_inicio, 6, 60)
+graficar_intervalo(1, traza2, traza1, 82290, 60)
 # -----------------------------------------------------------------------------
